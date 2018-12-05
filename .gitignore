@@ -1,0 +1,10 @@
+.sass-cache/
+node-modules/
+Content/Media/*
+*.exe
+*.zip
+*.log
+*.sql
+.DS_Store
+Thumbs.db
+config.php
