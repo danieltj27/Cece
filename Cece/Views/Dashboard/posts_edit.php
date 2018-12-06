@@ -19,11 +19,11 @@
 
 						<?php if ( 'publish' == $post->post_status ) : ?>
 
-							<a href="<?php echo post_url( $post ); ?>" class="button button--tertiary" target="_blank">View</a>
+							<a href="<?php echo post_url( $post ); ?>" class="button" target="_blank">View</a>
 
 						<?php endif; ?>
 
-						<a class="button button--tertiary toolbar-settings-toggle" tabindex="0" role="link">Settings</a>
+						<a class="button toolbar-settings-toggle" tabindex="0" role="link">Settings</a>
 
 						<button type="submit" class="button button--primary">Save</button>
 

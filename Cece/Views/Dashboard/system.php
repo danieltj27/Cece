@@ -52,7 +52,7 @@
 
 					<?php else : ?>
 
-						<p><a href="<?php echo dashboard_url( 'system/check-updates/' ); ?>" class="button button--secondary">Check for updates</a></p>
+						<p><a href="<?php echo dashboard_url( 'system/check-updates/' ); ?>" class="button">Check for updates</a></p>
 
 					<?php endif; ?>
 

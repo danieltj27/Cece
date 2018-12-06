@@ -61,7 +61,7 @@
 
 						<fieldset class="inline">
 							
-							<button type="submit" id="submit" class="button button--secondary">Filter</button>
+							<button type="submit" id="submit" class="button">Filter</button>
 
 						</fieldset>
 
@@ -101,7 +101,7 @@
 									<th>Name</th>
 									<th>Email Address</th>
 									<th>Type</th>
-									<th>Last Logged In</th>
+									<th>Last Log In</th>
 									<th>Registered</th>
 
 								</tr>
@@ -155,7 +155,7 @@
 
 							<?php if ( get_pagination_link( dashboard_url( 'users/' ), 'previous' ) ) : ?>
 
-								<a href="<?php echo get_pagination_link( dashboard_url( 'users/' ), 'previous' ); ?>" class="button button--tertiary button--small">&laquo; Previous</a>
+								<a href="<?php echo get_pagination_link( dashboard_url( 'users/' ), 'previous' ); ?>" class="button button--small">&laquo; Previous</a>
 
 							<?php endif; ?>
 
@@ -165,7 +165,7 @@
 
 							<?php if ( get_pagination_link( dashboard_url( 'users/' ), 'next' ) ) : ?>
 
-								<a href="<?php echo get_pagination_link( dashboard_url( 'users/' ), 'next' ); ?>" class="button button--tertiary button--small">Next &raquo;</a>
+								<a href="<?php echo get_pagination_link( dashboard_url( 'users/' ), 'next' ); ?>" class="button button--small">Next &raquo;</a>
 
 							<?php endif; ?>
 

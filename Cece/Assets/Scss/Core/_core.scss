@@ -9,7 +9,7 @@
 
 html {
 
-	background-color: $light-grey;
+	background-color: $white;
 	min-height: 100vh;
 	font-size: 100%;
 
@@ -17,7 +17,7 @@ html {
 
 body {
 
-	background-color: $light-grey;
+	background-color: $white;
 	min-height: 100vh;
 	color: $mono;
 	font-size: $font-size;
@@ -29,7 +29,7 @@ body {
 
 ::selection {
 
-	background-color: lighten($blue, 25%);
+	background-color: $purple;
 	color: $white;
 
 }
@@ -85,7 +85,7 @@ hr {
 
 code {
 
-	background-color: $navy;
+	background-color: $purple;
 	padding: 2px 6px;
 	border-radius: $radius;
 	color: $white;
@@ -230,10 +230,8 @@ a {
 	&:focus {
 
 		outline: none;
-		box-shadow: 0 0 0 3px lighten( $blue, 25% );
+		box-shadow: 0 0 0 3px lighten( $purple, 25% );
 
 	}
 
 }
-
- 

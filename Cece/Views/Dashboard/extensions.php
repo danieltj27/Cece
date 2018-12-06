@@ -98,7 +98,7 @@
 
 										</td>
 										
-										<td><a href="<?php echo dashboard_url( 'extensions/manage/' . $extension[ 'domain' ] . '/' ); ?>" class="button button--secondary button--small">Manage</a></td>
+										<td><a href="<?php echo dashboard_url( 'extensions/manage/' . $extension[ 'domain' ] . '/' ); ?>" class="button button--small">Manage</a></td>
 
 									</tr>
 

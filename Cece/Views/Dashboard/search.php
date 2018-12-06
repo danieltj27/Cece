@@ -157,7 +157,7 @@
 
 							<?php if ( get_pagination_link( dashboard_url( 'search/' ), 'previous' ) ) : ?>
 
-								<a href="<?php echo get_pagination_link( dashboard_url( 'search/' ), 'previous' ); ?>" class="button button--tertiary button--small">&laquo; Previous</a>
+								<a href="<?php echo get_pagination_link( dashboard_url( 'search/' ), 'previous' ); ?>" class="button button--small">&laquo; Previous</a>
 
 							<?php endif; ?>
 
@@ -167,7 +167,7 @@
 
 							<?php if ( get_pagination_link( dashboard_url( 'search/' ), 'next' ) ) : ?>
 
-								<a href="<?php echo get_pagination_link( dashboard_url( 'search/' ), 'next' ); ?>" class="button button--tertiary button--small">Next &raquo;</a>
+								<a href="<?php echo get_pagination_link( dashboard_url( 'search/' ), 'next' ); ?>" class="button button--small">Next &raquo;</a>
 
 							<?php endif; ?>
 

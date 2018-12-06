@@ -9,12 +9,12 @@
 
 .button {
 
-	background-color: $white;
+	background-color: $light-grey;
 	width: auto;
 	padding: 6px 14px;
 	display: inline-block;
 	border-radius: $radius;
-	box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.1);
+	box-shadow: inset 0 -2px 0 rgba( 0, 0, 0, 0.1 );
 	color: $mono;
 	font-size: 90%;
 	text-align: center;
@@ -27,14 +27,14 @@
 
 	&:hover {
 
-		background-color: darken($grey, 1%);
+		background-color: darken( $light-grey, 10% );
 		color: $mono;
 
 	}
 
 	&:focus {
 
-		box-shadow: 0 0 0 3px lighten( $blue, 25% );
+		box-shadow: 0 0 0 3px lighten( $purple, 20% );
 		outline: none;
 
 	}
@@ -51,21 +51,20 @@
 	&--primary,
 	&--secondary {
 
-		background-color: $blue;
+		background-color: $purple;
 		color: $white;
 
 		&:hover {
 
-			background-color: darken($blue, 2%);
-			box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.25);
+			background-color: $dark-purple;
 			color: $white;
 
 		}
 
 		&:active {
 
-			background-color: darken($blue, 10%);
-			box-shadow: inset 0 3px 0 rgba(0, 0, 0, 0.25);
+			background-color: $dark-purple;
+			box-shadow: inset 0 3px 0 rgba( 0, 0, 0, 0.25 );
 			color: $white;
 
 		}
@@ -74,39 +73,17 @@
 
 	&--secondary {
 
-		background-color: $navy;
+		background-color: $dark-purple;
 
 		&:hover {
 
-			background-color: darken($navy, 2%);
+			background-color: darken( $dark-purple, 2% );
 
 		}
 
 		&:active {
 
-			background-color: darken($navy, 10%);
-
-		}
-
-	}
-
-	&--tertiary {
-
-		background-color: $clear;
-		box-shadow: none;
-		color: $mono;
-
-		&:hover {
-
-			background-color: $white;
-			color: $mono;
-
-		}
-
-		&:active {
-
-			background-color: darken($grey, 1%);
-			color: $mono;
+			background-color: darken( $dark-purple, 10% );
 
 		}
 
@@ -119,16 +96,16 @@
 
 		&:hover {
 
-			background-color: darken($red, 2%);
-			box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.25);
+			background-color: darken( $red, 2% );
+			box-shadow: inset 0 -3px 0 rgba( 0, 0, 0, 0.25 );
 			color: $white;
 
 		}
 
 		&:active {
 
-			background-color: darken($red, 10%);
-			box-shadow: inset 0 3px 0 rgba(0, 0, 0, 0.25);
+			background-color: darken( $red, 10% );
+			box-shadow: inset 0 3px 0 rgba( 0, 0, 0, 0.25 );
 			color: $white;
 
 		}
@@ -162,4 +139,3 @@
 	}
 
 }
-

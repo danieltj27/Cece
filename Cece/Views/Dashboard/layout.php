@@ -54,17 +54,12 @@
 							<li><a href="<?php echo dashboard_url( 'menus/' ); ?>"><i class="fas fa-list-ol" aria-hidden="true"></i> Menus</a></li>
 							<li><a href="<?php echo dashboard_url( 'extensions/' ); ?>"><i class="fas fa-puzzle-piece" aria-hidden="true"></i> Extensions</a></li>
 							<li><a href="<?php echo dashboard_url( 'settings/' ); ?>"><i class="fas fa-wrench" aria-hidden="true"></i> Settings</a></li>
-							<li class="spacer"></li>
 							<li><a href="<?php echo dashboard_url( 'system/' ); ?>"><i class="fas fa-university" aria-hidden="true"></i> System</a></li>
 						<?php endif; ?>
+						<li class="spacer"></li>
+						<li><a href="<?php echo auth_url( 'logout/' ); ?>"><i class="fas fa-door-open" aria-hidden="true"></i> Log Out</a></li>
 
 					</ul>
-
-				</div>
-
-				<div class="header__callout">
-
-					<a href="<?php echo auth_url( 'logout/' ); ?>" class="button"><i class="fas fa-door-open" aria-hidden="true"></i> Log Out</a>
 
 				</div>
 

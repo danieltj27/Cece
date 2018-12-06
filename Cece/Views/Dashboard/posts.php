@@ -71,7 +71,7 @@
 
 						<fieldset class="inline">
 							
-							<button type="submit" id="submit" class="button button--secondary">Filter</button>
+							<button type="submit" id="submit" class="button">Filter</button>
 
 						</fieldset>
 
@@ -161,7 +161,7 @@
 										</td>
 										<td><abbr title="<?php echo date( 'jS F Y, H:i:s', strtotime( $post->published_at ) ); ?>"><?php echo date( 'Y-m-d', strtotime( $post->published_at ) ); ?></abbr></td>
 										<td>
-											<a href="<?php echo post_url( $post ); ?>" class="button button--secondary button--small">View <?php echo $post_type['labels']['singular']; ?></a>
+											<a href="<?php echo post_url( $post ); ?>" class="button button--small">View <?php echo $post_type['labels']['singular']; ?></a>
 										</td>
 
 									</tr>
@@ -190,7 +190,7 @@
 
 							<?php if ( get_pagination_link( dashboard_url( 'posts/' ), 'previous' ) ) : ?>
 
-								<a href="<?php echo get_pagination_link( dashboard_url( 'posts/' ), 'previous' ); ?>" class="button button--tertiary button--small">&laquo; Previous</a>
+								<a href="<?php echo get_pagination_link( dashboard_url( 'posts/' ), 'previous' ); ?>" class="button button--small">&laquo; Previous</a>
 
 							<?php endif; ?>
 
@@ -200,7 +200,7 @@
 
 							<?php if ( get_pagination_link( dashboard_url( 'posts/' ), 'next' ) ) : ?>
 
-								<a href="<?php echo get_pagination_link( dashboard_url( 'posts/' ), 'next' ); ?>" class="button button--tertiary button--small">Next &raquo;</a>
+								<a href="<?php echo get_pagination_link( dashboard_url( 'posts/' ), 'next' ); ?>" class="button button--small">Next &raquo;</a>
 
 							<?php endif; ?>
 

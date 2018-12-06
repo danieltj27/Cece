@@ -16,7 +16,7 @@
 
 					<div class="col col--50 text--right">
 
-						<a class="button button--tertiary toolbar-settings-toggle" tabindex="0" role="link">Settings</a>
+						<a class="button toolbar-settings-toggle" tabindex="0" role="link">Settings</a>
 
 						<button type="submit" class="button button--primary">Create</button>
 

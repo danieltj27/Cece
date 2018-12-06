@@ -9,8 +9,8 @@
 
 table {
 
-	background-color: $clear;
-	border: none;
+	background-color: $white;
+	border: 1px solid $light-grey;
 	width: 100%;
 
 	@media screen and ( max-width: 768px ) {
@@ -44,12 +44,12 @@ table {
 	thead,
 	tfoot {
 
-		background-color: $navy;
+		background-color: $white;
 		border: none;
 
 		th {
 
-			color: $white;
+			color: $mono;
 			font-size: $text-sm;
 			font-weight: 400;
 			font-family: $font-family;
@@ -60,12 +60,36 @@ table {
 
 	}
 
+	thead {
+
+		border-bottom: 1px solid $grey;
+
+	}
+
+	tfoot {
+
+		border-top: 1px solid $grey;
+
+	}
+
 	tbody {
 
 		tr {
 
 			background-color: $clear;
-			border-bottom: 1px solid $grey;
+			border-bottom: 1px solid $light-grey;
+
+			&:nth-of-type(odd) {
+
+				background-color: lighten( $light-grey, 3% );
+
+			}
+
+			&:nth-of-type(even) {
+
+				background-color: $clear;
+
+			}
 
 			&:only-of-type,
 			&:last-of-type {
@@ -86,4 +110,3 @@ table {
 	}
 
 }
-
