@@ -52,9 +52,9 @@
 
 							<select name="type" id="type">
 								<option value>&mdash; Type &mdash;</option>
-								<option value="user"<?php if ( 'user' == $type_filter ) : ?> selected="selected"<?php endif; ?>>Users</option>
+								<option value="user"<?php if ( 'user' == $type_filter ) : ?> selected="selected"<?php endif; ?>>User</option>
 								<option value="author"<?php if ( 'author' == $type_filter ) : ?> selected="selected"<?php endif; ?>>Author</option>
-								<option value="admin"<?php if ( 'admin' == $type_filter ) : ?> selected="selected"<?php endif; ?>>Admins</option>
+								<option value="admin"<?php if ( 'admin' == $type_filter ) : ?> selected="selected"<?php endif; ?>>Admin</option>
 							</select>
 
 						</fieldset>
