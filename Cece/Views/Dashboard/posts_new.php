@@ -81,7 +81,7 @@
 
 			<hr />
 
-			<p>Characters: <span id="editor__charcount">0</span></p>
+			<p><span id="editor__charcount">0</span> characters</p>
 
 		</div>
 

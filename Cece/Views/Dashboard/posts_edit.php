@@ -88,7 +88,7 @@
 
 			<hr />
 
-			<p>Characters: <span id="editor__charcount"><?php echo strlen( $post->post_content ); ?></span></p>
+			<p><span id="editor__charcount"><?php echo strlen( $post->post_content ); ?></span> characters</p>
 
 			<hr />
 
