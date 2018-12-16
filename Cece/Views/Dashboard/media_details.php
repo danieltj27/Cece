@@ -84,7 +84,7 @@
 
 						<li><strong>Permalink:</strong> <a href="<?php echo $media->get_url(); ?>" target="_blank"><?php echo $media->get_filename(); ?></a></li>
 
-						<li><strong>Uploaded at:</strong> <?php echo date( 'jS F Y, H:i', strtotime( $media->uploaded_at ) ); ?></li>
+						<li><strong>Uploaded at:</strong> <abbr title="<?php echo $media->uploaded_at; ?>"><?php echo date( 'jS F Y, H:i', strtotime( $media->uploaded_at ) ); ?></abbr></li>
 
 					</ul>
 
