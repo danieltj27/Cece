@@ -17,7 +17,11 @@
 			<div class="header__gutter">
 
 				<a href="<?php echo home_url(); ?>" class="header__logo">
-					<span><?php echo blog_name(); ?></span>
+
+					<div class="blog__logo">Cece</div>
+
+					<div class="blog__name"><?php echo blog_name(); ?></div>
+
 				</a>
 
 				<div class="header__search">

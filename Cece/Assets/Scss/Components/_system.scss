@@ -9,6 +9,12 @@
 
 #cece {
 
+	&.system {
+
+		background-color: $light-grey;
+
+	}
+
 	.system {
 
 		width: 100%;
@@ -18,7 +24,7 @@
 
 		&__logo {
 
-			background-color: $clear;
+			background-color: $primary;
 			background-image: url('../svg/cece.svg');
 			background-repeat: no-repeat;
 			background-position: center;

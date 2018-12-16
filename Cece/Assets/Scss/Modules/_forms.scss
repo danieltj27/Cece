@@ -70,8 +70,8 @@ textarea {
 	&:focus {
 
 		background-color: $white;
-		border: 1px solid $purple;
-		box-shadow: 0 0 0 3px lighten( $purple, 20% );
+		border: 1px solid $primary;
+		box-shadow: 0 0 0 3px lighten( $primary, 20% );
 		outline: none;
 
 	}
@@ -126,8 +126,8 @@ textarea {
 	&[type="submit"],
 	&[type="reset"] {
 
-		background-color: $purple;
-		border: 1px solid $purple;
+		background-color: $primary;
+		border: 1px solid $primary;
 		width: auto;
 		padding: 5px 15px;
 		display: inline-block;
@@ -190,7 +190,7 @@ input {
 		border-bottom: 1px solid $light-grey;
 		padding: 5px 0;
 		border-radius: 0;
-		color: $dark-purple;
+		color: $secondary;
 		font-size: $text-hg;
 
 		&:focus {

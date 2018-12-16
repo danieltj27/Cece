@@ -25,14 +25,18 @@ $font-bold:      "Work Sans Bold", -apple-system, BlinkMacSystemFont, "Segoe UI"
 $line-height:    150%;
 $letter-spacing: 0;
 
-$radius: 4px;
+$radius:  4px;
+$lighter: 15%;
+$darker:  25%;
 
-$clear:      transparent;
+$clear:       transparent;
 $white:       #ffffff;
 $black:       #000000;
 $mono:        #20272f;
-$purple:      #6154a8;
-$dark-purple: #3d3279;
+$green:       #80b7a8;
+$dark-green:  #57887a;
+$primary:     $green;
+$secondary:   $dark-green;
 $blue:        #0083ef;
 $red:         #e40f0e;
 $green:       #2aa528;

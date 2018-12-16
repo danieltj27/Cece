@@ -29,7 +29,7 @@ body {
 
 ::selection {
 
-	background-color: $purple;
+	background-color: $primary;
 	color: $white;
 
 }
@@ -85,7 +85,7 @@ hr {
 
 code {
 
-	background-color: $purple;
+	background-color: $primary;
 	padding: 2px 6px;
 	border-radius: $radius;
 	color: $white;
@@ -230,7 +230,7 @@ a {
 	&:focus {
 
 		outline: none;
-		box-shadow: 0 0 0 3px lighten( $purple, 25% );
+		box-shadow: 0 0 0 3px lighten( $primary, $lighter );
 
 	}
 

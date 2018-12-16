@@ -99,7 +99,7 @@
 
 			ul {
 
-				background-color: $dark-purple;
+				background-color: $secondary;
 				margin: 0 0 20px;
 				padding: 0;
 				display: flex;
@@ -139,7 +139,7 @@
 						&:focus {
 
 							background-color: rgba( 0, 0, 0, 0.2 );
-							box-shadow: inset 0 0 0 3px lighten( $purple, 20% );
+							box-shadow: inset 0 0 0 3px lighten( $primary, 20% );
 
 						}
 
