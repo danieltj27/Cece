@@ -604,7 +604,7 @@ function get_search_query() {
 }
 
 /**
- * Always returns true.
+ * Return true
  * 
  * @since 0.1.0
  * 
@@ -617,7 +617,7 @@ function _return_true() {
 }
 
 /**
- * Always returns false.
+ * Return false
  * 
  * @since 0.1.0
  * 

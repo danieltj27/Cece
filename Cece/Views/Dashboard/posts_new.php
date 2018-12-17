@@ -85,6 +85,48 @@
 
 		</div>
 
+		<div class="editor__media" data-media-count="<?php echo count( $media ); ?>">
+
+			<h3>Media Library</h3>
+
+			<p><i class="fas fa-times" aria-hidden="true"></i> <a class="toolbar-media-toggle" tabindex="0" role="link">Hide media library</a></p>
+
+			<?php if ( $media ) : ?>
+
+				<ul class="media__gallery">
+
+					<?php foreach ( $media as $file ) : ?>
+
+						<li class="media__item">
+
+							<a href="#" class="insert-media" data-syntax="![<?php echo $file->get_filename(); ?>](<?php echo $file->get_url(); ?>)" style="background-image: url('<?php echo $file->get_url(); ?>');" tabindex="0" role="link">
+
+								<span><?php echo $file->get_filename(); ?></span>
+								
+								<br />
+								
+								<span><?php echo $file->get_size(); ?></span>
+
+							</a>
+
+						</li>
+
+					<?php endforeach; ?>
+
+				</ul>
+
+				<a class="button js-media-more" tabindex="0" role="link">Load More</a>
+
+			<?php else : ?>
+
+				<h2 class="h4">No files found</h2>
+
+				<p>There aren't any files to show you right now.</p>
+
+			<?php endif; ?>
+
+		</div>
+
 		<div class="editor__container">
 
 			<?php echo do_notices(); ?>
@@ -96,7 +138,7 @@
 					<li><button type="button" class="toolbar-item toolbar-heading" id="toolbar-heading" data-syntax="# " aria-label="Add heading text"><i class="fas fa-heading" aria-hidden="true"></i></button></li>
 					<li><button type="button" class="toolbar-item toolbar-bold" id="toolbar-bold" data-syntax="****" aria-label="Add bold text"><i class="fas fa-bold" aria-hidden="true"></i></button></li>
 					<li><button type="button" class="toolbar-item toolbar-italic" id="toolbar-italic" data-syntax="**" aria-label="Add italic text"><i class="fas fa-italic" aria-hidden="true"></i></button></li>
-					<li><button type="button" class="toolbar-item toolbar-image" id="toolbar-image" data-syntax="![]()" aria-label="Add an image"><i class="fas fa-image" aria-hidden="true"></i></button></li>
+					<li><button type="button" class="toolbar-media-toggle toolbar-image" id="toolbar-image" data-syntax="![]()" aria-label="Add an image"><i class="fas fa-image" aria-hidden="true"></i></button></li>
 					<li><button type="button" class="toolbar-item toolbar-quote" id="toolbar-quote" data-syntax="> " aria-label="Add a quote"><i class="fas fa-quote-left" aria-hidden="true"></i></button></li>
 					<li><button type="button" class="toolbar-item toolbar-list" id="toolbar-list" data-syntax="- " aria-label="Add a list"><i class="fas fa-list" aria-hidden="true"></i></button></li>
 					<li><button type="button" class="toolbar-item toolbar-link" id="toolbar-link" data-syntax="[]()" aria-label="Add a link"><i class="fas fa-link" aria-hidden="true"></i></button></li>

@@ -41,6 +41,7 @@ class API extends Controller {
 	public function __construct() {
 
 		$this->get( 'api/', array( $this->class, 'heartbeat' ) );
+		$this->post( 'api/media-pagination/', array( $this->class, 'media_pagination' ), is_author() );
 
 	}
 
@@ -62,6 +63,82 @@ class API extends Controller {
 		);
 
 		return self::json( $response );
+
+	}
+
+	/**
+	 * Media pagination
+	 * 
+	 * @since 0.1.0
+	 * 
+	 * @return mixed
+	 */
+	public static function media_pagination() {
+
+		// Setup the return data.
+		$data = array(
+			'offset' => 0,
+			'end' => false,
+			'html' => ''
+		);
+
+		// Get the current offset.
+		$offset = ( isset( $_POST[ 'count' ] ) ) ? (int) $_POST[ 'count' ] : 0;
+
+		// Get the next set of media.
+		$media = get_media(
+			array(
+				'orderby' => 'uploaded_at',
+				'order' => 'DESC',
+				'limit' => blog_per_page(),
+				'offset' => $offset
+			)
+		);
+
+		// Update the offset.
+		$data[ 'offset' ] = $offset + count( $media );
+
+		// Did we get anything back?
+		if ( ! empty( $media ) ) {
+
+			// Loop through each media item.
+			foreach ( $media as $file ) {
+
+				// Add the HTML to response.
+				$data[ 'html' ] .= "<li class='media__item'><a href='#' class='insert-media' data-syntax='![" . $file->get_filename() . "](" . $file->get_url() . ")' style='background-image: url(" . $file->get_url() . ");' tabindex='0' role='link'><span>" . $file->get_filename() . "</span><br /><span>" . $file->get_size() . "</span></a></li>";
+
+			}
+
+		} else {
+
+			// Set flag to hide load more.
+			$data[ 'end' ] = true;
+
+		}
+
+		// See if we have any more media.
+		$media = get_media(
+			array(
+				'orderby' => 'uploaded_at',
+				'order' => 'DESC',
+				'limit' => blog_per_page(),
+				'offset' => $data[ 'offset' ]
+			)
+		);
+
+		// Have we reached the end?
+		if ( empty( $media ) ) {
+
+			// No more media.
+			$data[ 'end' ] = true;
+
+		}
+
+		// Return as a JSON object.
+		echo json_encode( $data );
+
+		// Stop file execution here.
+		die();
 
 	}
 

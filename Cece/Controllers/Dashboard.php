@@ -840,7 +840,17 @@ class Dashboard extends Controller {
 		$post_types = new PostTypes;
 		$post_types = $post_types->get();
 
-		return self::view( self::$path . 'posts_new.php', array( 'title' => 'New Post &lsaquo; Dashboard', 'users' => $users, 'post_types' => $post_types ), true );
+		// Get latest media.
+		$media = get_media(
+			array(
+				'orderby' => 'uploaded_at',
+				'order' => 'DESC',
+				'limit' => blog_per_page(),
+				'offset' => get_page_offset()
+			)
+		);
+
+		return self::view( self::$path . 'posts_new.php', array( 'title' => 'New Post &lsaquo; Dashboard', 'users' => $users, 'post_types' => $post_types, 'media' => $media ), true );
 
 	}
 
@@ -928,7 +938,17 @@ class Dashboard extends Controller {
 		$post_types = new PostTypes;
 		$post_types = $post_types->get();
 
-		return self::view( self::$path . 'posts_edit.php', array( 'title' => 'Edit Post &lsaquo; Dashboard', 'post' => $post, 'users' => $users, 'post_types' => $post_types ), true );
+		// Get latest media.
+		$media = get_media(
+			array(
+				'orderby' => 'uploaded_at',
+				'order' => 'DESC',
+				'limit' => blog_per_page(),
+				'offset' => get_page_offset()
+			)
+		);
+
+		return self::view( self::$path . 'posts_edit.php', array( 'title' => 'Edit Post &lsaquo; Dashboard', 'post' => $post, 'users' => $users, 'post_types' => $post_types, 'media' => $media ), true );
 
 	}
 
