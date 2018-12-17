@@ -19,12 +19,12 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 /**
- * Define application cookie names.
+ * Define cookie names.
  * 
  * @since 0.1.0
  */
-define( 'TEST_COOKIE', '_phc_test' );
-define( 'AUTH_COOKIE', '_phc_auth' );
+define( 'TEST_COOKIE', '_cc_test' );
+define( 'AUTH_COOKIE', '_cc_auth' );
 
 /**
  * Define time based constants.
