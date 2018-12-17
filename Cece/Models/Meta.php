@@ -239,4 +239,3 @@ class Meta extends Model {
 	}
 
 }
-

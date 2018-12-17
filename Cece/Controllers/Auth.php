@@ -724,4 +724,3 @@ Thank you,<br />The team at " . blog_name() . ".";
 	}
 
 }
-

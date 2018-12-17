@@ -41,4 +41,3 @@ class Model {
 	public $previous_ID = 0;
 
 }
-

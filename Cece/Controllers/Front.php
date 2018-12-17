@@ -263,4 +263,3 @@ class Front extends Controller {
 	}
 
 }
-

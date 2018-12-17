@@ -606,4 +606,3 @@ class Media extends Model {
 	}
 
 }
-

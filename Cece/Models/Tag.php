@@ -318,4 +318,3 @@ class Tag extends Model {
 	}
 
 }
-

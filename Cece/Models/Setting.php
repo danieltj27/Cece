@@ -422,4 +422,3 @@ class Setting extends Model {
 	}
 
 }
-

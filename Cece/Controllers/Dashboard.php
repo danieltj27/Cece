@@ -369,6 +369,9 @@ class Dashboard extends Controller {
 
 		$menu->save();
 
+		// Fire menu save event.
+		do_event( 'menu/save', array( 'menu' => $menu ) );
+
 		register_notice( 'menus_save', 'success', 'The menu has been saved.' );
 
 		return self::redirect( 'dashboard/menus/edit/' . $menu->ID . '/' );
@@ -446,6 +449,9 @@ class Dashboard extends Controller {
 		$menu->fetch( $menu_id );
 
 		$menu->delete();
+
+		// Fire menu delete event.
+		do_event( 'menu/delete', array( 'menu' => $menu ) );
 
 		register_notice( 'menus_delete', 'success', 'The menu has been permanently deleted.' );
 
@@ -895,6 +901,9 @@ class Dashboard extends Controller {
 
 		$post->save();
 
+		// Fire post save event.
+		do_event( 'post/save', array( 'post' => $post ) );
+
 		register_notice( 'posts_save', 'success', 'The post has been saved.' );
 
 		return self::redirect( 'dashboard/posts/edit/' . $post->ID . '/' );
@@ -992,6 +1001,9 @@ class Dashboard extends Controller {
 
 		$post->delete();
 
+		// Fire post delete event.
+		do_event( 'post/delete', array( 'post' => $post ) );
+
 		register_notice( 'posts_delete', 'success', 'The post has been permanently deleted.' );
 
 		return self::redirect( 'dashboard/posts/' );
@@ -1033,6 +1045,9 @@ class Dashboard extends Controller {
 
 		// Try and upload each file.
 		$upload = prepare_file_upload( $_FILES );
+
+		// Fire media upload event.
+		do_event( 'media/upload', array( 'files' => $_FILES, 'upload_status' => $upload ) );
 
 		register_notice( 'media_upload', 'success', 'The media file has been uploaded.' );
 
@@ -1108,6 +1123,9 @@ class Dashboard extends Controller {
 		$media->fetch( $media_id );
 
 		$media->delete();
+
+		// Fire media delete event.
+		do_event( 'media/delete', array( 'media' => $media ) );
 
 		register_notice( 'media_delete', 'success', 'The media file has been permanently deleted.' );
 
@@ -1251,6 +1269,9 @@ Thank you,<br />The team at " . blog_name() . ".";
 
 		}
 
+		// Fire user save event.
+		do_event( 'user/save', array( 'user' => $user ) );
+
 		register_notice( 'users_save', 'success', 'The user account has been saved.' );
 
 		return self::redirect( 'dashboard/users/edit/' . $user->ID . '/' );
@@ -1334,6 +1355,9 @@ Thank you,<br />The team at " . blog_name() . ".";
 
 		$user->delete();
 
+		// Fire user delete event.
+		do_event( 'user/delete', array( 'user' => $user ) );
+
 		register_notice( 'users_delete', 'success', 'The user has been permanently deleted.' );
 
 		return self::redirect( 'dashboard/users/' );
@@ -1341,4 +1365,3 @@ Thank you,<br />The team at " . blog_name() . ".";
 	}
 
 }
-

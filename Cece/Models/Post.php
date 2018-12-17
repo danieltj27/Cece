@@ -666,4 +666,3 @@ class Post extends Model {
 	}
 
 }
-

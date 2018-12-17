@@ -519,4 +519,3 @@ define( 'DB_PREFIX', '" . $_POST[ 'prefix' ] . "' );" . PHP_EOL;
 	}
 
 }
-
