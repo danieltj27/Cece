@@ -550,6 +550,13 @@ function prepare_file_upload( $files ) {
 		// Loop through each upload.
 		foreach ( $upload[ 'name' ] as $filename ) {
 
+			// Bail if we have an error.
+			if ( 0 !== $upload[ 'error' ][ $upload_index ] ) {
+
+				return false;
+
+			}
+
 			// Create the file data array.
 			$file = array(
 				'name' => $filename,

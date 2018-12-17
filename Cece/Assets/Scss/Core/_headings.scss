@@ -32,6 +32,16 @@ h6,
 
 	}
 
+	@media screen and ( min-width: 769px ) {
+
+		&.mob-only-margin {
+
+			margin: 0;
+
+		}
+
+	}
+
 }
 
 h1,

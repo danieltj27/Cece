@@ -9,13 +9,13 @@
 
 				<div class="row row--inline">
 
-					<div class="col col--33">
+					<div class="col col--33 col-tab--50 col-mob--100">
 
-						<h1 class="no-margin">Edit Post</h1>
+						<h1 class="mob-only-margin">Edit Post</h1>
 
 					</div>
 
-					<div class="col col--66 text--right">
+					<div class="col col--66 col-tab--50 col-mob--100 text--right text-mob--left">
 
 						<?php if ( 'publish' == $post->post_status ) : ?>
 
@@ -98,43 +98,63 @@
 
 		<div class="editor__media" data-media-count="<?php echo count( $media ); ?>">
 
-			<h3>Media Library</h3>
+			<div class="row">
 
-			<p><i class="fas fa-times" aria-hidden="true"></i> <a class="toolbar-media-toggle" tabindex="0" role="link">Hide media library</a></p>
+				<div class="col col--50 col-tab--100">
 
-			<?php if ( $media ) : ?>
+					<h3 class="no-margin">Media Library</h3>
 
-				<ul class="media__gallery">
+				</div>
 
-					<?php foreach ( $media as $file ) : ?>
+				<div class="col col--50 col-tab--100 text--right text-mob--left">
 
-						<li class="media__item">
+					<a class="button js-media-more" tabindex="0" role="link">Load More</a>
 
-							<a href="#" class="insert-media" data-syntax="![<?php echo $file->get_filename(); ?>](<?php echo $file->get_url(); ?>)" style="background-image: url('<?php echo $file->get_url(); ?>');" tabindex="0" role="link">
+				</div>
 
-								<span><?php echo $file->get_filename(); ?></span>
-								
-								<br />
-								
-								<span><?php echo $file->get_size(); ?></span>
+			</div>
 
-							</a>
+			<div class="row">
 
-						</li>
+				<div class="col col--100">
 
-					<?php endforeach; ?>
+					<p><i class="fas fa-times" aria-hidden="true"></i> <a class="toolbar-media-toggle" tabindex="0" role="link">Hide media library</a></p>
 
-				</ul>
+					<?php if ( $media ) : ?>
 
-				<a class="button js-media-more" tabindex="0" role="link">Load More</a>
+						<ul class="media__gallery">
 
-			<?php else : ?>
+							<?php foreach ( $media as $file ) : ?>
 
-				<h2 class="h4">No files found</h2>
+								<li class="media__item">
 
-				<p>There aren't any files to show you right now.</p>
+									<a href="#" class="insert-media" data-syntax="![<?php echo $file->get_filename(); ?>](<?php echo $file->get_url(); ?>)" style="background-image: url('<?php echo $file->get_url(); ?>');" tabindex="0" role="link">
 
-			<?php endif; ?>
+										<span><?php echo $file->get_filename(); ?></span>
+										
+										<br />
+										
+										<span><?php echo $file->get_size(); ?></span>
+
+									</a>
+
+								</li>
+
+							<?php endforeach; ?>
+
+						</ul>
+
+					<?php else : ?>
+
+						<h2 class="h4">No files found</h2>
+
+						<p>There aren't any files to show you right now.</p>
+
+					<?php endif; ?>
+
+				</div>
+
+			</div>
 
 		</div>
 

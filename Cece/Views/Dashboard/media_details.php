@@ -8,7 +8,7 @@
 
 				<div class="col col--50 col-mob--100">
 
-					<h1 class="no-margin">Media Details</h1>
+					<h1 class="mob-only-margin">Media Details</h1>
 
 				</div>
 

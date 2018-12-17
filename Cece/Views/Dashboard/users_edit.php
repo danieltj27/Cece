@@ -9,15 +9,15 @@
 
 				<div class="row row--inline">
 
-					<div class="col<?php if ( ! is_me( $user->ID ) && is_admin() ) : ?> col--50<?php else : ?> col--100<?php endif; ?>">
+					<div class="col<?php if ( ! is_me( $user->ID ) && is_admin() ) : ?> col--50 col-mob--100<?php else : ?> col--100<?php endif; ?>">
 
-						<h1 class="no-margin">Edit User</h1>
+						<h1 class="mob-only-margin">Edit User</h1>
 
 					</div>
 
 					<?php if ( ! is_me( $user->ID ) && is_admin() ) : ?>
 
-						<div class="col col--50 text--right">
+						<div class="col col--50 col-mob--100 text--right text-mob--left">
 
 							<a href="<?php echo csrfify_url( dashboard_url( 'users/delete/' . $user->ID . '/' ) ); ?>" class="button button--warning js-delete-warn">Delete</a>
 

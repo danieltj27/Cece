@@ -278,6 +278,24 @@ ul.menu-input-list {
 					width: 100%;
 					margin: 0 0 -1px;
 
+					&:first-of-type {
+
+						border-radius: $radius $radius 0 0;
+
+					}
+
+					&:last-of-type {
+
+						border-radius: 0 0 $radius $radius;
+
+					}
+
+					&:only-of-type {
+
+						border-radius: $radius;
+
+					}
+
 					&:only-of-type,
 					&:last-of-type {
 
@@ -303,21 +321,29 @@ ul.menu-input-list {
 }
 
 ::-webkit-input-placeholder {
+
 	color: lighten( $dark-grey, 50% );
 	opacity: 1;
+
 }
 
 ::-moz-placeholder {
+
 	color: lighten( $dark-grey, 50% );
 	opacity: 1;
+
 }
 
 :-ms-input-placeholder {
+
 	color: lighten( $dark-grey, 50% );
 	opacity: 1;
+
 }
 
 :-moz-placeholder {
+
 	color: lighten( $dark-grey, 50% );
 	opacity: 1;
+
 }

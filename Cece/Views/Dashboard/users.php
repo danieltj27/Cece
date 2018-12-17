@@ -8,7 +8,7 @@
 
 				<div class="col col--50 col-mob--100">
 
-					<h1 class="no-margin">Users</h1>
+					<h1 class="mob-only-margin">Users</h1>
 
 				</div>
 

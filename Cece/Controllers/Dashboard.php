@@ -1049,7 +1049,16 @@ class Dashboard extends Controller {
 		// Fire media upload event.
 		do_event( 'media/upload', array( 'files' => $_FILES, 'upload_status' => $upload ) );
 
-		register_notice( 'media_upload', 'success', 'The media file has been uploaded.' );
+		// Were any files uploaded?
+		if ( true === $upload ) {
+
+			register_notice( 'media_upload', 'success', 'The media file has been uploaded.' );
+
+		} else {
+
+			register_notice( 'media_upload', 'warning', 'Failed to upload any media.' );
+
+		}
 
 		return self::redirect( 'dashboard/media/' );
 
