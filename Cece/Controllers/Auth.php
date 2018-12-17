@@ -197,6 +197,9 @@ Thank you,<br />The team at " . blog_name() . ".";
 			// Send the email.
 			email( $user->user_email, '[' . blog_name() . '] Password Reset', $message, true );
 
+			// Fire forgot password sent event.
+			do_event( 'auth/forgot/sent', array( 'user' => $user ) );
+
 		}
 
 		register_notice( 'forgot_send', 'info', 'Please check your emails.' );
@@ -302,6 +305,9 @@ Thank you,<br />The team at " . blog_name() . ".";
 
 		// Save the changes.
 		$user->save();
+
+		// Fire forgot password updated event.
+		do_event( 'auth/forgot/updated', array( 'user' => $user ) );
 
 		register_notice( 'forgot_update', 'success', 'Password was reset.' );
 
@@ -472,6 +478,9 @@ Thank you,<br />The team at " . blog_name() . ".";
 
 		}
 
+		// Fire register event.
+		do_event( 'core/register', array( 'user' => $user ) );
+
 		// Log the user in.
 		return self::login_user( $create, $_POST['email'] );
 
@@ -550,7 +559,7 @@ Thank you,<br />The team at " . blog_name() . ".";
 		// Set the browser cookie.
 		setcookie( AUTH_COOKIE, $hash, $remember, '/', blog_domain(), is_secure(), true );
 
-		// Fire the login event.
+		// Fire login event.
 		do_event( 'core/login', array( 'user_id' => $id, 'user_email' => $email ) );
 
 		return true;
@@ -580,7 +589,7 @@ Thank you,<br />The team at " . blog_name() . ".";
 
 		}
 
-		// Fire the logout event.
+		// Fire logout event.
 		do_event( 'core/logout', array( 'user' => current_user() ) );
 
 		// Reset the browser cookie.
