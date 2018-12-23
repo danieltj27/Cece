@@ -1,6 +1,7 @@
 .sass-cache/
 node-modules/
 Content/Media/*
+Content/Extensions/*
 *.exe
 *.zip
 *.log
