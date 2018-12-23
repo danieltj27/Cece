@@ -50,7 +50,7 @@ class Dashboard extends Controller {
 	public function __construct() {
 
 		// Fire before controller event.
-		do_event( 'dashboard/controller/before', array( 'class' => $this->class, 'path' => $this->path ) );
+		do_event( 'dashboard/controller/before', array( 'class' => $this->class, 'path' => self::$path ) );
 
 		// Define the controller routes.
 		$this->get( 'dashboard/', array( $this->class, 'index' ), is_logged_in() );
@@ -87,7 +87,7 @@ class Dashboard extends Controller {
 		$this->post( 'dashboard/users/delete/:param/', array( $this->class, 'users_delete' ), is_admin() );
 
 		// Fire after controller event.
-		do_event( 'dashboard/controller/after', array( 'class' => $this->class, 'path' => $this->path ) );
+		do_event( 'dashboard/controller/after', array( 'class' => $this->class, 'path' => self::$path ) );
 
 	}
 

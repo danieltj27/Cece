@@ -50,7 +50,7 @@ class Auth extends Controller {
 	public function __construct() {
 
 		// Fire before controller event.
-		do_event( 'auth/controller/before', array( 'class' => $this->class, 'path' => $this->path ) );
+		do_event( 'auth/controller/before', array( 'class' => $this->class, 'path' => self::$path ) );
 
 		// Define the controller routes.
 		$this->get( 'auth/', array( $this->class, 'missed_login' ) );
@@ -63,7 +63,7 @@ class Auth extends Controller {
 		$this->get( 'auth/logout/', array( $this->class, 'logout' ) );
 
 		// Fire after controller event.
-		do_event( 'auth/controller/after', array( 'class' => $this->class, 'path' => $this->path ) );
+		do_event( 'auth/controller/after', array( 'class' => $this->class, 'path' => self::$path ) );
 
 	}
 
