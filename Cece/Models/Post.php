@@ -229,6 +229,8 @@ class Post extends Model {
 
 		}
 
+		global $_post_types;
+
 		// Create new database connection.
 		$db = new Database;
 
@@ -275,6 +277,14 @@ class Post extends Model {
 
 			// Fallback to saving as draft.
 			$this->post_status = 'draft';
+
+		}
+
+		// Is the post type valid?
+		if ( ! isset( $_post_types[ $this->post_type ] ) ) {
+
+			// Fallback to saving as a post.
+			$this->post_type = 'post';
 
 		}
 
@@ -367,13 +377,15 @@ class Post extends Model {
 
 		}
 
+		global $_post_types;
+
 		// Create new database connection.
 		$db = new Database;
 
 		// Prepare the update statement.
 		$query = $db->connection->prepare( 'UPDATE ' . $db->prefix . 'posts SET title = ?, content = ?, path = ?, status = ?, type = ?, tags = ?, author_id = ?, parent_id = ?, media_id = ?, published_at = ?, created_at = ?, updated_at = ? WHERE ID = ?' );
 
-		// Set the updated timestamp.
+		// Set the timestamps.
 		$this->published_at = date( 'Y-m-d H:i:s', strtotime( $this->published_at ) );
 		$this->updated_at = date( 'Y-m-d H:i:s' );
 
@@ -405,6 +417,14 @@ class Post extends Model {
 
 			// Fallback to saving as draft.
 			$this->post_status = 'draft';
+
+		}
+
+		// Is the post type valid?
+		if ( ! isset( $_post_types[ $this->post_type ] ) ) {
+
+			// Fallback to saving as a post.
+			$this->post_type = 'post';
 
 		}
 
