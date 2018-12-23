@@ -92,7 +92,7 @@
 
 			<hr />
 
-			<a href="<?php echo csrfify_url( dashboard_url( 'posts/delete/' . $post->ID . '/' ) ); ?>" class="button button--small button--warning js-delete-warn">Permanently Delete</a>
+			<a href="<?php echo csrfify_url( dashboard_url( 'posts/delete/' . $post->ID . '/' ) ); ?>" class="button button--small button--full button--warning js-delete-warn">Permanently Delete</a>
 
 		</div>
 
@@ -100,13 +100,13 @@
 
 			<div class="row">
 
-				<div class="col col--50 col-tab--100">
+				<div class="col col--50 col-mob--100">
 
-					<h3 class="no-margin">Media Library</h3>
+					<h3 class="mob-only-margin">Media Library</h3>
 
 				</div>
 
-				<div class="col col--50 col-tab--100 text--right text-mob--left">
+				<div class="col col--50 col-mob--100 text--right text-mob--left">
 
 					<a class="button js-media-more" tabindex="0" role="link">Load More</a>
 
