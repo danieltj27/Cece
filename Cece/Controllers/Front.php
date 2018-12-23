@@ -40,6 +40,9 @@ class Front extends Controller {
 	 */
 	public function __construct() {
 
+		// Fire before controller event.
+		do_event( 'front/controller/before', array( 'class' => $this->class ) );
+
 		// Define the controller routes.
 		$this->get( '/', array( $this->class, 'index' ) );
 		$this->get( '/posts/:param/', array( $this->class, 'view_post' ) );
@@ -49,6 +52,9 @@ class Front extends Controller {
 		$this->get( 'login/', array( $this->class, 'missed_login' ) );
 		$this->get( 'register/', array( $this->class, 'missed_register' ) );
 		$this->get( 'logout/', array( $this->class, 'missed_logout' ) );
+
+		// Fire after controller event.
+		do_event( 'front/controller/after', array( 'class' => $this->class ) );
 
 	}
 

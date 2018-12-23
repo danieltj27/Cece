@@ -49,6 +49,9 @@ class System extends Controller {
 	 */
 	public function __construct() {
 
+		// Fire before controller event.
+		do_event( 'system/controller/before', array( 'class' => $this->class, 'path' => $this->path ) );
+
 		// Define the controller routes.
 		$this->get( 'system/', array( $this->class, 'system' ) );
 		$this->get( 'system/not-found/', array( $this->class, 'not_found' ) );
@@ -59,6 +62,9 @@ class System extends Controller {
 		$this->get( 'system/install/setup/', array( $this->class, 'install_setup' ) );
 		$this->post( 'system/install/database-setup/', array( $this->class, 'install_database' ) );
 		$this->post( 'system/install/account-setup/', array( $this->class, 'install_register' ) );
+
+		// Fire after controller event.
+		do_event( 'system/controller/after', array( 'class' => $this->class, 'path' => $this->path ) );
 
 	}
 

@@ -49,6 +49,9 @@ class Auth extends Controller {
 	 */
 	public function __construct() {
 
+		// Fire before controller event.
+		do_event( 'auth/controller/before', array( 'class' => $this->class, 'path' => $this->path ) );
+
 		// Define the controller routes.
 		$this->get( 'auth/', array( $this->class, 'missed_login' ) );
 		$this->get( 'auth/login/', array( $this->class, 'login' ) );
@@ -58,6 +61,9 @@ class Auth extends Controller {
 		$this->get( 'auth/forgot/reset/:param/', array( $this->class, 'forgot_reset' ) );
 		$this->post( 'auth/forgot/update/', array( $this->class, 'forgot_update' ) );
 		$this->get( 'auth/logout/', array( $this->class, 'logout' ) );
+
+		// Fire after controller event.
+		do_event( 'auth/controller/after', array( 'class' => $this->class, 'path' => $this->path ) );
 
 	}
 

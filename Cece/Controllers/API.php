@@ -40,8 +40,14 @@ class API extends Controller {
 	 */
 	public function __construct() {
 
+		// Fire before controller event.
+		do_event( 'api/controller/before', array( 'class' => $this->class ) );
+
 		$this->get( 'api/', array( $this->class, 'heartbeat' ) );
 		$this->post( 'api/media-pagination/', array( $this->class, 'media_pagination' ), is_author() );
+
+		// Fire after controller event.
+		do_event( 'api/controller/after', array( 'class' => $this->class ) );
 
 	}
 
