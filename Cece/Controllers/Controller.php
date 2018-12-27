@@ -365,10 +365,20 @@ class Controller {
 				compact( $args );
 
 				// Should we use a layout template?
-				if ( true === $layout ) {
+				if ( false !== $layout ) {
 
-					// Get the directory of the view.
-					$dir = dirname( $view );
+					// Should we use the default location?
+					if ( true === $layout ) {
+
+						// Get the directory of this view.
+						$dir = dirname( $view );
+
+					} else {
+
+						// Get the directory specified.
+						$dir = dirname( $layout );
+
+					}
 
 					if ( file_exists( $dir . '/layout.php' ) ) {
 
