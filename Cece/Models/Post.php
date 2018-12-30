@@ -251,7 +251,7 @@ class Post extends Model {
 
 		// Filter and trim the post title and content.
 		$this->post_title = filter_text( trim( $this->post_title ) );
-		$this->post_content = filter_text( ltrim( $this->post_content ) );
+		$this->post_content = filter_text( trim( $this->post_content ) );
 
 		// Filter the path.
 		$this->post_path = create_path( $this->post_path, true );
@@ -391,7 +391,7 @@ class Post extends Model {
 
 		// Filter and trim the post title and content.
 		$this->post_title = filter_text( trim( $this->post_title ) );
-		$this->post_content = filter_text( ltrim( $this->post_content ) );
+		$this->post_content = filter_text( trim( $this->post_content ) );
 
 		// Filter the path.
 		$this->post_path = create_path( $this->post_path, true, $this->ID );
