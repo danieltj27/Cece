@@ -273,6 +273,10 @@ function get_path() {
  * then it'll append a number to the end of the path to make
  * `hello-world-2` (or 3, 4 etc) until a path is unique.
  * 
+ * This function should only ever be used against posts and the
+ * function should be duplicated and modified if other models
+ * require unique paths.
+ * 
  * @since 0.1.0
  * 
  * @param string  $path    The path to filter.
