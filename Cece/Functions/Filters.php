@@ -67,7 +67,7 @@ function sanitise_path( $path = '' ) {
  */
 function filter_text( $text ) {
 
-	return htmlspecialchars( $text, ENT_QUOTES, 'UTF-8' );
+	return htmlspecialchars( $text );
 
 }
 
@@ -84,6 +84,6 @@ function filter_text( $text ) {
  */
 function unfilter_text( $text ) {
 
-	return htmlspecialchars_decode( $text, ENT_QUOTES );
+	return htmlspecialchars_decode( $text );
 
 }
