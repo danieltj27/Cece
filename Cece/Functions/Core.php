@@ -149,6 +149,14 @@ $_active_theme = array();
 $_total_pages = 1;
 
 /**
+ * PHPMailer namespaces for email.
+ * 
+ * @since 0.1.0
+ */
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+/**
  * Check if the app is installed.
  * 
  * @since 0.1.0
@@ -336,6 +344,61 @@ function create_path( $path, $unique = false, $post_id = 0 ) {
 }
 
 /**
+ * Return the page title text.
+ * 
+ * @since 0.1.0
+ * 
+ * @param string  $title The title to prepend.
+ * @param boolean $raw   THe flag to show the raw title or full title.
+ * 
+ * @return string $title
+ */
+function load_title( $title = '', $raw = false ) {
+
+	// Force raw output if not installed.
+	if ( ! is_app_installed() ) {
+
+		$raw = true;
+
+	}
+
+	// Should we should the raw title only?
+	if ( true === $raw ) {
+
+		return $title;
+
+	}
+
+	return $title . ' &mdash; ' . blog_name();
+
+}
+
+/**
+ * Load the selected template.
+ * 
+ * Loads the given template via the `view` method
+ * within the core application controller.
+ * 
+ * @since 0.1.0
+ * 
+ * @param string $path The template to load.
+ * 
+ * @return mixed
+ */
+function load_template( $path = '' ) {
+
+	// Bail silently if we get nothing.
+	if ( ! is_string( $path ) || '' == $path ) {
+
+		return false;
+
+	}
+
+	return Controller::view( $path );
+
+}
+
+/**
  * Parse the Markdown of a posts content.
  * 
  * This function will convert the post content of a given post
@@ -432,6 +495,79 @@ function content_excerpt( $post, $length = 140 ) {
 	}
 
 	return $content;
+
+}
+
+/**
+ * Sanitise a piece of textual input.
+ * 
+ * @since 0.1.0
+ * 
+ * @param string $text      The dirty text that needs cleaning.
+ * @param string $regex     The regular expression to use for cleaning.
+ * @param string $delimiter The delimiter of the regular expression.
+ * 
+ * @return string
+ */
+function sanitise_text( $text = '', $regex = '~[^A-Za-z]~' ) {
+
+	// Make sure we a regular expression.
+	if ( '' == $regex || ! is_string( $regex ) ) {
+
+		no_thank_you( 'Invalid regular expression given for sanitisation.' );
+
+	}
+
+	return preg_replace( $regex, '', $text );
+
+}
+
+/**
+ * Wrapper function to filter URL paths.
+ * 
+ * @since 0.1.0
+ * 
+ * @see sanitise_text()
+ * 
+ * @param string $path The URL path to clean.
+ * 
+ * @return string
+ */
+function sanitise_path( $path = '' ) {
+
+	return sanitise_text( $path, '~[^A-Za-z0-9_[-]\/]~' );
+
+}
+
+/**
+ * Filter a string of possible HTML content.
+ * 
+ * @since 0.1.0
+ * 
+ * @param string $text The text to filter from HTML.
+ * 
+ * @return string $text
+ */
+function filter_text( $text ) {
+
+	return htmlspecialchars( $text );
+
+}
+
+/**
+ * Reverse the filtering of htmlspecialchars.
+ * 
+ * @see filter_text()
+ * 
+ * @since 0.1.0
+ * 
+ * @param string $text The text to filter into HTML.
+ * 
+ * @return string $text
+ */
+function unfilter_text( $text ) {
+
+	return htmlspecialchars_decode( $text );
 
 }
 
@@ -607,6 +743,38 @@ function get_search_query() {
 	}
 
 	return filter_text( $_GET[ 'query' ] );
+
+}
+
+/**
+ * Send an email from the blog.
+ * 
+ * @uses PHPMailer
+ * 
+ * @since 0.1.0
+ * 
+ * @param string $to      The address to send to.
+ * @param string $subject The email subject line.
+ * @param string $message The email message.
+ * @param mixed  $html    The HTML email flag.
+ * 
+ * @return mixed
+ */
+function email( $to, $subject, $message, $html = false ) {
+
+	// Create new PHPMailer instance.
+	$mail = new PHPMailer( false );
+
+	// Set the email options.
+	$mail->setFrom( blog_email(), blog_name() );
+	$mail->addAddress( $to );
+	$mail->Subject = $subject;
+	$mail->Body = $message;
+
+	// Set default to HTML.
+	$mail->isHTML( $html );
+
+	return $mail->send();
 
 }
 

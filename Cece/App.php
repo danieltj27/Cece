@@ -156,13 +156,10 @@ final class App {
 		require_once( CECEAPP . 'Functions/URLs.php' );
 		require_once( CECEAPP . 'Functions/Gets.php' );
 		require_once( CECEAPP . 'Functions/CSRF.php' );
-		require_once( CECEAPP . 'Functions/Filters.php' );
-		require_once( CECEAPP . 'Functions/Templates.php' );
 		require_once( CECEAPP . 'Functions/Notices.php' );
 		require_once( CECEAPP . 'Functions/Extensions.php' );
 		require_once( CECEAPP . 'Functions/Themes.php' );
 		require_once( CECEAPP . 'Functions/Users.php' );
-		require_once( CECEAPP . 'Functions/Emails.php' );
 		require_once( CECEAPP . 'Controllers/Controller.php' );
 		require_once( CECEAPP . 'Controllers/Front.php' );
 		require_once( CECEAPP . 'Controllers/Auth.php' );
