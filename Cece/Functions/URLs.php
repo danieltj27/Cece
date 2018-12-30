@@ -78,7 +78,7 @@ function home_url( $path = '', $cached = true ) {
 	// Check if we have a path.
 	if ( '' != $path ) {
 
-		$url = $url . ltrim( $path, '/' );
+		$url = $url . trim( $path, '/' );
 
 	}
 

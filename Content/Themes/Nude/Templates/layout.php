@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2" />
 <title><?php echo load_title( $title ); ?></title>
 <link rel="stylesheet" href="<?php echo theme_url( 'Assets/Css/style.css' ); ?>" />
+<?php do_event( 'themes/layout/head' ); ?>
 </head>
 <body id="cece">
 
@@ -104,5 +105,6 @@
 
 <script src="<?php echo theme_url( 'Assets/Js/jquery.min.js' ); ?>"></script>
 <script src="<?php echo theme_url( 'Assets/Js/scripts.min.js' ); ?>"></script>
+<?php do_event( 'themes/layout/footer' ); ?>
 </body>
 </html>

@@ -327,7 +327,7 @@ class Post extends Model {
 		if ( ! $user->exists( $this->post_author_ID ) ) {
 
 			// Invalid so default to the current user.
-			$this->post_author_ID = get_current_user_id();
+			$this->post_author_ID = current_user_id();
 
 		}
 
@@ -467,7 +467,7 @@ class Post extends Model {
 		if ( ! $user->exists( $this->post_author_ID ) ) {
 
 			// Invalid so default to the current user.
-			$this->post_author_ID = get_current_user_id();
+			$this->post_author_ID = current_user_id();
 
 		}
 

@@ -73,9 +73,36 @@ class Query {
 		// Merge the query with the defaults.
 		$this->opts = array_merge( $defaults, $opts );
 
-		// Clean up some options safely.
-		$this->opts[ 'order' ] = strtoupper( $this->opts[ 'order' ] );
-		$this->opts[ 'order' ] = ( in_array( $this->opts[ 'order' ], array( 'DESC', 'ASC' ), true ) ) ? $this->opts[ 'order' ] : 'DESC';
+		// Check for an order array.
+		if ( is_array( $this->opts[ 'order' ] ) ) {
+
+			// Setup temp order array.
+			$temp_order = array();
+
+			// Loop through the order array.
+			foreach ( $this->opts[ 'order' ] as $key => $value ) {
+
+				// Check for valid DESC & ASC values.
+				$value = strtoupper( $value );
+				$value = ( in_array( $value, array( 'DESC', 'ASC' ), true ) ) ? $value : 'DESC';
+
+				// Add to the temporary array.
+				$temp_order[] = $value;
+
+			}
+
+			// Set the new order array.
+			$this->opts[ 'order' ] = $temp_order;
+
+		} else {
+
+			// Force string to upper and only allow DESC & ASC.
+			$this->opts[ 'order' ] = strtoupper( $this->opts[ 'order' ] );
+			$this->opts[ 'order' ] = ( in_array( $this->opts[ 'order' ], array( 'DESC', 'ASC' ), true ) ) ? $this->opts[ 'order' ] : 'DESC';
+
+		}
+
+		// Clean up some other options safely.
 		$this->opts[ 'limit' ] = (int) $this->opts[ 'limit' ];
 		$this->opts[ 'offset' ] = (int) $this->opts[ 'offset' ];
 
@@ -195,6 +222,50 @@ class Query {
 
 		}
 
+		// Setup the order by variable.
+		$order_sql_by = '';
+
+		// Is the order by option an array?
+		if ( is_array( $this->opts[ 'orderby' ] ) ) {
+
+			// Create temporary order by variable.
+			$temp_order_by = array();
+
+			// Loop through the order by array.
+			foreach ( $this->opts[ 'orderby' ] as $key => $value ) {
+
+				// Do we have an array of ordering?
+				if ( is_array( $this->opts[ 'order' ] ) && isset( $this->opts[ 'order' ][ $key ] ) ) {
+
+					$value = $value . ' ' . $this->opts[ 'order' ][ $key ];
+
+				}
+
+				// Add the new ordering value.
+				$temp_order_by[] = $value;
+
+			}
+
+			// Convert the order by into a string.
+			$order_sql_by = implode( ', ', $temp_order_by );
+
+			// Is the order type not an array?
+			if ( ! is_array( $this->opts[ 'order' ] ) ) {
+
+				// Add the order to the end.
+				$order_sql_by = $order_sql_by . ' ' . $this->opts[ 'order' ];
+
+			}
+
+		} else {
+
+			// Set the ordering.
+			$order_sql_by = $this->opts[ 'orderby' ] . ' ' . $this->opts[ 'order' ];
+
+		}
+
+		//dd( 'SELECT * FROM ' . $db->prefix . $this->opts[ 'table' ] . ' ' . $where . ' ORDER BY ' . $order_sql_by );
+
 		// Should we count or fetch the items?
 		if ( false === $count ) {
 
@@ -202,12 +273,12 @@ class Query {
 			if ( 0 === $this->opts[ 'limit' ] ) {
 
 				// Prepare with a limit and offset.
-				$query = $db->connection->prepare( 'SELECT * FROM ' . $db->prefix . $this->opts[ 'table' ] .' ' . $where . ' ORDER BY ' . $this->opts[ 'orderby' ] . ' ' . $this->opts[ 'order' ] );
+				$query = $db->connection->prepare( 'SELECT * FROM ' . $db->prefix . $this->opts[ 'table' ] . ' ' . $where . ' ORDER BY ' . $order_sql_by );
 
 			} else {
 
 				// Prepare the standard fetch query.
-				$query = $db->connection->prepare( 'SELECT * FROM ' . $db->prefix . $this->opts[ 'table' ] .' ' . $where . ' ORDER BY ' . $this->opts[ 'orderby' ] . ' ' . $this->opts[ 'order' ] . ' LIMIT :offset, :limit' );
+				$query = $db->connection->prepare( 'SELECT * FROM ' . $db->prefix . $this->opts[ 'table' ] . ' ' . $where . ' ORDER BY ' . $order_sql_by . ' LIMIT :offset, :limit' );
 
 				// Bind the parameters to our query.
 				$query->bindParam( ':offset', $this->opts[ 'offset' ], PDO::PARAM_INT );
@@ -218,7 +289,7 @@ class Query {
 		} else {
 
 			// Prepare the count query.
-			$query = $db->connection->prepare( 'SELECT COUNT(*) FROM ' . $db->prefix . $this->opts[ 'table' ] .' ' . $where . ' ORDER BY ' . $this->opts[ 'orderby' ] . ' ' . $this->opts[ 'order' ] );
+			$query = $db->connection->prepare( 'SELECT COUNT(*) FROM ' . $db->prefix . $this->opts[ 'table' ] . ' ' . $where . ' ORDER BY ' . $order_sql_by );
 
 		}
 
