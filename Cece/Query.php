@@ -264,8 +264,6 @@ class Query {
 
 		}
 
-		//dd( 'SELECT * FROM ' . $db->prefix . $this->opts[ 'table' ] . ' ' . $where . ' ORDER BY ' . $order_sql_by );
-
 		// Should we count or fetch the items?
 		if ( false === $count ) {
 

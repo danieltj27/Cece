@@ -674,6 +674,24 @@ class Dashboard extends Controller {
 			// Add it.
 			$setting->setting_value[] = $extension[ 'domain' ];
 
+			/**
+			 * A path to the extension needs to be created and used to
+			 * include the core extension file in case it needs to do
+			 * anything on installation. As it's not already installed
+			 * (officially) the core file isn't included so the install
+			 * function wouldn't be included and the event that is fired
+			 * on install would get missed.
+			 */
+			$ext_path = CECEEXTEND . $extension[ 'domain' ] . '/' . trim( $extension[ 'function_path' ], '/' ) . '/' . $extension[ 'domain' ] . '.php';
+
+			// Does the path exist?
+			if ( file_exists( $ext_path ) ) {
+
+				// Include the file.
+				require_once( $ext_path );
+
+			}
+
 			// Install the extension.
 			do_event( $extension[ 'domain' ] . '/install', array( 'extension' => $extension ) );
 
