@@ -43,6 +43,16 @@
 					<div class="col col--50 col-tab--75 col-tab--100">
 
 						<fieldset>
+							<label for="flag_site_debug">Debug mode</label>
+							<?php $flags->fetch( 'flag_site_debug', 'setting_key' ); ?>
+							<select name="flag_site_debug" id="flag_site_debug">
+								<option value="off">Off (default)</option>
+								<option value="on"<?php if ( 'on' == $flags->setting_value ) : ?> selected="selected"<?php endif; ?>>On</option>
+							</select>
+							<p class="input-desc">Debug mode shouldn't be enabled on production environments. Turning this on will no longer suppress error messaging.</p>
+						</fieldset>
+
+						<fieldset>
 							<label for="flag_dev_branch">Release branch</label>
 							<?php $flags->fetch( 'flag_dev_branch', 'setting_key' ); ?>
 							<select name="flag_dev_branch" id="flag_dev_branch">

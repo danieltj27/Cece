@@ -262,15 +262,11 @@ class Setting extends Model {
 	 * not saved into an instance variable. This function
 	 * should only be called once as it could be expensive.
 	 * 
-	 * @deprecated
-	 * 
 	 * @since 0.1.0
 	 * 
 	 * @return array
 	 */
 	public function all() {
-
-		no_thank_you( 'The all() method has been deprecated. Use get_settings() instead.' );
 
 		// Create new database connection.
 		$db = new Database;

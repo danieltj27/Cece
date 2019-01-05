@@ -842,7 +842,7 @@ function dd( $var ) {
 function is_debugging() {
 
 	// Check for debug mode.
-	if ( defined( 'APP_DEBUG' ) && true === APP_DEBUG ) {
+	if ( 'on' == blog_setting( 'flag_site_debug' ) ) {
 
 		return true;
 

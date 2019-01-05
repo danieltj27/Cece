@@ -486,10 +486,6 @@ define( 'DB_PREFIX', '" . $_POST[ 'prefix' ] . "' );" . PHP_EOL;
 				'setting_key' => 'hsts',
 				'setting_value' => 'off'
 			),
-			'debug' => array(
-				'setting_key' => 'debug',
-				'setting_value' => 'off'
-			),
 			'update_check' => array(
 				'setting_key' => 'update_check',
 				'setting_value' => date( 'Y-m-d H:i:s' )

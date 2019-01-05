@@ -104,11 +104,6 @@
 						</fieldset>
 
 						<fieldset>
-							<?php $settings->fetch( 'debug', 'setting_key' ); ?>
-							<label for="debug"><input type="checkbox" name="debug" id="debug"<?php if ( 'on' == $settings->setting_value ) : ?> checked="checked"<?php endif; ?> /> Enable system debugging (<strong>not recommended</strong>).</label>
-						</fieldset>
-
-						<fieldset>
 							<label for="language">Language</label>
 							<?php $settings->fetch( 'language', 'setting_key' ); ?>
 							<select name="language" id="language">
