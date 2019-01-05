@@ -139,7 +139,15 @@
 
 												} else {
 
-													echo '<a href="' . dashboard_url( 'users/edit/' . $user->ID . '/' ) . '">' . $user->user_fullname . '</a>';
+													if ( is_admin() ) {
+
+														echo '<a href="' . dashboard_url( 'users/edit/' . $user->ID . '/' ) . '">' . $user->user_fullname . '</a>';
+
+													} else {
+
+														echo $user->user_fullname;
+
+													}
 
 												}
 

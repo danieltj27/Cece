@@ -112,7 +112,15 @@
 
 												} else {
 
-													echo '<a href="' . dashboard_url( 'users/edit/' . $user->ID . '/' ) . '">' . $user->user_fullname . '</a>';
+													if ( is_admin() ) {
+
+														echo '<a href="' . dashboard_url( 'users/edit/' . $user->ID . '/' ) . '">' . $user->user_fullname . '</a>';
+
+													} else {
+
+														echo $user->user_fullname;
+
+													}
 
 												}
 
@@ -134,7 +142,7 @@
 										</td>
 										<td><abbr title="<?php echo date( 'jS F Y, H:i:s', strtotime( $post->published_at ) ); ?>"><?php echo date( 'Y-m-d', strtotime( $post->published_at ) ); ?></abbr></td>
 										<td>
-											<a href="<?php echo post_url( $post ); ?>" class="button button--secondary button--small">View <?php echo $post_type['labels']['singular']; ?></a>
+											<a href="<?php echo post_url( $post ); ?>" class="button button--small">View <?php echo $post_type['labels']['singular']; ?></a>
 										</td>
 
 									</tr>
