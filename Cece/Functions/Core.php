@@ -74,7 +74,7 @@ $_settings = array();
  * 
  * @var array
  */
-$_rgd_settings = array();
+$_reg_settings = array();
 
 /**
  * The home URL default value.

@@ -39,7 +39,7 @@ function register_setting( $opts = array() ) {
 
 	}
 
-	global $_rgd_settings;
+	global $_reg_settings;
 
 	// Set up the defaults.
 	$defaults = array(
@@ -55,7 +55,7 @@ function register_setting( $opts = array() ) {
 	$opts = array_merge( $defaults, $opts );
 
 	// Does setting already exist?
-	if ( isset( $_rgd_settings[ $opts[ 'key' ] ] ) ) {
+	if ( isset( $_reg_settings[ $opts[ 'key' ] ] ) ) {
 
 		return false;
 
@@ -69,7 +69,7 @@ function register_setting( $opts = array() ) {
 	}
 
 	// Add it.
-	$_rgd_settings[ $opts[ 'key' ] ] = $opts;
+	$_reg_settings[ $opts[ 'key' ] ] = $opts;
 
 	return true;
 
@@ -88,17 +88,17 @@ function register_setting( $opts = array() ) {
  */
 function unregister_setting( $key = '' ) {
 
-	global $_rgd_settings;
+	global $_reg_settings;
 
 	// Does the setting exist?
-	if ( ! isset( $_rgd_settings[ $key ] ) ) {
+	if ( ! isset( $_reg_settings[ $key ] ) ) {
 
 		return false;
 
 	}
 
 	// Remove the setting.
-	unset( $_rgd_settings[ $key ] );
+	unset( $_reg_settings[ $key ] );
 
 	return true;
 
