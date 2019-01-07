@@ -42,28 +42,33 @@
 
 				<div class="header__menu">
 
-					<ul>
+					<?php $menu_links = get_dashboard_links(); ?>
 
-						<li><a href="<?php echo dashboard_url(); ?>"><i class="fas fa-tachometer-alt" aria-hidden="true"></i> Dashboard</a></li>
-						<?php if ( is_author() ) : ?>
-							<li class="spacer"></li>
-							<li><a href="<?php echo dashboard_url( 'posts/new/' ); ?>"><i class="fas fa-plus" aria-hidden="true"></i> New Post</a></li>
-							<li><a href="<?php echo dashboard_url( 'posts/' ); ?>"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Posts</a></li>
-							<li><a href="<?php echo dashboard_url( 'media/' ); ?>"><i class="fas fa-image" aria-hidden="true"></i> Media</a></li>
-						<?php endif; ?>
-						<li><a href="<?php echo dashboard_url( 'users/edit/' . my_id() . '/' ); ?>"><i class="fas fa-smile" aria-hidden="true"></i> Profile</a></li>
-						<?php if ( is_admin() ) : ?>
-							<li class="spacer"></li>
-							<li><a href="<?php echo dashboard_url( 'users/' ); ?>"><i class="fas fa-user-friends" aria-hidden="true"></i> Users</a></li>
-							<li><a href="<?php echo dashboard_url( 'menus/' ); ?>"><i class="fas fa-list-ol" aria-hidden="true"></i> Menus</a></li>
-							<li><a href="<?php echo dashboard_url( 'extensions/' ); ?>"><i class="fas fa-puzzle-piece" aria-hidden="true"></i> Extensions</a></li>
-							<li><a href="<?php echo dashboard_url( 'settings/' ); ?>"><i class="fas fa-wrench" aria-hidden="true"></i> Settings</a></li>
-							<li><a href="<?php echo dashboard_url( 'system/' ); ?>"><i class="fas fa-university" aria-hidden="true"></i> System</a></li>
-						<?php endif; ?>
-						<li class="spacer"></li>
-						<li><a href="<?php echo auth_url( 'logout/' ); ?>"><i class="fas fa-door-open" aria-hidden="true"></i> Log Out</a></li>
+					<?php if ( ! empty( $menu_links ) ) : ?>
 
-					</ul>
+						<ul>
+
+							<?php foreach ( $menu_links as $menu_link ) : ?>
+
+								<?php if ( true === $menu_link[ 'auth' ] ) : ?>
+
+									<?php if ( true === $menu_link[ 'spacer' ] ) : ?>
+
+										<li class="spacer"></li>
+
+									<?php else : ?>
+
+										<li><a href="<?php echo $menu_link[ 'url' ]; ?>" class="menu-link--<?php echo $menu_link[ 'key' ]; ?>"><i class="fas fa-<?php echo $menu_link[ 'icon' ]; ?>" aria-hidden="true"></i> <?php echo $menu_link[ 'label' ]; ?></a></li>
+
+									<?php endif; ?>
+
+								<?php endif; ?>
+
+							<?php endforeach; ?>
+
+						</ul>
+
+					<?php endif; ?>
 
 				</div>
 

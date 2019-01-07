@@ -49,6 +49,9 @@ class Dashboard extends Controller {
 	 */
 	public function __construct() {
 
+		// Register the side menu links.
+		$this->register_menu_links();
+
 		// Fire before controller event.
 		do_event( 'dashboard/controller/before', array( 'class' => $this->class, 'path' => self::$path ) );
 
@@ -88,6 +91,122 @@ class Dashboard extends Controller {
 
 		// Fire after controller event.
 		do_event( 'dashboard/controller/after', array( 'class' => $this->class, 'path' => self::$path ) );
+
+	}
+
+	/**
+	 * Registers the default dashboard links.
+	 * 
+	 * @since 0.1.0
+	 * 
+	 * @return boolean
+	 */
+	public function register_menu_links() {
+
+		// Define all menu links.
+		$menu_links = array(
+			array(
+				'key' => 'dashboard',
+				'label' => 'Dashboard',
+				'icon' => 'tachometer-alt',
+				'url' => dashboard_url()
+			),
+			array(
+				'key' => 'spacer-1',
+				'spacer' => true,
+				'auth' => is_author()
+			),
+			array(
+				'key' => 'new-post',
+				'label' => 'New Post',
+				'icon' => 'plus',
+				'url' => dashboard_url( 'posts/new/' ),
+				'auth' => is_author()
+			),
+			array(
+				'key' => 'post',
+				'label' => 'Post',
+				'icon' => 'pencil-alt',
+				'url' => dashboard_url( 'posts/' ),
+				'auth' => is_author()
+			),
+			array(
+				'key' => 'media',
+				'label' => 'Media',
+				'icon' => 'image',
+				'url' => dashboard_url( 'media/' ),
+				'auth' => is_author()
+			),
+			array(
+				'key' => 'profile',
+				'label' => 'Profile',
+				'icon' => 'smile',
+				'url' => dashboard_url( 'users/edit/' . my_id() . '/' )
+			),
+			array(
+				'key' => 'spacer-2',
+				'spacer' => true,
+				'auth' => is_admin()
+			),
+			array(
+				'key' => 'users',
+				'label' => 'Users',
+				'icon' => 'user-friends',
+				'url' => dashboard_url( 'users/' ),
+				'auth' => is_admin()
+			),
+			array(
+				'key' => 'menus',
+				'label' => 'Menus',
+				'icon' => 'list-ol',
+				'url' => dashboard_url( 'menus/' ),
+				'auth' => is_admin()
+			),
+			array(
+				'key' => 'extensions',
+				'label' => 'Extensions',
+				'icon' => 'puzzle-piece',
+				'url' => dashboard_url( 'extensions/' ),
+				'auth' => is_admin()
+			),
+			array(
+				'key' => 'settings',
+				'label' => 'settings',
+				'icon' => 'wrench',
+				'url' => dashboard_url( 'settings/' ),
+				'auth' => is_admin()
+			),
+			array(
+				'key' => 'system',
+				'label' => 'System',
+				'icon' => 'university',
+				'url' => dashboard_url( 'system/' ),
+				'auth' => is_admin()
+			),
+			array(
+				'key' => 'spacer-3',
+				'spacer' => true
+			),
+			array(
+				'key' => 'log-out',
+				'label' => 'Log Out',
+				'icon' => 'door-open',
+				'url' => auth_url( 'logout/' )
+			)
+		);
+
+		// Add each menu link.
+		foreach ( $menu_links as $menu_link ) {
+
+			// Register the new dashboard link.
+			register_dashboard_link( $menu_link );
+
+		}
+
+		// Fire dashboard menu link event.
+		do_event( 'dashboard/controller/menu-links', array( 'menu_links' => $menu_links ) );
+
+		return true;
 
 	}
 

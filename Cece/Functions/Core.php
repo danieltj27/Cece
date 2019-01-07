@@ -121,6 +121,17 @@ $_current_user = false;
 $_post_types = array();
 
 /**
+ * The dashboard menu links.
+ * 
+ * @since 0.1.0
+ * 
+ * @access private
+ * 
+ * @var array
+ */
+$_dash_links = array();
+
+/**
  * Current app notices.
  * 
  * @since 0.1.0
@@ -737,6 +748,102 @@ function prepare_file_upload( $files ) {
 		}
 
 	}
+
+	return true;
+
+}
+
+/**
+ * Get the dashboard menu links.
+ * 
+ * @since 0.1.0
+ * 
+ * @return array $links
+ */
+function get_dashboard_links() {
+
+	global $_dash_links;
+
+	return $_dash_links;
+
+}
+
+/**
+ * Register new dashboard menu link.
+ * 
+ * @since 0.1.0
+ * 
+ * @param array $opts The options of the menu link to register.
+ * 
+ * @return boolean
+ */
+function register_dashboard_link( $opts = array() ) {
+
+	// Bail if we get nothing.
+	if ( empty( $opts ) ) {
+
+		return false;
+
+	}
+
+	global $_dash_links;
+
+	// Set up the defaults.
+	$defaults = array(
+		'key' => '',
+		'label' => '',
+		'icon' => 'circle',
+		'url' => home_url(),
+		'spacer' => false,
+		'auth' => true
+	);
+
+	// Merge the two together.
+	$opts = array_merge( $defaults, $opts );
+
+	// Does menu link already exist?
+	if ( isset( $_dash_links[ $opts[ 'key' ] ] ) ) {
+
+		return false;
+
+	}
+
+	// Check key is valid.
+	if ( '' == $opts[ 'key' ] || false === $opts[ 'key' ] || 0 === $opts[ 'key' ] ) {
+
+		return false;
+
+	}
+
+	// Add it.
+	$_dash_links[ $opts[ 'key' ] ] = $opts;
+
+	return true;
+
+}
+
+/**
+ * Deregister a dashboard menu link.
+ * 
+ * @since 0.1.0
+ * 
+ * @param string $key The key of the menu link to deregister.
+ * 
+ * @return boolean
+ */
+function deregister_dashboard_link( $key = '' ) {
+
+	global $_dash_links;
+
+	// Does the link exist?
+	if ( ! isset( $_dash_links[ $key ] ) ) {
+
+		return false;
+
+	}
+
+	// Remove the link.
+	unset( $_dash_links[ $key ] );
 
 	return true;
 
