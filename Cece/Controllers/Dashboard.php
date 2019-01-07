@@ -171,7 +171,7 @@ class Dashboard extends Controller {
 			),
 			array(
 				'key' => 'settings',
-				'label' => 'settings',
+				'label' => 'Settings',
 				'icon' => 'wrench',
 				'url' => dashboard_url( 'settings/' ),
 				'auth' => is_admin()
