@@ -61,6 +61,22 @@ $_installed = false;
 $_settings = array();
 
 /**
+ * The array of registered settings.
+ * 
+ * Please note that this variable is different to that of
+ * `$_settings` and should not be mixed up. This variable
+ * contents all registered settings which aids in the
+ * display and saving of settings within controllers.
+ * 
+ * @since 0.1.0
+ * 
+ * @access private
+ * 
+ * @var array
+ */
+$_rgd_settings = array();
+
+/**
  * The home URL default value.
  * 
  * @since 0.1.0

@@ -85,22 +85,26 @@
 
 						<fieldset>
 							<?php $settings->fetch( 'register', 'setting_key' ); ?>
-							<label for="register"><input type="checkbox" name="register" id="register"<?php if ( 'on' == $settings->setting_value ) : ?> checked="checked"<?php endif; ?> /> Let anyone register a new account.</label>
+							<label for="register-check"><input type="checkbox" name="register-check" id="register-check" data-check-input="register"<?php if ( 'on' == $settings->setting_value ) : ?> checked="checked"<?php endif; ?> value="<?php echo $settings->setting_value; ?>" /> Let anyone register a new account.</label>
+							<input type="hidden" name="register" id="register" value="<?php echo $settings->setting_value; ?>" />
 						</fieldset>
 
 						<fieldset>
 							<?php $settings->fetch( 'https', 'setting_key' ); ?>
-							<label for="https"><input type="checkbox" name="https" id="https"<?php if ( 'on' == $settings->setting_value ) : ?> checked="checked"<?php endif; ?> /> Access blog over a HTTPS (secure) connection.</label>
+							<label for="https-check"><input type="checkbox" name="https-check" id="https-check" data-check-input="https"<?php if ( 'on' == $settings->setting_value ) : ?> checked="checked"<?php endif; ?> value="<?php echo $settings->setting_value; ?>" /> Access blog over a HTTPS (secure) connection.</label>
+							<input type="hidden" name="https" id="https" value="<?php echo $settings->setting_value; ?>" />
 						</fieldset>
 
 						<fieldset>
 							<?php $settings->fetch( 'hsts', 'setting_key' ); ?>
-							<label for="hsts"><input type="checkbox" name="hsts" id="hsts"<?php if ( 'on' == $settings->setting_value ) : ?> checked="checked"<?php endif; ?> /> Force HTTPS connections with extreme prejudice.</label>
+							<label for="hsts-check"><input type="checkbox" name="hsts-check" id="hsts-check" data-check-input="hsts"<?php if ( 'on' == $settings->setting_value ) : ?> checked="checked"<?php endif; ?> value="<?php echo $settings->setting_value; ?>" /> Force HTTPS connections with extreme prejudice.</label>
+							<input type="hidden" name="hsts" id="hsts" value="<?php echo $settings->setting_value; ?>" />
 						</fieldset>
 
 						<fieldset>
 							<?php $settings->fetch( 'auto_check', 'setting_key' ); ?>
-							<label for="updates"><input type="checkbox" name="updates" id="updates"<?php if ( 'on' == $settings->setting_value ) : ?> checked="checked"<?php endif; ?> /> Automatically check for system updates each day.</label>
+							<label for="updates-check"><input type="checkbox" name="updates-check" id="updates-check" data-check-input="updates"<?php if ( 'on' == $settings->setting_value ) : ?> checked="checked"<?php endif; ?> value="<?php echo $settings->setting_value; ?>" /> Automatically check for system updates each day.</label>
+							<input type="hidden" name="updates" id="updates" value="<?php echo $settings->setting_value; ?>" />
 						</fieldset>
 
 						<fieldset>

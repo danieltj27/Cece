@@ -462,8 +462,20 @@ define( 'DB_PREFIX', '" . $_POST[ 'prefix' ] . "' );" . PHP_EOL;
 				'setting_key' => 'email',
 				'setting_value' => $_POST[ 'email' ]
 			),
+			'per_page' => array(
+				'setting_key' => 'per_page',
+				'setting_value' => 10
+			),
 			'register' => array(
 				'setting_key' => 'register',
+				'setting_value' => 'off'
+			),
+			'https' => array(
+				'setting_key' => 'https',
+				'setting_value' => ( 'https' == $proto ) ? 'on' : 'off'
+			),
+			'hsts' => array(
+				'setting_key' => 'hsts',
 				'setting_value' => 'off'
 			),
 			'auto_check' => array(
@@ -478,14 +490,6 @@ define( 'DB_PREFIX', '" . $_POST[ 'prefix' ] . "' );" . PHP_EOL;
 				'setting_key' => 'timezone',
 				'setting_value' => 'Europe/London'
 			),
-			'https' => array(
-				'setting_key' => 'https',
-				'setting_value' => ( 'https' == $proto ) ? 'on' : 'off'
-			),
-			'hsts' => array(
-				'setting_key' => 'hsts',
-				'setting_value' => 'off'
-			),
 			'update_check' => array(
 				'setting_key' => 'update_check',
 				'setting_value' => date( 'Y-m-d H:i:s' )
@@ -493,10 +497,6 @@ define( 'DB_PREFIX', '" . $_POST[ 'prefix' ] . "' );" . PHP_EOL;
 			'update_available' => array(
 				'setting_key' => 'update_available',
 				'setting_value' => '0'
-			),
-			'per_page' => array(
-				'setting_key' => 'per_page',
-				'setting_value' => 10
 			)
 		);
 

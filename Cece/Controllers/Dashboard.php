@@ -500,7 +500,8 @@ class Dashboard extends Controller {
 		$settings = get_settings(
 			array(
 				'orderby' => 'ID',
-				'order' => 'ASC'
+				'order' => 'ASC',
+				'limit' => 0
 			)
 		);
 

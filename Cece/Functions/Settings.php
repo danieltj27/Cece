@@ -16,16 +16,103 @@ if ( ! defined( 'CECE' ) ) {
 }
 
 /**
+ * Register a new setting.
+ * 
+ * Accepts an array of parameters which are to be
+ * used to register a setting which is then shown
+ * on the settings page within the dashbaord.
+ * 
+ * @todo implement proper settings field API.
+ * 
+ * @since 0.1.0
+ * 
+ * @param array $opts The array of setting options.
+ * 
+ * @return boolean
+ */
+function register_setting( $opts = array() ) {
+
+	// Bail if we get nothing.
+	if ( empty( $opts ) ) {
+
+		return false;
+
+	}
+
+	global $_rgd_settings;
+
+	// Set up the defaults.
+	$defaults = array(
+		'key' => '',
+		'label' => '',
+		'description' => '',
+		'type' => '',
+		'values' => '',
+		'callback' => ''
+	);
+
+	// Merge the two together.
+	$opts = array_merge( $defaults, $opts );
+
+	// Does setting already exist?
+	if ( isset( $_rgd_settings[ $opts[ 'key' ] ] ) ) {
+
+		return false;
+
+	}
+
+	// Check key is valid.
+	if ( '' == $opts[ 'key' ] || false === $opts[ 'key' ] || 0 === $opts[ 'key' ] ) {
+
+		return false;
+
+	}
+
+	// Add it.
+	$_rgd_settings[ $opts[ 'key' ] ] = $opts;
+
+	return true;
+
+}
+
+/**
+ * Unregisters a existing setting.
+ * 
+ * @todo implement proper settings field API.
+ * 
+ * @since 0.1.0
+ * 
+ * @param string $key The key for the setting.
+ * 
+ * @return boolean
+ */
+function unregister_setting( $key = '' ) {
+
+	global $_rgd_settings;
+
+	// Does the setting exist?
+	if ( ! isset( $_rgd_settings[ $key ] ) ) {
+
+		return false;
+
+	}
+
+	// Remove the setting.
+	unset( $_rgd_settings[ $key ] );
+
+	return true;
+
+}
+
+/**
  * Get a blog setting value.
  * 
  * Returns the value of a setting in the form
  * of a string or returns false if an invalid
  * setting has been requested.
  * 
- * Returns the value of a setting saved in the
- * database. All settings values are cached unless
- * the optional cache busting parameter is set to
- * anything but true.
+ * All settings values are cached unless the optional
+ * cache busting parameter is set to anything but true.
  * 
  * @since 0.1.0
  * 
