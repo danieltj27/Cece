@@ -39,6 +39,82 @@
 
 	}
 
+	&__group {
+
+		width: auto;
+		display: inline-flex;
+		position: relative;
+		flex-wrap: nowrap;
+		align-items: center;
+
+		.button {
+
+			border-left: 1px solid rgba( 0, 0, 0, 0.1 );
+			border-right: 1px solid rgba( 0, 0, 0, 0.1 );
+
+			&:first-of-type {
+
+				border-left: none;
+				border-radius: $radius 0 0 $radius;
+
+			}
+
+			&:last-of-type {
+
+				border-right: none;
+				border-radius: 0 $radius $radius 0;
+
+			}
+
+			&:only-of-type {
+
+				border: none;
+				border-radius: $radius;
+
+			}
+
+		}
+
+	}
+
+	&__dropdown {
+
+    	background-color: $white;
+		width: 200px;
+		padding: 10px;
+		display: none;
+		box-shadow: 0 4px 4px rgba( 0, 0, 0, 0.1 );
+		position: absolute;
+		top: calc( 100% + 5px );
+		z-index: 200;
+
+		.button {
+
+			&,
+			&:first-of-type,
+			&:only-of-type,
+			&:last-of-type {
+
+				border-radius: $radius;
+
+			}
+
+		}
+
+		&--left {
+
+			left: 0;
+
+		}
+
+		&--right {
+
+			right: 0;
+
+		}
+
+	}
+
 	i {
 
 		width: auto;
@@ -112,7 +188,7 @@
 
 	}
 
-	&--full {
+	&--wide {
 
 		width: 100%;
 
@@ -135,6 +211,51 @@
 	&--round {
 
 		border-radius: 100%;
+
+	}
+
+	&--push {
+
+		&-top {
+
+			margin-top: 10px;
+
+		}
+
+		&-left {
+
+			margin-left: 10px;
+
+		}
+
+		&-right {
+
+			margin-right: 10px;
+
+		}
+
+		&-bottom {
+
+			margin-bottom: 10px;
+
+		}
+
+	}
+
+	&--toggle {
+
+		&--left,
+		&--right {
+
+			padding: 6px 10px;
+
+			i {
+
+				margin: 0;
+
+			}
+
+		}
 
 	}
 

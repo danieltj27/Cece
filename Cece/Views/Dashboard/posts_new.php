@@ -18,7 +18,21 @@
 
 						<a class="button toolbar-settings-toggle" tabindex="0" role="link">Settings</a>
 
-						<button type="submit" class="button button--primary">Create</button>
+						<div class="button__group">
+
+							<button type="submit" class="button button--primary">Create</button>
+
+							<button type="button" class="button button--primary button--toggle button--toggle--left" data-toggle-target="js-post-status" aria-haspopup="true" aria-expanded="false" aria-label="Toggle drop down"><i class="fas fa-caret-down"></i></button>
+
+							<div class="button__dropdown button__dropdown--right js-post-status">
+
+								<button type="button" class="button button--primary button--wide button--push-bottom js-btn-update-post" data-post-field="status" data-post-value="draft">Draft</button>
+
+								<button type="button" class="button button--primary button--wide js-btn-update-post" data-post-field="status" data-post-value="publish">Publish</button>
+
+							</div>
+
+						</div>
 
 					</div>
 
