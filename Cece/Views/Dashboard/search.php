@@ -137,7 +137,7 @@
 											<?php if ( 'publish' == $post->post_status ) : ?>
 												Published
 											<?php else : ?>
-												Draft
+												Drafted
 											<?php endif; ?>
 										</td>
 										<td><abbr title="<?php echo date( 'jS F Y, H:i:s', strtotime( $post->published_at ) ); ?>"><?php echo date( 'Y-m-d', strtotime( $post->published_at ) ); ?></abbr></td>
