@@ -65,7 +65,7 @@
 				<label for="status">Status</label>
 				<select name="status" id="status">
 					<option value="publish">Published</option>
-					<option value="draft" selected="selected">Draft</option>
+					<option value="draft" selected="selected">Drafted</option>
 				</select>
 			</fieldset>
 

@@ -72,7 +72,7 @@
 				<label for="status">Status</label>
 				<select name="status" id="status">
 					<option value="publish"<?php if ( 'publish' == $post->post_status ) : ?> selected="selected"<?php endif; ?>>Published</option>
-					<option value="draft"<?php if ( 'draft' == $post->post_status ) : ?> selected="selected"<?php endif; ?>>Draft</option>
+					<option value="draft"<?php if ( 'draft' == $post->post_status ) : ?> selected="selected"<?php endif; ?>>Drafted</option>
 				</select>
 			</fieldset>
 
