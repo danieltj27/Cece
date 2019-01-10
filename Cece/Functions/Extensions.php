@@ -101,13 +101,13 @@ function add_listener( $event = '', $callback = array() ) {
 }
 
 /**
- * Get all extensions.
+ * Get all blog extensions.
  * 
  * @since 0.1.0
  * 
  * @return boolean|array
  */
-function get_all_extensions() {
+function get_extensions() {
 
 	// Get all extension directories.
 	$dirs = array_diff( scandir( CECEEXTEND ), array( '.', '..', '.svn', '.git', '.DS_Store', 'Thumbs.db' ) );
@@ -151,18 +151,22 @@ function get_all_extensions() {
 
 		}
 
+		// Create an extension instance.
+		$extension = new Extension;
+
+		// Set up the extension object.
+		$extension->ext_name = isset( $data[ 0 ][ 'name' ] ) ? $data[ 0 ][ 'name' ] : $data[ 0 ][ 'domain' ];
+		$extension->ext_description = isset( $data[ 0 ][ 'description' ] ) ? $data[ 0 ][ 'description' ] : '';
+		$extension->ext_domain = $data[ 0 ][ 'domain' ];
+		$extension->ext_func_path = isset( $data[ 0 ][ 'function_path' ] ) ? $data[ 0 ][ 'function_path' ] : '';
+		$extension->ext_version = isset( $data[ 0 ][ 'version' ] ) ? $data[ 0 ][ 'version' ] : '';
+		$extension->ext_author_name = isset( $data[ 0 ][ 'author_name' ] ) ? $data[ 0 ][ 'author_name' ] : '';
+		$extension->ext_author_url = isset( $data[ 0 ][ 'author_url' ] ) ? $data[ 0 ][ 'author_url' ] : '';
+		$extension->ext_licence_name = isset( $data[ 0 ][ 'licence_name' ] ) ? $data[ 0 ][ 'licence_name' ] : '';
+		$extension->ext_licence_url = isset( $data[ 0 ][ 'licence_url' ] ) ? $data[ 0 ][ 'licence_url' ] : '';
+
 		// Save the extension data.
-		$extensions[ $data[ 0 ][ 'domain' ] ] = array(
-			'name' => isset( $data[ 0 ][ 'name' ] ) ? $data[ 0 ][ 'name' ] : $data[ 0 ][ 'domain' ],
-			'description' => isset( $data[ 0 ][ 'description' ] ) ? $data[ 0 ][ 'description' ] : '',
-			'domain' => $data[ 0 ][ 'domain' ],
-			'function_path' => isset( $data[ 0 ][ 'function_path' ] ) ? $data[ 0 ][ 'function_path' ] : '',
-			'version' => isset( $data[ 0 ][ 'version' ] ) ? $data[ 0 ][ 'version' ] : '',
-			'author_name' => isset( $data[ 0 ][ 'author_name' ] ) ? $data[ 0 ][ 'author_name' ] : '',
-			'author_url' => isset( $data[ 0 ][ 'author_url' ] ) ? $data[ 0 ][ 'author_url' ] : '',
-			'licence_name' => isset( $data[ 0 ][ 'licence_name' ] ) ? $data[ 0 ][ 'licence_name' ] : '',
-			'licence_url' => isset( $data[ 0 ][ 'licence_url' ] ) ? $data[ 0 ][ 'licence_url' ] : ''
-		);
+		$extensions[ $data[ 0 ][ 'domain' ] ] = $extension;
 
 	}
 
@@ -189,51 +193,21 @@ function active_extensions() {
 	// Get the active extensions setting.
 	$active_extensions = blog_setting( 'active_extensions' );
 
-	// Convert to an array and decode it.
-	$active_extensions = json_decode( unfilter_text( $active_extensions ), true );
+	// Convert to an array.
+	$active_extensions = explode( ',', $active_extensions );
+
+	// Loop through each extension.
+	foreach ( $active_extensions as $key => $extension ) {
+
+		// Is the extension domain blank?
+		if ( '' == $extension ) {
+
+			unset( $active_extensions[ $key ] );
+
+		}
+
+	}
 
 	return $active_extensions;
-
-}
-
-/**
- * Check if an extension is installed.
- * 
- * @since 0.1.0
- * 
- * @param string $extension The domain of an extension.
- * 
- * @return boolean
- */
-function is_extension_installed( $extension = '' ) {
-
-	// Get all extensions.
-	$extensions = get_all_extensions();
-
-	// Does the extension exist?
-	if ( ! isset( $extensions[ $extension ] ) ) {
-
-		return false;
-
-	}
-
-	// Get the extension settings data.
-	$active_extensions = active_extensions();
-
-	// Do we have any extensions?
-	if ( empty( $active_extensions ) ) {
-
-		return false;
-
-	}
-
-	// Is the extension installed?
-	if ( in_array( $extension, $active_extensions, true ) ) {
-
-		return true;
-
-	}
-
-	return false;
 
 }

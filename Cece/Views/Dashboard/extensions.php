@@ -78,15 +78,15 @@
 
 									<tr>
 
-										<td><?php echo $extension[ 'name' ]; ?></td>
+										<td><?php echo $extension->ext_name; ?></td>
 										
-										<td><?php echo $extension[ 'description' ]; ?></td>
+										<td><?php echo $extension->ext_description; ?></td>
 										
-										<td><?php echo $extension[ 'author_name' ]; ?></td>
+										<td><?php echo $extension->ext_author_name; ?></td>
 										
 										<td>
 											
-											<?php if ( is_extension_installed( $extension[ 'domain' ] ) && 'on' != blog_setting( 'flag_ext_safe' ) ) : ?>
+											<?php if ( $extension->is_installed() && 'on' != blog_setting( 'flag_ext_safe' ) ) : ?>
 
 												Active
 
@@ -98,7 +98,7 @@
 
 										</td>
 										
-										<td><a href="<?php echo dashboard_url( 'extensions/manage/' . $extension[ 'domain' ] . '/' ); ?>" class="button button--small">Manage</a></td>
+										<td><a href="<?php echo dashboard_url( 'extensions/manage/' . $extension->ext_domain . '/' ); ?>" class="button button--small">Manage</a></td>
 
 									</tr>
 

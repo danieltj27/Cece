@@ -174,6 +174,8 @@ final class App {
 		require_once( CECEAPP . 'Models/Media.php' );
 		require_once( CECEAPP . 'Models/Post.php' );
 		require_once( CECEAPP . 'Models/Tag.php' );
+		require_once( CECEAPP . 'Models/Extension.php' );
+		//require_once( CECEAPP . 'Models/Theme.php' );
 		require_once( CECEAPP . 'Database.php' );
 		require_once( CECEAPP . 'Requests.php' );
 		require_once( CECEAPP . 'PostTypes.php' );
@@ -335,7 +337,7 @@ final class App {
 		}
 
 		// Get all extensions.
-		$extensions = get_all_extensions();
+		$extensions = get_extensions();
 
 		// Get all activated extensions.
 		$active_extensions = active_extensions();
@@ -346,14 +348,14 @@ final class App {
 			// Loop through and include all active listeners.
 			foreach ( $active_extensions as $extension ) {
 
-				// Create the path to the extension.
-				$ext_path = CECEEXTEND . $extension . '/' . trim( $extensions[ $extension ][ 'function_path' ], '/' ) . '/' . $extension . '.php';
+				// Set the extension as an object.
+				$extension = $extensions[ $extension ];
 
 				// Check the core extension file exists.
-				if ( file_exists( $ext_path ) ) {
+				if ( file_exists( $extension->ext_func_file() ) ) {
 
 					// Include the extension file.
-					require_once( $ext_path );
+					require_once( $extension->ext_func_file() );
 
 				}
 

@@ -50,31 +50,31 @@
 
 				<div class="col col--100">
 
-					<h2 class="h4"><?php echo $extension[ 'name' ]; ?></h2>
+					<h2 class="h4"><?php echo $extension->ext_name; ?></h2>
 
-					<p><?php echo $extension[ 'description' ]; ?></p>
+					<p><?php echo $extension->ext_description; ?></p>
 
 					<hr />
 
 					<ul>
 
-						<li><strong>Status:</strong> <?php if ( is_extension_installed( $extension[ 'domain' ] ) && 'on' != blog_setting( 'flag_ext_safe' ) ) : ?>Active<?php else : ?>Inactive<?php endif; ?></li>
+						<li><strong>Status:</strong> <?php if ( $extension->is_installed() && 'on' != blog_setting( 'flag_ext_safe' ) ) : ?>Active<?php else : ?>Inactive<?php endif; ?></li>
 
-						<li><strong>Version:</strong> <?php echo $extension[ 'version' ]; ?></li>
+						<li><strong>Version:</strong> <?php echo $extension->ext_version; ?></li>
 
-						<li><strong>Author:</strong> <?php echo $extension[ 'author_name' ]; ?></li>
+						<li><strong>Author:</strong> <?php echo $extension->ext_author_name; ?></li>
 
-						<li><strong>Website:</strong> <a href="<?php echo $extension[ 'author_url' ]; ?>"><?php echo $extension[ 'author_url' ]; ?></a></li>
+						<li><strong>Website:</strong> <a href="<?php echo $extension->ext_author_url; ?>"><?php echo $extension->ext_author_url; ?></a></li>
 
-						<li><strong>Licence:</strong> <a href="<?php echo $extension[ 'licence_url' ]; ?>"><?php echo $extension[ 'licence_name' ]; ?></a></li>
+						<li><strong>Licence:</strong> <a href="<?php echo $extension->ext_licence_url; ?>"><?php echo $extension->ext_licence_name; ?></a></li>
 
 					</ul>
 
 					<form action="<?php echo dashboard_url( 'extensions/save/' ); ?>" method="post">
 
-						<input type="hidden" name="domain" id="domain" value="<?php echo $extension[ 'domain' ]; ?>" />
+						<input type="hidden" name="domain" id="domain" value="<?php echo $extension->ext_domain; ?>" />
 
-						<?php if ( is_extension_installed( $extension[ 'domain' ] ) ) : ?>
+						<?php if ( $extension->is_installed() ) : ?>
 
 							<button type="submit" class="button button--warning">Uninstall</button>
 

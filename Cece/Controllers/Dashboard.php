@@ -684,7 +684,7 @@ class Dashboard extends Controller {
 		}
 
 		// Get all extensions.
-		$extensions = get_all_extensions();
+		$extensions = get_extensions();
 
 		return self::view( self::$path . 'extensions.php', array( 'title' => 'Extensions &lsaquo; Dashboard', 'extensions' => $extensions ), true );
 
@@ -708,17 +708,16 @@ class Dashboard extends Controller {
 
 		}
 
-		// Get all extensions.
-		$extensions = get_all_extensions();
+		// Create new extension instance.
+		$extension = new Extension;
 
 		// Get the extension domain.
 		$domain = ( isset( $params[':param'] ) ) ? $params[':param'] : 0;
 
 		// Does the extension exist?
-		if ( isset( $extensions[ $domain ] ) ) {
+		if ( false !== $extension->exists( $domain ) ) {
 
-			// Set up the extension data.
-			$extension = $extensions[ $domain ];
+			$extension->fetch( $domain );
 
 		} else {
 
@@ -740,7 +739,7 @@ class Dashboard extends Controller {
 	public static function extensions_save() {
 
 		// Get all extensions.
-		$extensions = get_all_extensions();
+		$extensions = get_extensions();
 
 		// Did we get an extension domain?
 		if ( ! isset( $_POST[ 'domain' ] ) || ! isset( $extensions[ $_POST[ 'domain' ] ] ) ) {
@@ -752,79 +751,38 @@ class Dashboard extends Controller {
 		// Set up the selected extension.
 		$extension = $extensions[ $_POST[ 'domain' ] ];
 
-		// Create new settings instance.
-		$setting = new Setting;
-
-		// Fetch the settings data.
-		$setting->fetch( 'active_extensions', 'setting_key' );
-
-		// Does the extensions active setting exist?
-		if ( false === $setting->exists( $setting->ID ) ) {
-
-			// It doesn't exist yet so set it up.
-			$setting->setting_key = 'active_extensions';
-			$setting->setting_value = array();
-
-		} else {
-
-			// Convert the HTML entities.
-			$setting->setting_value = unfilter_text( $setting->setting_value );
-
-			// Convert the setting to an array.
-			$setting->setting_value = json_decode( $setting->setting_value, true );
-
-		}
-
-		// Remove it if it exists or add it if it doesn't.
-		if ( in_array( $extension[ 'domain' ], $setting->setting_value, true ) ) {
-
-			// Get the array index.
-			$index = array_search( $extension[ 'domain' ], $setting->setting_value, true );
-
-			// Remove it.
-			unset( $setting->setting_value[ $index ] );
+		// Uninstall if installed, and vice versa.
+		if ( $extension->is_installed() ) {
 
 			// Uninstall the extension.
-			do_event( $extension[ 'domain' ] . '/uninstall', array( 'extension' => $extension ) );
+			$extension->uninstall();
+
+			// Fire the uninstall extension event.
+			do_event( $extension->ext_domain . '/uninstall', array( 'extension' => $extension ) );
 
 			register_notice( 'extensions_save', 'success', 'The extension has been uninstalled.' );
 
 		} else {
 
-			// Add it.
-			$setting->setting_value[] = $extension[ 'domain' ];
-
-			/**
-			 * A path to the extension needs to be created and used to
-			 * include the core extension file in case it needs to do
-			 * anything on installation. As it's not already installed
-			 * (officially) the core file isn't included so the install
-			 * function wouldn't be included and the event that is fired
-			 * on install would get missed.
-			 */
-			$ext_path = CECEEXTEND . $extension[ 'domain' ] . '/' . trim( $extension[ 'function_path' ], '/' ) . '/' . $extension[ 'domain' ] . '.php';
+			// Install the extension.
+			$extension->install();
 
 			// Does the path exist?
-			if ( file_exists( $ext_path ) ) {
+			if ( file_exists( $extension->ext_func_file() ) ) {
 
 				// Include the file.
-				require_once( $ext_path );
+				require_once( $extension->ext_func_file() );
 
 			}
 
-			// Install the extension.
-			do_event( $extension[ 'domain' ] . '/install', array( 'extension' => $extension ) );
+			// Fire the install extension event.
+			do_event( $extension->ext_domain . '/install', array( 'extension' => $extension ) );
 
 			register_notice( 'extensions_save', 'success', 'The extension has been installed.' );
 
 		}
 
-		// Convert back into JSON.
-		$setting->setting_value = json_encode( $setting->setting_value );
-
-		$setting->save();
-
-		return self::redirect( 'dashboard/extensions/manage/' . $extension[ 'domain' ] . '/' );
+		return self::redirect( 'dashboard/extensions/manage/' . $extension->ext_domain . '/' );
 
 	}
 
