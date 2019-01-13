@@ -175,7 +175,7 @@ final class App {
 		require_once( CECEAPP . 'Models/Post.php' );
 		require_once( CECEAPP . 'Models/Tag.php' );
 		require_once( CECEAPP . 'Models/Extension.php' );
-		//require_once( CECEAPP . 'Models/Theme.php' );
+		require_once( CECEAPP . 'Models/Theme.php' );
 		require_once( CECEAPP . 'Database.php' );
 		require_once( CECEAPP . 'Requests.php' );
 		require_once( CECEAPP . 'PostTypes.php' );

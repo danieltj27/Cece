@@ -16,13 +16,13 @@ if ( ! defined( 'CECE' ) ) {
 }
 
 /**
- * Get all installed themes.
+ * Get all themes.
  * 
  * @since 0.1.0
  * 
  * @return boolean|array
  */
-function get_all_themes() {
+function get_themes() {
 
 	// Get all theme directories.
 	$dirs = array_diff( scandir( CECETHEMES ), array( '.', '..', '.svn', '.git', '.DS_Store', 'Thumbs.db' ) );
@@ -59,18 +59,22 @@ function get_all_themes() {
 
 		}
 
+		// Create an theme instance.
+		$theme = new Theme;
+
+		// Set up the theme object.
+		$theme->theme_name = isset( $data[ 0 ][ 'name' ] ) ? $data[ 0 ][ 'name' ] : $data[ 0 ][ 'domain' ];
+		$theme->theme_description = isset( $data[ 0 ][ 'description' ] ) ? $data[ 0 ][ 'description' ] : '';
+		$theme->theme_domain = $data[ 0 ][ 'domain' ];
+		$theme->theme_temp_path = isset( $data[ 0 ][ 'template_path' ] ) ? $data[ 0 ][ 'template_path' ] : '';
+		$theme->theme_version = isset( $data[ 0 ][ 'version' ] ) ? $data[ 0 ][ 'version' ] : '';
+		$theme->theme_author_name = isset( $data[ 0 ][ 'author_name' ] ) ? $data[ 0 ][ 'author_name' ] : '';
+		$theme->theme_author_url = isset( $data[ 0 ][ 'author_url' ] ) ? $data[ 0 ][ 'author_url' ] : '';
+		$theme->theme_licence_name = isset( $data[ 0 ][ 'licence_name' ] ) ? $data[ 0 ][ 'licence_name' ] : '';
+		$theme->theme_licence_url = isset( $data[ 0 ][ 'licence_url' ] ) ? $data[ 0 ][ 'licence_url' ] : '';
+
 		// Save the theme data.
-		$themes[] = array(
-			'name' => isset( $data[ 0 ][ 'name' ] ) ? $data[ 0 ][ 'name' ] : $data[ 0 ][ 'domain' ],
-			'description' => isset( $data[ 0 ][ 'description' ] ) ? $data[ 0 ][ 'description' ] : '',
-			'domain' => $data[ 0 ][ 'domain' ],
-			'template_path' => isset( $data[ 0 ][ 'template_path' ] ) ? $data[ 0 ][ 'template_path' ] : '',
-			'version' => isset( $data[ 0 ][ 'version' ] ) ? $data[ 0 ][ 'version' ] : '',
-			'author_name' => isset( $data[ 0 ][ 'author_name' ] ) ? $data[ 0 ][ 'author_name' ] : '',
-			'author_url' => isset( $data[ 0 ][ 'author_url' ] ) ? $data[ 0 ][ 'author_url' ] : '',
-			'licence_name' => isset( $data[ 0 ][ 'licence_name' ] ) ? $data[ 0 ][ 'licence_name' ] : '',
-			'licence_url' => isset( $data[ 0 ][ 'licence_url' ] ) ? $data[ 0 ][ 'licence_url' ] : ''
-		);
+		$themes[ $theme->theme_domain ] = $theme;
 
 	}
 
@@ -103,47 +107,27 @@ function active_theme( $cached = true ) {
 	global $_active_theme;
 
 	// Should we use the cached version?
-	if ( true === $cached && is_array( $_active_theme ) && ! empty( $_active_theme ) ) {
+	if ( true === $cached && $_active_theme instanceof Theme ) {
 
 		return $_active_theme;
 
 	}
 
 	// Get the current theme.
-	$theme = blog_setting( 'theme' );
+	$current_theme = blog_setting( 'theme' );
+
+	// Get all themes.
+	$themes = get_themes();
 
 	// Does the theme exist?
-	if ( ! file_exists( CECETHEMES . $theme . '/theme.json' ) ) {
+	if ( ! isset( $themes[ $current_theme ] ) ) {
 
 		return false;
 
 	}
 
-	// Get the theme JSON details.
-	$data = file_get_contents( CECETHEMES . $theme . '/theme.json' );
-
-	// Convert to an array.
-	$data = json_decode( $data, true );
-
-	// Does the theme domain match the settings value?
-	if ( ! isset( $data[ 0 ][ 'domain' ] ) || $data[ 0 ][ 'domain' ] != $theme ) {
-
-		return false;
-
-	}
-
-	// Save the theme data.
-	$_active_theme = array(
-		'name' => isset( $data[ 0 ][ 'name' ] ) ? $data[ 0 ][ 'name' ] : $data[ 0 ][ 'domain' ],
-		'description' => isset( $data[ 0 ][ 'description' ] ) ? $data[ 0 ][ 'description' ] : '',
-		'domain' => $data[ 0 ][ 'domain' ],
-		'template_path' => isset( $data[ 0 ][ 'template_path' ] ) ? $data[ 0 ][ 'template_path' ] : '',
-		'version' => isset( $data[ 0 ][ 'version' ] ) ? $data[ 0 ][ 'version' ] : '',
-		'author_name' => isset( $data[ 0 ][ 'author_name' ] ) ? $data[ 0 ][ 'author_name' ] : '',
-		'author_url' => isset( $data[ 0 ][ 'author_url' ] ) ? $data[ 0 ][ 'author_url' ] : '',
-		'licence_name' => isset( $data[ 0 ][ 'licence_name' ] ) ? $data[ 0 ][ 'licence_name' ] : '',
-		'licence_url' => isset( $data[ 0 ][ 'licence_url' ] ) ? $data[ 0 ][ 'licence_url' ] : ''
-	);
+	// Set as the active theme.
+	$_active_theme = $themes[ $current_theme ];
 
 	return $_active_theme;
 
@@ -161,14 +145,14 @@ function theme_domain() {
 	// Get the active theme.
 	$theme = active_theme();
 
-	// Does the file path exist?
+	// Does the theme exist?
 	if ( ! $theme ) {
 
 		return false;
 
 	}
 
-	return $theme[ 'domain' ];
+	return $theme->theme_domain;
 
 }
 
@@ -186,24 +170,53 @@ function theme_path( $path = '' ) {
 	// Get the active theme.
 	$theme = active_theme();
 
-	// Does the file path exist?
-	if ( ! $theme || ! file_exists( CECETHEMES . $theme[ 'domain' ] . '/' . $theme[ 'template_path' ] ) ) {
+	// Does the theme exist?
+	if ( ! $theme ) {
 
 		return false;
 
 	}
 
-	// Create the path.
-	$_path = CECETHEMES . $theme[ 'domain' ] . '/' . $theme[ 'template_path' ];
-
-	// Do we have a path to append?
+	// Do we have a custom path?
 	if ( '' != $path ) {
 
-		$_path = $_path . '/' . ltrim( $path, '/' );
+		return $theme->theme_path() . trim( $path, '/' );
 
 	}
 
-	return $_path;
+	return $theme->theme_path();
+
+}
+
+/**
+ * Returns the active theme templates path.
+ * 
+ * @since 0.1.0
+ * 
+ * @param string $path The directory or file to append.
+ * 
+ * @return boolean|string
+ */
+function theme_template( $path = '' ) {
+
+	// Get the active theme.
+	$theme = active_theme();
+
+	// Does the theme exist?
+	if ( ! $theme ) {
+
+		return false;
+
+	}
+
+	// Do we have a custom path?
+	if ( '' != $path ) {
+
+		return $theme->theme_temp_path() . trim( $path, '/' );
+
+	}
+
+	return $theme->theme_temp_path();
 
 }
 
@@ -221,23 +234,20 @@ function theme_url( $path = '' ) {
 	// Get the active theme.
 	$theme = active_theme();
 
-	// Does the file path exist?
+	// Does the theme exist?
 	if ( ! $theme ) {
 
 		return false;
 
 	}
 
-	// Create the path.
-	$_url = 'Content/Themes/' . $theme[ 'domain' ];
-
-	// Do we have a path to append?
+	// Do we have a custom path?
 	if ( '' != $path ) {
 
-		$_url = $_url . '/' . ltrim( $path, '/' );
+		return $theme->theme_url() . trim( $path, '/' );
 
 	}
 
-	return home_url( $_url );
+	return $theme->theme_url();
 
 }

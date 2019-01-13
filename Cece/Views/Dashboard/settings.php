@@ -62,7 +62,7 @@
 								<?php $settings->fetch( 'theme', 'setting_key' ); ?>
 								<select name="theme" id="theme">
 									<?php foreach ( $themes as $theme ) : ?>
-										<option value="<?php echo $theme[ 'domain' ]; ?>"<?php if ( theme_domain() == $theme[ 'domain' ] ) : ?> selected="selected"<?php endif; ?>><?php echo $theme[ 'name' ]; ?> by <?php echo $theme[ 'author_name' ]; ?></option>
+										<option value="<?php echo $theme->theme_domain; ?>"<?php if ( theme_domain() == $theme->theme_domain ) : ?> selected="selected"<?php endif; ?>><?php echo $theme->theme_name; ?> by <?php echo $theme->theme_author_name; ?></option>
 									<?php endforeach; ?>
 								</select>
 							</fieldset>

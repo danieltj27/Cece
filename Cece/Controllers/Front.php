@@ -88,7 +88,7 @@ class Front extends Controller {
 			true
 		);
 
-		return self::view( theme_path( 'index.php' ), array( 'title' => 'Home', 'posts' => $posts ), true );
+		return self::view( theme_template( 'index.php' ), array( 'title' => 'Home', 'posts' => $posts ), true );
 
 	}
 
@@ -122,7 +122,7 @@ class Front extends Controller {
 		$author = new User;
 		$author->fetch( $post->post_author_ID );
 
-		return self::view( theme_path( 'post.php' ), array( 'title' => $post->post_title, 'post' => $post, 'author' => $author ), true );
+		return self::view( theme_template( 'post.php' ), array( 'title' => $post->post_title, 'post' => $post, 'author' => $author ), true );
 
 	}
 
@@ -152,7 +152,7 @@ class Front extends Controller {
 
 		}
 
-		return self::view( theme_path( 'page.php' ), array( 'title' => $page->post_title, 'page' => $page ), true );
+		return self::view( theme_template( 'page.php' ), array( 'title' => $page->post_title, 'page' => $page ), true );
 
 	}
 
@@ -209,7 +209,7 @@ class Front extends Controller {
 			)
 		);
 
-		return self::view( theme_path( 'tag.php' ), array( 'title' => $tag->tag_name, 'tag' => $tag, 'posts' => $posts ), true );
+		return self::view( theme_template( 'tag.php' ), array( 'title' => $tag->tag_name, 'tag' => $tag, 'posts' => $posts ), true );
 
 	}
 
@@ -225,7 +225,7 @@ class Front extends Controller {
 		// Set the HTTP response.
 		http_response_code( 404 );
 
-		return self::view( theme_path( '404.php' ), array( 'title' => 'Page Not Found' ), true );
+		return self::view( theme_template( '404.php' ), array( 'title' => 'Page Not Found' ), true );
 
 	}
 

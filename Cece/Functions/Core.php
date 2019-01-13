@@ -160,9 +160,9 @@ $_event_listeners = array();
  * 
  * @access private
  * 
- * @var array
+ * @var boolean|object
  */
-$_active_theme = array();
+$_active_theme = false;
 
 /**
  * The total number of pages (for pagination).

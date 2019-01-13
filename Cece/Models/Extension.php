@@ -184,31 +184,6 @@ class Extension extends Model {
 	}
 
 	/**
-	 * Switches to the previous extension.
-	 * 
-	 * @since 0.1.0
-	 * 
-	 * @return boolean
-	 */
-	public function previous() {
-
-		// Does the previous extension already exist?
-		if ( false === $this->fetch( $this->previous_ID ) ) {
-
-			$this->reset( true );
-
-			return false;
-
-		}
-
-		// Go back to the previous to object.
-		$this->fetch( $this->previous_ID );
-
-		return true;
-
-	}
-
-	/**
 	 * Reset the current instance.
 	 * 
 	 * @since 0.1.0

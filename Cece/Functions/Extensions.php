@@ -101,7 +101,7 @@ function add_listener( $event = '', $callback = array() ) {
 }
 
 /**
- * Get all blog extensions.
+ * Get all extensions.
  * 
  * @since 0.1.0
  * 
@@ -166,7 +166,7 @@ function get_extensions() {
 		$extension->ext_licence_url = isset( $data[ 0 ][ 'licence_url' ] ) ? $data[ 0 ][ 'licence_url' ] : '';
 
 		// Save the extension data.
-		$extensions[ $data[ 0 ][ 'domain' ] ] = $extension;
+		$extensions[ $extension->ext_domain ] = $extension;
 
 	}
 

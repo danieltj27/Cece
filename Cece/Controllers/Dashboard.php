@@ -597,7 +597,7 @@ class Dashboard extends Controller {
 		$settings = new Setting;
 
 		// Get all themes
-		$themes = get_all_themes();
+		$themes = get_themes();
 
 		// Get all timezones.
 		$timezones = DateTimeZone::listIdentifiers( DateTimeZone::ALL );
