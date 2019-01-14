@@ -17,4 +17,4 @@ Creating issues, submitting pull requests or just chiming in on discussions is a
 
 ## Copyright & Licence
 
-Copyright (c) 2018 Daniel James. Cece is licenced under [MIT](https://github.com/danieltj27/Cece/blob/master/LICENCE.md).
+(c) 2019 Daniel James. Cece is licenced under [MIT](https://github.com/danieltj27/Cece/blob/master/LICENCE.md).
