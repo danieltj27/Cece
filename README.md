@@ -15,6 +15,10 @@ Cece is very easy and quick to install. You'll need the following software versi
 
 Creating issues, submitting pull requests or just chiming in on discussions is always welcome. All project development is handled within the GitHub [repository](https://github.com/danieltj27/Cece/).
 
-## Copyright & Licence
+## Copyright
 
-(c) 2019 Daniel James. Cece is licenced under [MIT](https://github.com/danieltj27/Cece/blob/master/LICENCE.md).
+Copyright 2019 Daniel James
+
+## Licence
+
+[MIT](https://github.com/danieltj27/Cece/blob/master/LICENCE.md)
