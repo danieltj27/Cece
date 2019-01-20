@@ -59,6 +59,15 @@ class Post extends Model {
 	public $post_status = '';
 
 	/**
+	 * The post template.
+	 * 
+	 * @since 0.1.0
+	 * 
+	 * @var string
+	 */
+	public $post_template = '';
+
+	/**
 	 * The post type.
 	 * 
 	 * @since 0.1.0
@@ -192,19 +201,20 @@ class Post extends Model {
 
 		// Setup the post model.
 		$this->previous_ID = $this->ID;
-		$this->ID = $result['id'];
-		$this->post_title = $result['title'];
-		$this->post_content = $result['content'];
-		$this->post_path = $result['path'];
-		$this->post_status = $result['status'];
-		$this->post_tags = json_decode( $result['tags'], true );
-		$this->post_author_ID = $result['author_id'];
-		$this->post_type = $result['type'];
-		$this->post_parent_ID = $result['parent_id'];
-		$this->post_media_ID = $result['media_id'];
-		$this->published_at = $result['published_at'];
-		$this->created_at = $result['created_at'];
-		$this->updated_at = $result['updated_at'];
+		$this->ID = $result[ 'id' ];
+		$this->post_title = $result[ 'title' ];
+		$this->post_content = $result[ 'content' ];
+		$this->post_path = $result[ 'path' ];
+		$this->post_status = $result[ 'status' ];
+		$this->post_template = $result[ 'template' ];
+		$this->post_tags = json_decode( $result[ 'tags' ], true );
+		$this->post_author_ID = $result[ 'author_id' ];
+		$this->post_type = $result[ 'type' ];
+		$this->post_parent_ID = $result[ 'parent_id' ];
+		$this->post_media_ID = $result[ 'media_id' ];
+		$this->published_at = $result[ 'published_at' ];
+		$this->created_at = $result[ 'created_at' ];
+		$this->updated_at = $result[ 'updated_at' ];
 
 		return $result;
 
@@ -235,7 +245,7 @@ class Post extends Model {
 		$db = new Database;
 
 		// Prepare the insert statement.
-		$query = $db->connection->prepare( 'INSERT INTO ' . $db->prefix . 'posts ( title, content, path, status, type, tags, author_id, parent_id, media_id, published_at, created_at, updated_at ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )' );
+		$query = $db->connection->prepare( 'INSERT INTO ' . $db->prefix . 'posts ( title, content, path, status, template, type, tags, author_id, parent_id, media_id, published_at, created_at, updated_at ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )' );
 
 		// Did we get a published date?
 		if ( '' == $this->published_at ) {
@@ -280,6 +290,16 @@ class Post extends Model {
 
 		}
 
+		// Get the current theme.
+		$theme = active_theme();
+
+		// Does the template exist?
+		if ( ! file_exists( $theme->theme_temp_path() . $this->post_template ) ) {
+
+			$this->post_template = '';
+
+		}
+
 		// Is the post type valid?
 		if ( ! isset( $_post_types[ $this->post_type ] ) ) {
 
@@ -336,14 +356,15 @@ class Post extends Model {
 		$query->bindParam( 2, $this->post_content );
 		$query->bindParam( 3, $this->post_path );
 		$query->bindParam( 4, $this->post_status );
-		$query->bindParam( 5, $this->post_type );
-		$query->bindParam( 6, $this->post_tags );
-		$query->bindParam( 7, $this->post_author_ID );
-		$query->bindParam( 8, $this->post_parent_ID );
-		$query->bindParam( 9, $this->post_media_ID );
-		$query->bindParam( 10, $this->published_at );
-		$query->bindParam( 11, $this->created_at );
-		$query->bindParam( 12, $this->updated_at );
+		$query->bindParam( 5, $this->post_template );
+		$query->bindParam( 6, $this->post_type );
+		$query->bindParam( 7, $this->post_tags );
+		$query->bindParam( 8, $this->post_author_ID );
+		$query->bindParam( 9, $this->post_parent_ID );
+		$query->bindParam( 10, $this->post_media_ID );
+		$query->bindParam( 11, $this->published_at );
+		$query->bindParam( 12, $this->created_at );
+		$query->bindParam( 13, $this->updated_at );
 
 		// Execute the query.
 		$query->execute();
@@ -383,7 +404,7 @@ class Post extends Model {
 		$db = new Database;
 
 		// Prepare the update statement.
-		$query = $db->connection->prepare( 'UPDATE ' . $db->prefix . 'posts SET title = ?, content = ?, path = ?, status = ?, type = ?, tags = ?, author_id = ?, parent_id = ?, media_id = ?, published_at = ?, created_at = ?, updated_at = ? WHERE ID = ?' );
+		$query = $db->connection->prepare( 'UPDATE ' . $db->prefix . 'posts SET title = ?, content = ?, path = ?, status = ?, template = ?, type = ?, tags = ?, author_id = ?, parent_id = ?, media_id = ?, published_at = ?, created_at = ?, updated_at = ? WHERE ID = ?' );
 
 		// Set the timestamps.
 		$this->published_at = date( 'Y-m-d H:i:s', strtotime( $this->published_at ) );
@@ -417,6 +438,16 @@ class Post extends Model {
 
 			// Fallback to saving as draft.
 			$this->post_status = 'draft';
+
+		}
+
+		// Get the current theme.
+		$theme = active_theme();
+
+		// Does the template exist?
+		if ( ! file_exists( $theme->theme_temp_path() . $this->post_template ) ) {
+
+			$this->post_template = '';
 
 		}
 
@@ -476,15 +507,16 @@ class Post extends Model {
 		$query->bindParam( 2, $this->post_content );
 		$query->bindParam( 3, $this->post_path );
 		$query->bindParam( 4, $this->post_status );
-		$query->bindParam( 5, $this->post_type );
-		$query->bindParam( 6, $this->post_tags );
-		$query->bindParam( 7, $this->post_author_ID );
-		$query->bindParam( 8, $this->post_parent_ID );
-		$query->bindParam( 9, $this->post_media_ID );
-		$query->bindParam( 10, $this->published_at );
-		$query->bindParam( 11, $this->created_at );
-		$query->bindParam( 12, $this->updated_at );
-		$query->bindParam( 13, $this->ID );
+		$query->bindParam( 5, $this->post_template );
+		$query->bindParam( 6, $this->post_type );
+		$query->bindParam( 7, $this->post_tags );
+		$query->bindParam( 8, $this->post_author_ID );
+		$query->bindParam( 9, $this->post_parent_ID );
+		$query->bindParam( 10, $this->post_media_ID );
+		$query->bindParam( 11, $this->published_at );
+		$query->bindParam( 12, $this->created_at );
+		$query->bindParam( 13, $this->updated_at );
+		$query->bindParam( 14, $this->ID );
 
 		// Execute the query.
 		$query->execute();
@@ -551,18 +583,19 @@ class Post extends Model {
 
 			$this->previous_ID = $this->ID;
 			$this->ID = isset( $data[ 'id' ] ) ? $data[ 'id' ] : 0;
-			$this->post_title = isset( $data['title'] ) ? $data[ 'title' ] : '';
-			$this->post_content = isset( $data['content'] ) ? $data[ 'content' ] : '';
-			$this->post_path = isset( $data['path'] ) ? $data[ 'path' ] : '';
-			$this->post_status = isset( $data['status'] ) ? $data[ 'status' ] : '';
-			$this->post_type = isset( $data['type'] ) ? $data[ 'type' ] : '';
-			$this->post_tags = isset( $data['tags'] ) ? json_decode( $data['tags'], true ) : array();
+			$this->post_title = isset( $data[ 'title' ] ) ? $data[ 'title' ] : '';
+			$this->post_content = isset( $data[ 'content' ] ) ? $data[ 'content' ] : '';
+			$this->post_path = isset( $data[ 'path' ] ) ? $data[ 'path' ] : '';
+			$this->post_status = isset( $data[ 'status' ] ) ? $data[ 'status' ] : '';
+			$this->post_template = isset( $data[ 'template' ] ) ? $data[ 'template' ] : '';
+			$this->post_type = isset( $data[ 'type' ] ) ? $data[ 'type' ] : '';
+			$this->post_tags = isset( $data[ 'tags' ] ) ? json_decode( $data[ 'tags' ], true ) : array();
 			$this->post_author_ID = isset( $data[ 'author_id' ] ) ? $data[ 'author_id' ] : 0;
 			$this->post_parent_ID = isset( $data[ 'parent_id' ] ) ? $data[ 'parent_id' ] : 0;
 			$this->post_media_ID = isset( $data[ 'media_id' ] ) ? $data[ 'media_id' ] : 0;
-			$this->published_at = isset( $data['published_at'] ) ? $data[ 'published_at' ] : '';
-			$this->created_at = isset( $data['created_at'] ) ? $data[ 'created_at' ] : '';
-			$this->updated_at = isset( $data['updated_at'] ) ? $data[ 'updated_at' ] : '';
+			$this->published_at = isset( $data[ 'published_at' ] ) ? $data[ 'published_at' ] : '';
+			$this->created_at = isset( $data[ 'created_at' ] ) ? $data[ 'created_at' ] : '';
+			$this->updated_at = isset( $data[ 'updated_at' ] ) ? $data[ 'updated_at' ] : '';
 
 		}
 
@@ -672,6 +705,7 @@ class Post extends Model {
 		$this->post_content = '';
 		$this->post_path = '';
 		$this->post_status = '';
+		$this->post_template = '';
 		$this->post_type = '';
 		$this->post_tags = array();
 		$this->post_author_ID = 0;

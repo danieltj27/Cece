@@ -958,7 +958,10 @@ class Dashboard extends Controller {
 			)
 		);
 
-		return self::view( self::$path . 'posts_new.php', array( 'title' => 'New Post &lsaquo; Dashboard', 'users' => $users, 'post_types' => $post_types, 'media' => $media ), true );
+		// Get the active theme templates.
+		$templates = theme_templates();
+
+		return self::view( self::$path . 'posts_new.php', array( 'title' => 'New Post &lsaquo; Dashboard', 'users' => $users, 'post_types' => $post_types, 'media' => $media, 'templates' => $templates ), true );
 
 	}
 
@@ -994,6 +997,7 @@ class Dashboard extends Controller {
 		$post->post_content = ( isset( $_POST[ 'content' ] ) ) ? $_POST[ 'content' ] : $post->post_content;
 		$post->post_path = ( isset( $_POST[ 'path' ] ) ) ? $_POST[ 'path' ] : $post->post_path;
 		$post->post_status = ( isset( $_POST[ 'status' ] ) ) ? $_POST[ 'status' ] : $post->post_status;
+		$post->post_template = ( isset( $_POST[ 'template' ] ) ) ? $_POST[ 'template' ] : $post->post_template;
 		$post->post_type = ( isset( $_POST[ 'type' ] ) ) ? $_POST[ 'type' ] : $post->post_type;
 		$post->post_tags = ( isset( $_POST[ 'tags' ] ) ) ? $_POST[ 'tags' ] : $post->post_tags;
 		$post->post_author_ID = ( isset( $_POST[ 'author_id' ] ) ) ? $_POST[ 'author_id' ] : $post->post_author_ID;
@@ -1059,7 +1063,10 @@ class Dashboard extends Controller {
 			)
 		);
 
-		return self::view( self::$path . 'posts_edit.php', array( 'title' => 'Edit Post &lsaquo; Dashboard', 'post' => $post, 'users' => $users, 'post_types' => $post_types, 'media' => $media ), true );
+		// Get the active theme templates.
+		$templates = theme_templates();
+
+		return self::view( self::$path . 'posts_edit.php', array( 'title' => 'Edit Post &lsaquo; Dashboard', 'post' => $post, 'users' => $users, 'post_types' => $post_types, 'media' => $media, 'templates' => $templates ), true );
 
 	}
 

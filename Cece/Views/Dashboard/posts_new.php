@@ -57,15 +57,35 @@
 			</fieldset>
 
 			<fieldset>
-				<label for="published_at">Publish Date</label>
-				<input type="datetime-local" name="published_at" id="published_at" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}" />
-			</fieldset>
-
-			<fieldset>
 				<label for="status">Status</label>
 				<select name="status" id="status">
 					<option value="publish">Published</option>
 					<option value="draft" selected="selected">Drafted</option>
+				</select>
+			</fieldset>
+
+			<fieldset>
+				<label for="published_at">Publish Date</label>
+				<input type="datetime-local" name="published_at" id="published_at" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}" />
+			</fieldset>
+
+			<?php if ( $templates ) : ?>
+				<fieldset>
+					<label for="template">Custom Template</label>
+					<select name="template" id="template">
+						<option>Default template</option>
+						<?php foreach ( $templates as $template => $name ) : ?>
+							<option value="<?php echo $template; ?>"><?php echo $name; ?></option>
+						<?php endforeach; ?>
+					</select>
+					<p class="input-desc">Templates are defined in your theme.</p>
+				</fieldset>
+			<?php endif; ?>
+
+			<fieldset>
+				<label for="template">Custom Template</label>
+				<select name="template" id="template">
+					<option value="default">Default template</option>
 				</select>
 			</fieldset>
 

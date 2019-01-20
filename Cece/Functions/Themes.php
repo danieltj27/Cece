@@ -189,6 +189,81 @@ function theme_path( $path = '' ) {
 }
 
 /**
+ * Get the templates of the active theme.
+ * 
+ * @since 0.1.0
+ * 
+ * @return boolean|array
+ */
+function theme_templates() {
+
+	// Get the active theme.
+	$theme = active_theme();
+
+	// Does the path exist?
+	if ( ! file_exists( $theme->theme_temp_path() ) ) {
+
+		return false;
+
+	}
+
+	// Get files in the template path.
+	$files = array_diff( scandir( $theme->theme_temp_path() ), array( '.', '..', '.svn', '.git', '.DS_Store', 'Thumbs.db' ) );
+
+	// Did we get anything?
+	if ( empty( $files ) ) {
+
+		return false;
+
+	}
+
+	// Find out which are PHP files.
+	foreach ( $files as $key => $file ) {
+
+		// Is this not a PHP file?
+		if ( false === strpos( $file, '.php' ) ) {
+
+			unset( $files[ $key ] );
+
+		}
+
+	}
+
+	// Do we have any templates left?
+	if ( empty( $files ) ) {
+
+		return false;
+
+	}
+
+	// Build the templates array.
+	$templates = array();
+
+	// Find out which are custom templates.
+	foreach ( $files as $key => $file ) {
+
+		// Check if this template is marked as a template.
+		if ( substr( $file, 0, strlen( 'template-' ) ) == 'template-' ) {
+
+			// Remove template from the start and PHP from the end.
+			$templates[ $file ] = substr( substr( $file, strlen( 'template-' ) ), 0, -4 );
+
+		}
+
+	}
+
+	// Do we have anything?
+	if ( empty( $templates ) ) {
+
+		return false;
+
+	}
+
+	return $templates;
+
+}
+
+/**
  * Returns the active theme templates path.
  * 
  * @since 0.1.0
@@ -197,7 +272,7 @@ function theme_path( $path = '' ) {
  * 
  * @return boolean|string
  */
-function theme_template( $path = '' ) {
+function theme_template_path( $path = '' ) {
 
 	// Get the active theme.
 	$theme = active_theme();

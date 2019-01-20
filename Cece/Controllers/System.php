@@ -343,6 +343,7 @@ define( 'DB_PREFIX', '" . $_POST[ 'prefix' ] . "' );" . PHP_EOL;
 			  `content` longtext NOT NULL,
 			  `path` varchar(250) NOT NULL DEFAULT '',
 			  `status` varchar(250) NOT NULL DEFAULT '',
+			  `template` varchar(250) NOT NULL DEFAULT '',
 			  `type` varchar(250) NOT NULL DEFAULT '',
 			  `tags` longtext NOT NULL,
 			  `author_id` int(10) NOT NULL,

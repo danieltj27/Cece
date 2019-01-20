@@ -64,17 +64,30 @@
 			</fieldset>
 
 			<fieldset>
-				<label for="published_at">Publish Date</label>
-				<input type="datetime-local" name="published_at" id="published_at" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}" value="<?php echo date( 'Y-m-d', strtotime( $post->published_at ) ) . 'T' . date( 'H:i', strtotime( $post->published_at ) ); ?>" />
-			</fieldset>
-
-			<fieldset>
 				<label for="status">Status</label>
 				<select name="status" id="status">
 					<option value="publish"<?php if ( 'publish' == $post->post_status ) : ?> selected="selected"<?php endif; ?>>Published</option>
 					<option value="draft"<?php if ( 'draft' == $post->post_status ) : ?> selected="selected"<?php endif; ?>>Drafted</option>
 				</select>
 			</fieldset>
+
+			<fieldset>
+				<label for="published_at">Publish Date</label>
+				<input type="datetime-local" name="published_at" id="published_at" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}" value="<?php echo date( 'Y-m-d', strtotime( $post->published_at ) ) . 'T' . date( 'H:i', strtotime( $post->published_at ) ); ?>" />
+			</fieldset>
+
+			<?php if ( $templates ) : ?>
+				<fieldset>
+					<label for="template">Custom Template</label>
+					<select name="template" id="template">
+						<option>Default template</option>
+						<?php foreach ( $templates as $template => $name ) : ?>
+							<option value="<?php echo $template; ?>"<?php if ( $template == $post->post_template ) : ?> selected="selected"<?php endif; ?>><?php echo $name; ?></option>
+						<?php endforeach; ?>
+					</select>
+					<p class="input-desc">Templates are defined in your theme.</p>
+				</fieldset>
+			<?php endif; ?>
 
 			<fieldset>
 				<label for="tags">Tags</label>
