@@ -87,54 +87,6 @@ function home_url( $path = '', $cached = true ) {
 }
 
 /**
- * Returns the post URL.
- * 
- * @todo implement post URL writing functionality.
- * 
- * @since 0.1.0
- * 
- * @param object $post The object a Post instance.
- * 
- * @return string
- */
-function post_url( $post ) {
-
-	// Do we have a valid post instance?
-	if ( ! $post instanceof Post ) {
-
-		return false;
-
-	}
-
-	// Create new post type instance.
-	$post_type = new PostTypes;
-
-	// Get the actual post type.
-	$post_type = $post_type->get( $post->post_type );
-
-	// Did we get a valid post type?
-	if ( false === $post_type ) {
-
-		return false;
-
-	}
-
-	// Should the post type be in the URL?
-	if ( $post_type[ 'show_in_url' ] ) {
-
-		$path = $post_type[ 'path' ] . '/' . $post->post_path . '/';
-
-	} else {
-
-		$path = $post->post_path . '/';
-
-	}
-
-	return home_url( $path );
-
-}
-
-/**
  * Returns the authentication URL.
  * 
  * @see home_url()

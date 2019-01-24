@@ -122,7 +122,7 @@ class Front extends Controller {
 		$author = new User;
 		$author->fetch( $post->post_author_ID );
 
-		return self::view( theme_template_path( 'post.php' ), array( 'title' => $post->post_title, 'post' => $post, 'author' => $author ), true );
+		return self::view( $post->get_template(), array( 'title' => $post->post_title, 'post' => $post, 'author' => $author ), true );
 
 	}
 
@@ -152,7 +152,7 @@ class Front extends Controller {
 
 		}
 
-		return self::view( theme_template_path( 'page.php' ), array( 'title' => $page->post_title, 'page' => $page ), true );
+		return self::view( $page->get_template(), array( 'title' => $page->post_title, 'page' => $page ), true );
 
 	}
 

@@ -19,7 +19,7 @@
 
 						<?php if ( 'publish' == $post->post_status ) : ?>
 
-							<a href="<?php echo post_url( $post ); ?>" class="button" target="_blank">View</a>
+							<a href="<?php echo $post->get_url(); ?>" class="button" target="_blank">View</a>
 
 						<?php endif; ?>
 

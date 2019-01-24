@@ -177,7 +177,7 @@
 										</td>
 										<td><abbr title="<?php echo date( 'jS F Y, H:i:s', strtotime( $post->published_at ) ); ?>"><?php echo date( 'Y-m-d', strtotime( $post->published_at ) ); ?></abbr></td>
 										<td>
-											<a href="<?php echo post_url( $post ); ?>" class="button button--small">View <?php echo $post_type['labels']['singular']; ?></a>
+											<a href="<?php echo $post->get_url(); ?>" class="button button--small">View <?php echo $post_type['labels']['singular']; ?></a>
 										</td>
 
 									</tr>
