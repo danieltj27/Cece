@@ -8,7 +8,7 @@
 
 			<?php foreach ( $posts as $post ) : ?>
 
-				<li><a href="<?php echo post_url( $post ); ?>"><?php echo $post->post_title; ?></a> on the <time><?php echo date( 'jS F Y', strtotime( $post->published_at ) ); ?></time></li>
+				<li><a href="<?php echo $post->get_url(); ?>"><?php echo $post->post_title; ?></a> on the <time><?php echo date( 'jS F Y', strtotime( $post->published_at ) ); ?></time></li>
 
 			<?php endforeach; ?>
 

@@ -720,43 +720,6 @@ class Post extends Model {
 	}
 
 	/**
-	 * Returns the current URL of the post.
-	 * 
-	 * @since 0.1.0
-	 * 
-	 * @return string
-	 */
-	public function post_url() {
-
-		// Create new post type instance.
-		$post_type = new PostTypes;
-
-		// Get the actual post type.
-		$post_type = $post_type->get( $this->post_type );
-
-		// Did we get a valid post type?
-		if ( false === $post_type ) {
-
-			return false;
-
-		}
-
-		// Should the post type be in the URL?
-		if ( $post_type[ 'show_in_url' ] ) {
-
-			$path = $post_type[ 'path' ] . '/' . $this->post_path . '/';
-
-		} else {
-
-			$path = $this->post_path . '/';
-
-		}
-
-		return home_url( $path );
-
-	}
-
-	/**
 	 * Returns the post URL.
 	 * 
 	 * @since 0.1.0

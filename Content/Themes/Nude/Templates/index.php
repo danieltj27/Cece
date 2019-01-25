@@ -10,7 +10,7 @@
 
 				<li>
 					<article class="post post-<?php echo $post->ID; ?>" id="post-<?php echo $post->ID; ?>">
-						<h2 class="h3 post__heading"><a href="<?php echo post_url( $post ); ?>"><?php echo $post->post_title; ?></a></h2>
+						<h2 class="h3 post__heading"><a href="<?php echo $post->get_url(); ?>"><?php echo $post->post_title; ?></a></h2>
 						<time class="post__timestamp"><?php echo date( 'jS F Y', strtotime( $post->published_at ) ); ?></time>
 						<div class="post__content">
 							<p><?php echo content_excerpt( $post, 200 ); ?></p>
