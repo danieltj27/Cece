@@ -68,6 +68,19 @@ class Auth extends Controller {
 	}
 
 	/**
+	 * Redirect to the login page.
+	 * 
+	 * @since 0.1.0
+	 * 
+	 * @return mixed
+	 */
+	public static function missed_login() {
+
+		return self::redirect( 'auth/login/' );
+
+	}
+
+	/**
 	 * Log in to an account.
 	 * 
 	 * @since 0.1.0
