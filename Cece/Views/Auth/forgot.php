@@ -5,6 +5,7 @@
 	<fieldset>
 		<label for="email">Email address</label>
 		<input type="email" name="email" id="email" />
+		<p class="input-desc"><a href="<?php echo auth_url( 'login/' ); ?>">I know my password.</a></p>
 	</fieldset>
 
 	<fieldset>
