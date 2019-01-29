@@ -252,13 +252,11 @@ function blog_home_page() {
 		// Set the post (page) object.
 		$post->fetch( $home_page );
 
-	} else {
-
-		return false;
+		return $post;
 
 	}
 
-	return $post;
+	return false;
 
 }
 
