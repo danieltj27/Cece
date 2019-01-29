@@ -171,6 +171,13 @@ class Front extends Controller {
 
 		}
 
+		// Is this the custom home page?
+		if ( $page->is_home() ) {
+
+			return self::redirect( '/' );
+
+		}
+
 		return self::view( $page->get_template(), array( 'title' => $page->post_title, 'page' => $page ), true );
 
 	}
