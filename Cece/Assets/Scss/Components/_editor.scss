@@ -1,10 +1,5 @@
 /**
- * Cece
- * (c) 2018, Daniel James
- * 
  * Editor
- * 
- * @package Cece
  */
 
 #cece {
@@ -179,9 +174,21 @@
 
 		}
 
-		&__title {
+		&__title,
+		&__textarea {
 
 			background-color: $clear;
+
+			&:focus {
+
+				background-color: $light-grey;
+
+			}
+
+		}
+
+		&__title {
+
 			border: none;
 			margin: 0 0 20px;
 			padding: 10px;
@@ -192,7 +199,6 @@
 
 		&__textarea {
 
-			background-color: $clear;
 			border: none;
 			min-height: 480px;
 			color: $mono;
