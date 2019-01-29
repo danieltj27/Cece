@@ -467,6 +467,10 @@ define( 'DB_PREFIX', '" . $_POST[ 'prefix' ] . "' );" . PHP_EOL;
 				'setting_key' => 'per_page',
 				'setting_value' => 10
 			),
+			'home_page' => array(
+				'setting_key' => 'home_page',
+				'setting_value' => 0
+			),
 			'register' => array(
 				'setting_key' => 'register',
 				'setting_value' => 'off'

@@ -83,6 +83,24 @@
 							<p class="input-desc">The number of posts, users and other items per page.</p>
 						</fieldset>
 
+						<?php if ( $pages ) : ?>
+
+							<?php $home_page = blog_home_page(); ?>
+
+							<fieldset>
+								<label for="home_page">Home page <span class="required">*</span></label>
+								<?php $settings->fetch( 'home_page', 'setting_key' ); ?>
+								<select name="home_page" id="home_page">
+									<option value="0">&mdash;</option>
+									<?php foreach ( $pages as $page ) : ?>
+										<option value="<?php echo $page->ID; ?>"<?php if ( false !== $home_page && $home_page->ID == $page->ID ) : ?> selected="selected"<?php endif; ?>><?php echo $page->post_title; ?></option>
+									<?php endforeach; ?>
+								</select>
+								<p class="input-desc">The selected page will be used as a custom home page.</p>
+							</fieldset>
+
+						<?php endif; ?>
+
 						<fieldset>
 							<?php $settings->fetch( 'register', 'setting_key' ); ?>
 							<label for="register-check"><input type="checkbox" name="register-check" id="register-check" data-check-input="register"<?php if ( 'on' == $settings->setting_value ) : ?> checked="checked"<?php endif; ?> value="<?php echo $settings->setting_value; ?>" /> Let anyone register a new account.</label>

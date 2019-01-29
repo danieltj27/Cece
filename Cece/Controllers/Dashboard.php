@@ -158,7 +158,7 @@ class Dashboard extends Controller {
 			array(
 				'key' => 'menus',
 				'label' => 'Menus',
-				'icon' => 'list-ol',
+				'icon' => 'table',
 				'url' => dashboard_url( 'menus/' ),
 				'auth' => is_admin()
 			),
@@ -599,10 +599,25 @@ class Dashboard extends Controller {
 		// Get all themes
 		$themes = get_themes();
 
+		// Get all pages.
+		$pages = get_posts(
+			array(
+				'where' => array(
+					array(
+						'key' => 'type',
+						'value' => 'page'
+					)
+				),
+				'orderby' => 'title',
+				'order' => 'ASC',
+				'limit' => 0
+			)
+		);
+
 		// Get all timezones.
 		$timezones = DateTimeZone::listIdentifiers( DateTimeZone::ALL );
 
-		return self::view( self::$path . 'settings.php', array( 'title' => 'Settings &lsaquo; Dashboard', 'settings' => $settings, 'themes' => $themes, 'timezones' => $timezones ), true );
+		return self::view( self::$path . 'settings.php', array( 'title' => 'Settings &lsaquo; Dashboard', 'settings' => $settings, 'themes' => $themes, 'pages' => $pages, 'timezones' => $timezones ), true );
 
 	}
 

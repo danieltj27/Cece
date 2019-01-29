@@ -67,6 +67,23 @@ class Front extends Controller {
 	 */
 	public static function index() {
 
+		// Get the custom home page setting.
+		$page = blog_home_page();
+
+		// Do we have a custom home page?
+		if ( false !== $page ) {
+
+			// Can we view this?
+			if ( 'page' != $page->post_type || 'publish' != $page->post_status ) {
+
+				return self::redirect( '404/' );
+
+			}
+
+			return self::view( $page->get_template(), array( 'title' => $page->post_title, 'page' => $page ), true );
+
+		}
+
 		// Get all published posts in date order.
 		$posts = get_posts(
 			array(
@@ -112,6 +129,7 @@ class Front extends Controller {
 		// Try and fetch the post.
 		$fetch = $post->fetch( $path, 'path' );
 
+		// Can we view this?
 		if ( ! $fetch || 'post' != $post->post_type || 'publish' != $post->post_status ) {
 
 			return self::redirect( '404/' );
@@ -146,6 +164,7 @@ class Front extends Controller {
 		// Try and fetch the page.
 		$fetch = $page->fetch( $path, 'path' );
 
+		// Can we view this?
 		if ( ! $fetch || 'page' != $page->post_type || 'publish' != $page->post_status ) {
 
 			return self::redirect( '404/' );

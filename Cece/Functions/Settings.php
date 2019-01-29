@@ -232,6 +232,37 @@ function blog_per_page() {
 }
 
 /**
+ * Return the custom home page.
+ * 
+ * @since 0.1.0
+ * 
+ * @return object
+ */
+function blog_home_page() {
+
+	// Get the custom home page.
+	$home_page = (int) blog_setting( 'home_page' );
+
+	// Create a post instance.
+	$post = new Post;
+
+	// Does the page exist?
+	if ( $post->exists( $home_page ) ) {
+
+		// Set the post (page) object.
+		$post->fetch( $home_page );
+
+	} else {
+
+		return false;
+
+	}
+
+	return $post;
+
+}
+
+/**
  * Return blog language type.
  * 
  * @since 0.1.0
