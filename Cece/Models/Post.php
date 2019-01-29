@@ -784,4 +784,34 @@ class Post extends Model {
 
 	}
 
+	/**
+	 * Check if this is the custom home page.
+	 * 
+	 * @since 0.1.0
+	 * 
+	 * @return boolean
+	 */
+	public function is_home() {
+
+		// Get the custom home page value.
+		$home_page = blog_home_page();
+
+		// Is this even viewable?
+		if ( false === $home_page || 'page' != $this->post_type || 'publish' != $this->post_status ) {
+
+			return false;
+
+		}
+
+		// Do the IDs match?
+		if ( $home_page->ID == $this->ID ) {
+
+			return true;
+
+		}
+
+		return false;
+
+	}
+
 }

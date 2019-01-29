@@ -127,13 +127,7 @@
 
 										<td><?php echo $post->ID; ?></td>
 										<td>
-											<a href="<?php echo dashboard_url( 'posts/edit/' . $post->ID . '/' ); ?>">
-												<?php if ( '' == $post->post_title ) : ?>
-													<em>untitled</em>
-												<?php else : ?>
-													<?php echo $post->post_title; ?>
-												<?php endif; ?>
-											</a>
+											<a href="<?php echo dashboard_url( 'posts/edit/' . $post->ID . '/' ); ?>"><?php if ( '' == $post->post_title ) : ?><em>untitled</em><?php else : ?><?php echo $post->post_title; ?><?php endif; ?></a><?php if ( $post->is_home() ) : ?> &mdash; <strong>Home</strong><?php endif; ?>
 										</td>
 										<td>
 											<?php
