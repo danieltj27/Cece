@@ -553,6 +553,12 @@ class Media extends Model {
 	 */
 	public function get_size() {
 
+		if ( ! $this->file_found() ) {
+
+			return '0 bytes';
+
+		}
+
 		// Get the file size in bytes.
 		$bytes = filesize( $this->get_path() );
 
@@ -580,6 +586,27 @@ class Media extends Model {
 		} elseif ( 1 == $bytes ) {
 
 			return $bytes . ' byte';
+
+		}
+
+	}
+
+	/**
+	 * Checks if the media exists.
+	 * 
+	 * @since 0.1.0
+	 * 
+	 * @return boolean
+	 */
+	public function file_found() {
+
+		if ( file_exists( $this->get_path() ) ) {
+
+			return true;
+
+		} else {
+
+			return false;
 
 		}
 
