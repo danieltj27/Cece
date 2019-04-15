@@ -50,7 +50,7 @@ class Dashboard extends Controller {
 	public function __construct() {
 
 		// Register the side menu links.
-		$this->register_menu_links();
+		$this->register_menu();
 
 		// Fire before controller event.
 		do_event( 'dashboard/controller/before', array( 'class' => $this->class, 'path' => self::$path ) );
@@ -101,10 +101,10 @@ class Dashboard extends Controller {
 	 * 
 	 * @return boolean
 	 */
-	public function register_menu_links() {
+	public function register_menu() {
 
-		// Define all menu links.
-		$menu_links = array(
+		// Create menu link collection.
+		$menu = array(
 			array(
 				'key' => 'dashboard',
 				'label' => 'Dashboard',
@@ -196,15 +196,15 @@ class Dashboard extends Controller {
 		);
 
 		// Add each menu link.
-		foreach ( $menu_links as $menu_link ) {
+		foreach ( $menu as $link ) {
 
 			// Register the new dashboard link.
-			register_dashboard_link( $menu_link );
+			register_dashboard_link( $link );
 
 		}
 
 		// Fire dashboard menu link event.
-		do_event( 'dashboard/controller/menu-links', array( 'menu_links' => $menu_links ) );
+		do_event( 'dashboard/controller/menu', array( 'menu' => &$menu ) );
 
 		return true;
 
