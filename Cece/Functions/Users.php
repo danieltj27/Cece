@@ -273,30 +273,3 @@ function is_me( $user_id = 0 ) {
 	return false;
 
 }
-
-/**
- * Checks if a user can perform an action.
- * 
- * This function checks if the selected user can
- * perform a certain action based on the permissions
- * set on their account.
- * 
- * If the second parameter (which is optional) is left
- * blank, the current user id will be used instead. Returns
- * a boolean value of true if they have permission or false
- * if the user doesn't.
- * 
- * @todo permissions need to be implemented properly before this can be used.
- * 
- * @since 0.1.0
- * 
- * @param string $action  The action to check permissions for.
- * @param int    $user_id The user id to check against.
- * 
- * @return boolean
- */
-function user_can( $action, $user_id = 0 ) {
-
-	return no_thank_you( 'The user_can function is incomplete and should not be used.' );
-
-}
