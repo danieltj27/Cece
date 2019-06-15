@@ -113,6 +113,15 @@ class Requests {
 	public $is_api = false;
 
 	/**
+	 * Is file flag.
+	 * 
+	 * @since 0.1.1
+	 * 
+	 * @var boolean
+	 */
+	public $is_file = false;
+
+	/**
 	 * The current page slug.
 	 * 
 	 * @since 0.1.0
@@ -154,6 +163,7 @@ class Requests {
 		$this->is_admin = false;
 		$this->is_logged_in = is_logged_in();
 		$this->is_secure = is_secure();
+		$this->is_file = $this->maybe_is_file();
 		$this->is_front = $this->get_endpoint( 'front' );
 		$this->is_dashboard = $this->get_endpoint( 'dashboard' );
 		$this->is_system = $this->get_endpoint( 'system' );
@@ -162,24 +172,22 @@ class Requests {
 		$this->page = $this->get_endpoint();
 		$this->path = get_path();
 
-		// Set the blog timezone.
 		$this->set_timezone();
 
-		// Check if we need to upgrade to HSTS.
 		$this->maybe_http_upgrade();
 
-		// Run the automatic update chacker.
 		$this->run_auto_update_checker();
+
+		//var_dump( $this ); die();
 
 	}
 
 	/**
 	 * Check for secure connections.
 	 * 
-	 * Checks the current connection to see if it's
-	 * secure and whether strict transport security
-	 * headers should be set and redirected to a
-	 * HTTPS version of the page.
+	 * This functions checks whether the current connection is secure
+	 * and if the HSTS security header should be applied to the current
+	 * user session.
 	 * 
 	 * @todo redirect HTTP requests to HTTPS.
 	 * 
@@ -208,11 +216,9 @@ class Requests {
 	/**
 	 * Run an automatic system update check.
 	 * 
-	 * The automatic update check is triggered by any
-	 * user visiting the blog as long as the daily timeout
-	 * period has been reached. Whilst this may be better
-	 * to do via cron, it needs to be easily enabled and
-	 * disabled by the average user... servers are hard.
+	 * The automatic update check is triggered by any visit to the application
+	 * as long as the daily timeout period has been reached. This could be done
+	 * via a cron job but servers are hard.
 	 * 
 	 * @since 0.1.0
 	 * 
@@ -276,13 +282,18 @@ class Requests {
 	 */
 	public function get_endpoint( $endpoint = '' ) {
 
-		// Get the requested URL.
-		$url = parse_url( $_SERVER['REQUEST_URI'] );
+		// If it's a file default to front.
+		if ( $this->is_file ) {
 
-		// Convert to an array to get the endpoint.
-		$dirty_parts = explode( '/', $url['path'] );
+			return 'front';
 
-		// Create empty array for clean URL parts.
+		}
+
+		$url = parse_url( $_SERVER[ 'REQUEST_URI' ] );
+
+		// Split the path into parts.
+		$dirty_parts = explode( '/', $url[ 'path' ] );
+
 		$clean_parts = array();
 
 		// Loop through and remove empty parts.
@@ -304,9 +315,9 @@ class Requests {
 		}
 
 		// Check if the endpoint isn't for the front-end.
-		if ( ! empty( $clean_parts ) && in_array( $clean_parts[0], array( 'dashboard', 'system', 'auth', 'api' ), true ) ) {
+		if ( ! empty( $clean_parts ) && in_array( $clean_parts[ 0 ], array( 'dashboard', 'system', 'auth', 'api' ), true ) ) {
 
-			$selected = $clean_parts[0];
+			$selected = $clean_parts[ 0 ];
 
 		} else {
 
@@ -359,6 +370,39 @@ class Requests {
 
 		// Set the server timezone.
 		return date_default_timezone_set( $timezone );
+
+	}
+
+	/**
+	 * Check if the request is for a file.
+	 * 
+	 * This function checks whether the current request is for a file
+	 * on the server rather than an endpoint within the application.
+	 * 
+	 * @since 0.1.1
+	 * 
+	 * @return boolean
+	 */
+	public function maybe_is_file() {
+
+		// A list of common file types.
+		$known_types = array(
+			'html', 'htm', 'xml', 'json', 'txt', 'rtf', 'pdf', 'php',
+			'js', 'css', 'png', 'jpg', 'jpeg', 'gif', 'ico', 'mov',
+			'mp3', 'mp4', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx',
+			'zip', 'tar', 'tar.gz'
+		);
+
+		$path = pathinfo( $_SERVER[ 'REQUEST_URI' ], PATHINFO_EXTENSION );
+
+		// Is the file type present in the array?
+		if ( in_array( $path, $known_types, true ) ) {
+
+			return true;
+
+		}
+
+		return false;
 
 	}
 

@@ -233,7 +233,7 @@ class Controller {
 		foreach ( $this->routes as $route ) {
 
 			// Convert the placeholders to regex.
-			$current_route = str_replace( ':param', '[A-Za-z0-9-_]+', $route['url'] );
+			$current_route = str_replace( ':param', '[A-Za-z0-9-_]+', $route[ 'url' ] );
 			$current_route = '~^' . $current_route . '$~';
 
 			// Is this the route we're looking for?
@@ -243,7 +243,7 @@ class Controller {
 				$selected = $route;
 
 				// Convert the route path into parts.
-				$route_parts = explode( '/', $route['url'] );
+				$route_parts = explode( '/', $route[ 'url' ] );
 
 				// Convert the selected URL into parts.
 				$url_parts = explode( '/', $url );
@@ -265,36 +265,43 @@ class Controller {
 
 		}
 
-		// Did we not find a view callback?
+		// Do we not have a callback?
 		if ( false === $selected ) {
 
-			return self::redirect('system/not-found/');
+			// Don't redirect if we're looking for a file.
+			if ( $request->is_file ) {
+
+				die();
+
+			}
+
+			return self::redirect( 'system/not-found/' );
 
 		}
 
-		// Are we not even authorised?
-		if ( true !== $selected['auth'] ) {
+		// Are we not authorised?
+		if ( true !== $selected[ 'auth' ] ) {
 
-			return self::redirect('system/not-authorised/');
+			return self::redirect( 'system/not-authorised/' );
 
 		}
 
 		// Did we get an incorrect HTTP request type?
-		if ( 'get' != $selected['method'] && ( 'post' != $selected['method'] && 'POST' != $_SERVER['REQUEST_METHOD'] ) ) {
+		if ( 'get' != $selected[ 'method' ] && ( 'post' != $selected[ 'method' ] && 'POST' != $_SERVER[ 'REQUEST_METHOD' ] ) ) {
 
-			return self::redirect('system/bad-request/');
+			return self::redirect( 'system/bad-request/' );
 
 		}
 
 		// Did we find a valid route?
-		if ( is_callable( $selected['callback'][0], $selected['callback'][1] ) ) {
+		if ( is_callable( $selected[ 'callback' ][ 0 ], $selected[ 'callback' ][ 1 ] ) ) {
 
 			// Rune the route callback method.
-			call_user_func_array( $selected['callback'], array( $ids ) );
+			call_user_func_array( $selected[ 'callback' ], array( $ids ) );
 
 		} else {
 
-			return self::redirect('system/unknown-error/');
+			return self::redirect( 'system/unknown-error/' );
 
 		}
 

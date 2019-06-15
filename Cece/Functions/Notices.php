@@ -68,10 +68,9 @@ function register_notice( $id, $type, $text, $dismiss = true, $cache_bust = fals
 /**
  * Update session set notices.
  * 
- * This function can be used to update the global
- * notices cache if a notice has been added after
- * the application has been initialised but needs
- * outputting before shutdown.
+ * This function can be used to update the global notices cache
+ * if a notice has been added after the application has been
+ * initialised but needs outputting before shutdown.
  * 
  * @since 0.1.0
  * 
@@ -83,13 +82,10 @@ function update_notice_cache( $id = '' ) {
 
 	global $_notices;
 
-	// Do we have an id?
 	if ( isset( $_SESSION[ 'notices' ] ) && is_array( $_notices ) ) {
 
-		// Do we have an id?
 		if ( '' != $id ) {
 
-			// Does the notice exist?
 			if ( isset( $_SESSION[ 'notices' ][ $id ] ) ) {
 
 				// Add the specified notice.
@@ -133,17 +129,15 @@ function do_notices() {
 
 	global $_notices;
 
-	// Notices HTML placeholder.
 	$output = '';
 
-	// Bail early if we need to.
 	if ( empty( $_notices ) || ! is_array( $_notices ) ) {
 
 		return '';
 
 	}
 
-	// Define available notice icons.
+	// Define available icons.
 	$icons = array(
 		'info' => 'info',
 		'success' => 'thumbs-up',
@@ -160,7 +154,6 @@ function do_notices() {
 
 		}
 
-		// Can this be dismissed?
 		if ( $notice[ 'dismiss' ] ) {
 
 			$dismiss = '<a class="notice__close" role="link" tabindex="0"><i class="fas fa-times"></i></a>';

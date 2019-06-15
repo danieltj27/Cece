@@ -1213,6 +1213,12 @@ class Dashboard extends Controller {
 
 		$media->fetch( $media_id );
 
+		if ( $media->file_found() ) {
+
+			register_notice( 'media_details', 'warning', 'The file cannot be found on the server.' );
+
+		}
+
 		return self::view( self::$path . 'media_details.php', array( 'title' => 'Media Details &lsaquo; Dashboard', 'media' => $media ), true );
 
 	}
