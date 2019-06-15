@@ -55,6 +55,8 @@ class Auth extends Controller {
 		// Define the controller routes.
 		$this->get( 'auth/', array( $this->class, 'missed_login' ) );
 		$this->get( 'auth/login/', array( $this->class, 'login' ) );
+		$this->get( 'auth/login/2fa/', array( $this->class, 'login_2fa' ) );
+		$this->get( 'auth/login/2fa/resend/', array( $this->class, 'login_2fa_resend' ) );
 		$this->get( 'auth/register/', array( $this->class, 'register' ), can_register() );
 		$this->get( 'auth/forgot/', array( $this->class, 'forgot' ) );
 		$this->post( 'auth/forgot/send/', array( $this->class, 'forgot_send' ) );
@@ -105,6 +107,36 @@ class Auth extends Controller {
 			return self::view( self::$path . 'login.php', array( 'title' => 'Login' ), true );
 
 		}
+
+	}
+
+	/**
+	 * The two factor authentication page.
+	 * 
+	 * @todo implement 2fa account protection
+	 * 
+	 * @since 0.1.0
+	 * 
+	 * @return mixed
+	 */
+	public static function login_2fa() {
+
+		return self::redirect( 'auth/login/' );
+
+	}
+
+	/**
+	 * Resend the two factor authentication code.
+	 * 
+	 * @todo implement 2fa account protection
+	 * 
+	 * @since 0.1.0
+	 * 
+	 * @return mixed
+	 */
+	public static function login_2fa_resend() {
+
+		return self::redirect( 'auth/login/' );
 
 	}
 
