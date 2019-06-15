@@ -556,4 +556,48 @@ class User extends Model {
 
 	}
 
+	/**
+	 * Check if the user is an admin.
+	 * 
+	 * @since 0.1.0
+	 * 
+	 * @return boolean
+	 */
+	public function is_admin() {
+
+		if ( 'admin' == $this->user_type ) {
+
+			return true;
+
+		}
+
+		return false;
+
+	}
+
+	/**
+	 * Check if the user is an author.
+	 * 
+	 * This function checks if a user is an author but accepts an optional
+	 * parameter which allows you to check the user type strictly. If strict
+	 * checking is not forced, admin users will also return true.
+	 * 
+	 * @since 0.1.0
+	 * 
+	 * @param boolean $strict Strictly check the user type.
+	 * 
+	 * @return boolean
+	 */
+	public function is_author( $strict = false ) {
+
+		if ( ( false === $strict && in_array( $this->user_type, array( 'author', 'admin' ), true ) ) || ( false !== $strict && 'author' == $this->user_type ) ) {
+
+			return true;
+
+		}
+
+		return false;
+
+	}
+
 }
