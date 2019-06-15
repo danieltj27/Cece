@@ -16,15 +16,11 @@ if ( ! defined( 'CECE' ) ) {
 }
 
 /**
- * Check if the current user is logged in.
+ * Checks if the current user is logged in.
  * 
- * This function checks if the current user is logged
- * in or not. Will return true if they are or false if
- * they have not been authenticated.
- * 
- * The value becomes cached after it's first use but
- * setting the optional `cached` parameter to false
- * will refresh the value.
+ * The value from this function will be cached in a global variable after
+ * the first use to prevent lots of database queries. The value can be refreshed
+ * by passing the optional `$cached` parameter as false.
  * 
  * @since 0.1.0
  * 
@@ -36,60 +32,55 @@ function is_logged_in( $cached = true ) {
 
 	global $_logged_in;
 
-	// Should we get the cached version?
+	// Should we use the cached version?
 	if ( $_logged_in && true === $cached ) {
 
 		return $_logged_in;
 
 	}
 
-	// Set the default cached value.
+	// Set the default value.
 	$_logged_in = false;
 
 	// Do we have an active session and cookie set?
-	if ( empty( $_SESSION ) || ! isset( $_SESSION['id'] ) || ! isset( $_COOKIE[ AUTH_COOKIE ] ) ) {
+	if ( empty( $_SESSION ) || ! isset( $_SESSION[ 'id' ] ) || ! isset( $_COOKIE[ AUTH_COOKIE ] ) ) {
 
 		return $_logged_in;
 
 	}
 
-	// Create new database connection.
 	$db = new Database;
 
-	// Bail if the database connection failed.
+	// Bail if we fail.
 	if ( ! $db ) {
 
 		return false;
 
 	}
 
-	// Prepare the select statement.
+	// Prepare the SQL.
 	$query = $db->connection->prepare( 'SELECT email FROM ' . $db->prefix . 'users WHERE ID = ? LIMIT 1' );
 
-	// Bind the parameter to the query.
-	$query->bindParam( 1, $_SESSION['id'] );
+	// Bind the parameter.
+	$query->bindParam( 1, $_SESSION[ 'id' ] );
 
-	// Execute the query.
 	$query->execute();
 
-	// Return the values.
 	$result = $query->fetch();
 
-	// Did we get a result?
 	if ( false === $result ) {
 
 		return $_logged_in;
 
 	}
 
-	// Does the hash match the cookie?
+	// Check the hash of the set cookie.
 	if ( ! password_verify( $result['email'], $_COOKIE[ AUTH_COOKIE ] ) ) {
 
 		return $_logged_in;
 
 	}
 
-	// Update the cache value.
 	$_logged_in = true;
 
 	return $_logged_in;
@@ -109,17 +100,14 @@ function is_logged_in( $cached = true ) {
  */
 function is_admin( $user_id = 0 ) {
 
-	// Did we get a valid ID?
 	if ( 0 === $user_id ) {
 
 		$user_id = current_user_id();
 
 	}
 
-	// Create a user instance.
 	$user = new User;
 
-	// Fetch user.
 	$user->fetch( $user_id );
 
 	return $user->is_admin();
@@ -140,18 +128,14 @@ function is_admin( $user_id = 0 ) {
  */
 function is_author( $user_id = 0, $strict = false ) {
 
-	// Did we get a valid ID?
 	if ( 0 === $user_id ) {
 
-		// Set to the current user.
 		$user_id = current_user_id();
 
 	}
 
-	// Create a new user instance.
 	$user = new User;
 
-	// Fetch the selected user.
 	$user->fetch( $user_id );
 
 	return $user->is_author( $strict );
@@ -161,9 +145,9 @@ function is_author( $user_id = 0, $strict = false ) {
 /**
  * Get the current user object.
  * 
- * The value becomes cached after it's first use but
- * setting the optional `cached` parameter to false
- * will refresh the value.
+ * The value returned from this function will be cached in a global
+ * variable for quicker use later on but can be refreshed by setting
+ * the optional `$cached` value to false.
  * 
  * @since 0.1.0
  * 
@@ -175,27 +159,23 @@ function current_user( $cached = true ) {
 
 	global $_current_user;
 
-	// Should we get the cached version?
+	// Should we use the cached version?
 	if ( $_current_user && true === $cached ) {
 
 		return $_current_user;
 
 	}
 
-	// Setup the default user id.
 	$user_id = 0;
 
-	// Is the current user logged in?
 	if ( is_logged_in() ) {
 
 		$user_id = $_SESSION['id'];
 
 	}
 
-	// Create a new user instance.
 	$user = new User;
 
-	// Set the current user up.
 	$user->fetch( $user_id );
 
 	// Cache the value for later.
@@ -214,7 +194,6 @@ function current_user( $cached = true ) {
  */
 function current_user_id() {
 
-	// Get the current user instance.
 	$user = current_user();
 
 	return $user->ID;
@@ -239,11 +218,7 @@ function my_id() {
 }
 
 /**
- * Is the given user me?
- * 
- * Checks if a given ID is the same one as the
- * current user or not. Returns true if it is
- * and false if not or the user is not logged in.
+ * Is this user me?
  * 
  * @since 0.1.0
  * 
@@ -253,17 +228,14 @@ function my_id() {
  */
 function is_me( $user_id = 0 ) {
 
-	// Is the user logged in?
 	if ( ! is_logged_in() ) {
 
 		return false;
 
 	}
 
-	// Get the current user id.
 	$current_user_id = current_user_id();
 
-	// Do the IDs match?
 	if ( $user_id === $current_user_id ) {
 
 		return true;
