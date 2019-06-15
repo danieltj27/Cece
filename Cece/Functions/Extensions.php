@@ -2,7 +2,7 @@
 
 /**
  * Cece
- * (c) 2018, Daniel James
+ * (c) 2019, Daniel James
  * 
  * Extension functions
  * 
