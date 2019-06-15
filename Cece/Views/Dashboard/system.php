@@ -58,9 +58,9 @@
 
 					<ul>
 
-						<li>Your currently running Cece version <?php echo blog_version(); ?>.</li>
+						<li>You're currently running Cece version <?php echo blog_version(); ?>.</li>
 
-						<li>Your server is running PHP version <?php echo PHP_VERSION; ?>.</li>
+						<li>You're server is running PHP version <?php echo PHP_VERSION; ?>.</li>
 
 						<li>Automatic update checking is currently <?php if ( auto_updates() ) : ?>enabled<?php else : ?>disabled<?php endif; ?>.</li>
 
