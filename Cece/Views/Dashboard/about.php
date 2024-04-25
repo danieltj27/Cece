@@ -50,27 +50,13 @@
 
 							<li>
 
-								<img src="<?php echo assets_url( 'Img/daniel-james.jpg' ); ?>" alt="Daniel James" />
+								<img src="<?php echo assets_url( 'Img/daniel-james.png' ); ?>" alt="Daniel James" />
 
 								<div class="meta">
 
 									Daniel James
 
-									<span class="role">Founder &amp; Lead Developer</span>
-
-								</div>
-
-							</li>
-
-							<li>
-
-								<img src="<?php echo assets_url( 'Img/lee-taylor.jpg' ); ?>" alt="Lee Taylor" />
-
-								<div class="meta">
-
-									Lee Taylor
-
-									<span class="role">JavaScript Developer</span>
+									<span class="role">Lead Developer</span>
 
 								</div>
 
