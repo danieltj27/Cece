@@ -2,7 +2,7 @@
 
 /**
  * Cece
- * (c) 2019, Daniel James
+ * (c) 2024, Daniel James
  * 
  * Settings functions
  * 

@@ -2,7 +2,7 @@
 
 /**
  * Cece
- * (c) 2019, Daniel James
+ * (c) 2024, Daniel James
  * 
  * Extension functions
  * 
@@ -109,17 +109,25 @@ function add_listener( $event = '', $callback = array() ) {
  */
 function get_extensions() {
 
-	// Get all extension directories.
-	$dirs = array_diff( scandir( CECEEXTEND ), array( '.', '..', '.svn', '.git', '.DS_Store', 'Thumbs.db' ) );
+	$extensions = [];
+
+	if ( file_exists( CECEEXTEND ) ) {
+
+		// Get all extension directories.
+		$dirs = array_diff( scandir( CECEEXTEND ), array( '.', '..', '.svn', '.git', '.DS_Store', 'Thumbs.db' ) );
+
+	} else {
+
+		return $extensions;
+
+	}
 
 	// Did we get anything?
 	if ( empty( $dirs ) ) {
 
-		return false;
+		return $extensions;
 
 	}
-
-	$extensions = array();
 
 	// Loop through each directory as a extension.
 	foreach ( $dirs as $dir ) {
@@ -167,13 +175,6 @@ function get_extensions() {
 
 		// Save the extension data.
 		$extensions[ $extension->ext_domain ] = $extension;
-
-	}
-
-	// Did we get any extensions?
-	if ( empty( $extensions ) ) {
-
-		return false;
 
 	}
 

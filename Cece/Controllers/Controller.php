@@ -2,7 +2,7 @@
 
 /**
  * Cece
- * (c) 2019, Daniel James
+ * (c) 2024, Daniel James
  * 
  * @package Cece
  */
@@ -354,7 +354,7 @@ class Controller {
 	 * 
 	 * @return mixed
 	 */
-	public static function view( $view, $args = array(), $layout = false, $return = false ) {
+	public static function view( $view, $args = [], $layout = false, $return = false ) {
 
 		if ( file_exists( $view ) ) {
 
@@ -363,13 +363,9 @@ class Controller {
 
 				if ( is_array( $args ) && ! empty( $args ) ) {
 
-					// Extract the page variables.
 					extract( $args );
 
 				}
-
-				// Compact the view arguments.
-				compact( $args );
 
 				// Should we use a layout template?
 				if ( false !== $layout ) {

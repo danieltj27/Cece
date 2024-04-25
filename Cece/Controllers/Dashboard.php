@@ -2,7 +2,7 @@
 
 /**
  * Cece
- * (c) 2019, Daniel James
+ * (c) 2024, Daniel James
  * 
  * @package Cece
  */
@@ -240,7 +240,7 @@ class Dashboard extends Controller {
 		// Get all users.
 		$users = get_users();
 
-		return self::view( self::$path . 'index.php', array( 'title' => 'Dashboard', 'me' => $me, 'posts' => $posts, 'media' => $media, 'users' => $users ), true );
+		return self::view( self::$path . 'index.php', [ 'title' => 'Dashboard', 'me' => $me, 'posts' => $posts, 'media' => $media, 'users' => $users ], true );
 
 	}
 

@@ -2,7 +2,7 @@
 
 /**
  * Cece
- * (c) 2019, Daniel James
+ * (c) 2024, Daniel James
  * 
  * @package Cece
  */
@@ -112,7 +112,7 @@ class Theme extends Model {
 	 * 
 	 * @return object
 	 */
-	public function __construct( $domain = 0 ) {
+	public function __construct( $domain = '' ) {
 
 		if ( '' != $domain ) {
 

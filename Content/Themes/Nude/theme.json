@@ -1,12 +1,12 @@
 [
 	{
 		"name": "Nude",
-		"description": "A basic starter theme for your blog.",
+		"description": "The starter theme for Cece.",
 		"domain": "Nude",
 		"template_path": "Templates",
 		"version": "1.0.0",
 		"author_name": "Daniel James",
-		"author_url": "https://danieltj.uk/",
+		"author_url": "https://danieljames.uk/",
 		"licence_name": "MIT",
 		"licence_url": "https://opensource.org/licenses/MIT"
 	}

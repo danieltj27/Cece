@@ -2,7 +2,7 @@
 
 /**
  * Cece
- * (c) 2019, Daniel James
+ * (c) 2024, Daniel James
  * 
  * @package Cece
  */
@@ -319,51 +319,47 @@ final class App {
 	 * 
 	 * @access private
 	 * 
-	 * @return boolean
+	 * @return void
 	 */
 	private function prepare_extensions() {
 
 		if ( ! is_app_installed() ) {
 
-			return false;
+			return;
 
 		}
 
 		// Are we in safe mode?
-		if ( 'on' == blog_setting( 'flag_ext_safe' ) ) {
+		if ( 'on' != blog_setting( 'flag_ext_safe' ) ) {
 
-			return false;
+			// Get all extensions.
+			$extensions = get_extensions();
 
-		}
+			// Get all activated extensions.
+			$active_extensions = active_extensions();
 
-		// Get all extensions.
-		$extensions = get_extensions();
+			// Do we have any active?
+			if ( ! empty( $active_extensions ) || ! empty( $extensions ) ) {
 
-		// Get all activated extensions.
-		$active_extensions = active_extensions();
+				// Loop through and include all active listeners.
+				foreach ( $active_extensions as $extension ) {
 
-		// Do we have any active?
-		if ( ! empty( $active_extensions ) ) {
+					// Set the extension as an object.
+					$extension = $extensions[ $extension ];
 
-			// Loop through and include all active listeners.
-			foreach ( $active_extensions as $extension ) {
+					// Check the core extension file exists.
+					if ( file_exists( $extension->ext_func_file() ) ) {
 
-				// Set the extension as an object.
-				$extension = $extensions[ $extension ];
+						// Include the extension file.
+						require_once( $extension->ext_func_file() );
 
-				// Check the core extension file exists.
-				if ( file_exists( $extension->ext_func_file() ) ) {
-
-					// Include the extension file.
-					require_once( $extension->ext_func_file() );
+					}
 
 				}
 
 			}
 
 		}
-
-		return true;
 
 	}
 
@@ -374,12 +370,15 @@ final class App {
 	 * 
 	 * @access private
 	 * 
-	 * @return mixed
+	 * @return void
 	 */
 	private function prepare_theme() {
 
-		// Auto load the current theme.
-		active_theme( false );
+		if ( is_app_installed() ) {
+
+			active_theme( false );
+
+		}
 
 	}
 
