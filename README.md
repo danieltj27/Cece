@@ -7,7 +7,7 @@ The little blogging framework.
 Cece is very easy and quick to install. You'll need the following software versions:
 
 - [Download the latest version](https://github.com/danieltj27/Cece/releases)
-- PHP 5.6 or later (_v7 is preferred_)
+- PHP 7.1 or later (_v8 is preferred_)
 - MySQL 5.6 or later (_v8 is preferred_)
 - An Apache server (_mod_rewrite is required_)
 
@@ -17,7 +17,7 @@ Creating issues, submitting pull requests or just chiming in on discussions is a
 
 ## Copyright
 
-Copyright 2019 Daniel James
+Copyright 2024 Daniel James
 
 ## Licence
 
