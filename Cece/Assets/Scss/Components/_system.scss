@@ -19,17 +19,38 @@
 
 		&__logo {
 
-			background-color: $primary;
-			background-image: url('../svg/cece.svg');
-			background-repeat: no-repeat;
-			background-position: center;
-			background-size: 64px 64px;
-			width: 64px;
-			height: 64px;
-			margin: 30px auto 0;
+			background-color: $black;
+			border: 2px solid $black;
+
+			width: 100%;
+			max-width: 120px;
+			margin: 30px auto;
+			padding: 10px 20px;
 			display: block;
-			border-radius: $radius;
-			font-size: 0;
+
+			color: $white;
+			font-size: $text-xxl;
+			text-align: center;
+			font-family: $font-bold;
+
+			text-decoration: none;
+			text-transform: uppercase;
+			transition: ease-in-out all 0.5s;
+
+			text-wrap: nowrap;
+
+			&:hover {
+
+				background-color: $clear;
+				color: $black;
+
+			}
+
+			&:focus {
+
+				box-shadow: inset 0 0 0 3px lighten( $primary, 20% );
+
+			}
 
 		}
 

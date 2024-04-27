@@ -13,7 +13,7 @@
 		<section class="system__content">
 
 			<a href="<?php echo home_url(); ?>" class="system__logo">
-				<span><?php echo blog_name(); ?></span>
+				<span>Cece</span>
 			</a>
 
 			<div class="system__message">
