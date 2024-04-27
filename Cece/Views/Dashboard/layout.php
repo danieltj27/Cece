@@ -14,65 +14,87 @@
 
 		<menu class="header">
 
-			<div class="header__gutter">
+			<a href="<?php echo home_url(); ?>" class="header__logo">CECE</a>
 
-				<a href="<?php echo home_url(); ?>" class="header__logo">
+			<?php /*
+			<div class="header__search">
 
-					<div class="blog__logo">Cece</div>
+				<?php if ( is_author() ) : ?>
 
-					<div class="blog__name"><?php echo blog_name(); ?></div>
+					<form action="<?php echo dashboard_url( 'search/' ); ?>" method="get">
 
-				</a>
+						<label for="query" class="screen-reader-only">Search</label>
+						<input type="search" name="query" id="query" placeholder="Search..." <?php if ( get_search_query() ) : ?>value="<?php echo get_search_query(); ?>" <?php endif; ?>/>
+						<button type="submit" id="submit" aria-label="Search posts"><i class="fas fa-search" aria-hidden="true"></i></button>
 
-				<div class="header__search">
+					</form>
 
-					<?php if ( is_author() ) : ?>
+				<?php endif; ?>
 
-						<form action="<?php echo dashboard_url( 'search/' ); ?>" method="get">
+			</div>
+			*/ ?>
 
-							<label for="query" class="screen-reader-only">Search</label>
-							<input type="search" name="query" id="query" placeholder="Search for posts..." <?php if ( get_search_query() ) : ?>value="<?php echo get_search_query(); ?>" <?php endif; ?>/>
-							<button type="submit" id="submit" aria-label="Search posts"><i class="fas fa-search" aria-hidden="true"></i></button>
+			<div class="header__menu">
 
-						</form>
+				<?php $menu_links = get_dashboard_links(); ?>
 
-					<?php endif; ?>
+				<?php if ( ! empty( $menu_links ) ) : ?>
 
-				</div>
+					<ul>
 
-				<div class="header__menu">
+						<?php foreach ( $menu_links as $menu_link ) : ?>
 
-					<?php $menu_links = get_dashboard_links(); ?>
+							<?php if ( true === $menu_link[ 'auth' ] ) : ?>
 
-					<?php if ( ! empty( $menu_links ) ) : ?>
+								<li>
 
-						<ul>
+									<a href="<?php echo $menu_link[ 'url' ]; ?>" class="menu-link--<?php echo $menu_link[ 'key' ]; ?>"><?php echo $menu_link[ 'label' ]; ?></a>
 
-							<?php foreach ( $menu_links as $menu_link ) : ?>
+									<?php if ( ! empty( $menu_link[ 'sub' ] ) ) : ?>
 
-								<?php if ( true === $menu_link[ 'auth' ] ) : ?>
+										<ul>
 
-									<?php if ( true === $menu_link[ 'spacer' ] ) : ?>
+										<?php foreach ( $menu_link[ 'sub' ] as $sub_link ) : ?>
 
-										<li class="spacer"></li>
+											<?php if ( true === $sub_link[ 'auth' ] ) : ?>
 
-									<?php else : ?>
+												<li>
 
-										<li><a href="<?php echo $menu_link[ 'url' ]; ?>" class="menu-link--<?php echo $menu_link[ 'key' ]; ?>"><i class="fas fa-<?php echo $menu_link[ 'icon' ]; ?>" aria-hidden="true"></i> <?php echo $menu_link[ 'label' ]; ?></a></li>
+													<a href="<?php echo $sub_link[ 'url' ]; ?>" class="menu-link--<?php echo $sub_link[ 'key' ]; ?>"><?php echo $sub_link[ 'label' ]; ?></a>
+
+												</li>
+
+											<?php endif; ?>
+
+										<?php endforeach; ?>
+
+										</ul>
 
 									<?php endif; ?>
 
-								<?php endif; ?>
+								</li>
 
-							<?php endforeach; ?>
+							<?php endif; ?>
 
-						</ul>
+						<?php endforeach; ?>
 
-					<?php endif; ?>
+					</ul>
+
+				<?php endif; ?>
+
+			</div>
+
+			<a href="<?php echo dashboard_url( 'users/edit/' . my_id() . '/' ); ?>" class="header__profile">
+
+				<div class="profile__avatar"><?php echo current_user()->first_letter(); ?></div>
+
+				<div class="profile__name">
+
+					<?php echo current_user()->user_fullname; ?>
 
 				</div>
 
-			</div>
+			</a>
 
 		</menu>
 
@@ -94,7 +116,7 @@
 
 							<div class="col col--100">
 
-								<p><a href="<?php echo dashboard_url( 'about/' ); ?>">Version <?php echo blog_version(); ?></a></p>
+								<p class="text--center">Cece &mdash; <a href="<?php echo dashboard_url( 'about/' ); ?>">Version <?php echo blog_version(); ?></a></p>
 
 							</div>
 

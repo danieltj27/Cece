@@ -53,7 +53,7 @@
 
 					<div class="col col--50 col-tab--75 col-tab--100">
 
-						<p><i class="fas fa-reply" aria-hidden="true"></i> <a href="<?php echo dashboard_url( 'menus/' ); ?>">Back to menu listings</a></p>
+						<p><a href="<?php echo dashboard_url( 'menus/' ); ?>" class="button"><i class="fas fa-chevron-left" aria-hidden="true"></i> All Menus</a></p>
 
 						<fieldset>
 							<label for="name">Menu name <span class="required">*</span></label>
@@ -89,7 +89,7 @@
 						</fieldset>
 
 						<fieldset>
-							<button type="submit" class="button button--primary">Save Menu</button>
+							<button type="submit" class="button button--primary">Save Changes</button>
 						</fieldset>
 
 					</div>

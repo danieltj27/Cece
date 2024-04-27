@@ -44,7 +44,7 @@
 
 						<?php if ( is_admin() ) : ?>
 
-							<p><i class="fas fa-reply" aria-hidden="true"></i> <a href="<?php echo dashboard_url( 'users/' ); ?>">Back to user listings</a></p>
+							<p><a href="<?php echo dashboard_url( 'users/' ); ?>" class="button"><i class="fas fa-chevron-left" aria-hidden="true"></i> All Users</a></p>
 
 						<?php endif; ?>
 

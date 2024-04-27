@@ -48,11 +48,11 @@
 
 						<p>Your version of Cece is out of date. <strong>Please update now to version <?php echo blog_setting( 'update_available' ); ?>.</strong></p>
 
-						<p><a href="<?php echo dashboard_url( 'system/update-core/' ); ?>" class="button button--primary">Update Cece</a></p>
+						<p><a href="<?php echo dashboard_url( 'updates/update-core/' ); ?>" class="button button--primary">Update Cece</a></p>
 
 					<?php else : ?>
 
-						<p><a href="<?php echo dashboard_url( 'system/check-updates/' ); ?>" class="button">Check for updates</a></p>
+						<p><a href="<?php echo dashboard_url( 'updates/check/' ); ?>" class="button">Check for updates</a></p>
 
 					<?php endif; ?>
 

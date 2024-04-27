@@ -39,17 +39,15 @@ table {
 	thead,
 	tfoot {
 
-		background-color: $white;
+		background-color: $light-grey;
 		border: none;
 
 		th {
 
 			color: $mono;
 			font-size: $text-sm;
-			font-weight: 400;
 			font-family: $font-family;
 			text-align: left;
-			text-transform: uppercase;
 
 		}
 
@@ -57,17 +55,26 @@ table {
 
 	thead {
 
-		border-bottom: 1px solid $grey;
+		border-bottom: 1px solid darken( $light-grey, 10% );
 
 	}
 
 	tfoot {
 
-		border-top: 1px solid $grey;
+		border-top: 1px solid darken( $light-grey, 10% );
 
 	}
 
 	tbody {
+
+		tr,
+		th,
+		td {
+
+			font-size: $text-sm;
+			font-family: $font-light;
+
+		}
 
 		tr {
 
@@ -76,13 +83,13 @@ table {
 
 			&:nth-of-type(odd) {
 
-				background-color: lighten( $light-grey, 3% );
+				background-color: $clear;
 
 			}
 
 			&:nth-of-type(even) {
 
-				background-color: $clear;
+				background-color: lighten( $light-grey, 4% );
 
 			}
 

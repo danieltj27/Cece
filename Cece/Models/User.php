@@ -600,4 +600,21 @@ class User extends Model {
 
 	}
 
+	/**
+	 * Return the first letter of the user's name.
+	 * 
+	 * This function returns the first letter of the user's name which
+	 * can be used to create default avatars if a custom one is not
+	 * already set for themselves.
+	 * 
+	 * @since 0.1.0
+	 * 
+	 * @return string
+	 */
+	public function first_letter() {
+
+		return substr( $this->user_fullname, 0, 1 );
+
+	}
+
 }

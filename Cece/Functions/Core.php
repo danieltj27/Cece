@@ -779,7 +779,6 @@ function get_dashboard_links() {
  */
 function register_dashboard_link( $opts = array() ) {
 
-	// Bail if we get nothing.
 	if ( empty( $opts ) ) {
 
 		return false;
@@ -788,34 +787,55 @@ function register_dashboard_link( $opts = array() ) {
 
 	global $_dash_links;
 
-	// Set up the defaults.
-	$defaults = array(
+	// Merge together
+	$opts = array_merge( [
 		'key' => '',
 		'label' => '',
 		'icon' => 'circle',
 		'url' => home_url(),
-		'spacer' => false,
-		'auth' => true
-	);
+		'auth' => true,
+		'sub' => []
+	], $opts );
 
-	// Merge the two together.
-	$opts = array_merge( $defaults, $opts );
-
-	// Does menu link already exist?
+	// Ignore item if it already exists.
 	if ( isset( $_dash_links[ $opts[ 'key' ] ] ) ) {
 
 		return false;
 
 	}
 
-	// Check key is valid.
+	// Invalid key
 	if ( '' == $opts[ 'key' ] || false === $opts[ 'key' ] || 0 === $opts[ 'key' ] ) {
 
 		return false;
 
 	}
 
-	// Add it.
+	// Filter sub links if they exist.
+	if ( ! empty( $opts[ 'sub' ] ) ) {
+
+		$subs = [];
+
+		foreach ( $opts[ 'sub' ] as $sub ) {
+
+			// Merge together
+			$sub = array_merge( [
+				'key' => '',
+				'label' => '',
+				'icon' => 'circle',
+				'url' => home_url(),
+				'auth' => true
+			], $sub );
+
+			$subs[] = $sub;
+
+		}
+
+		$opts[ 'sub' ] = $subs;
+
+	}
+
+	// Add
 	$_dash_links[ $opts[ 'key' ] ] = $opts;
 
 	return true;

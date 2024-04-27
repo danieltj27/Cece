@@ -23,7 +23,7 @@
 
 					</a>
 
-					<?php $menu = get_menu_links( 'default' ); ?>
+					<?php $menu = get_menu_links( 'header' ); ?>
 					<?php if ( ! empty( $menu ) ) : ?>
 
 						<a href="#" class="header__toggle">Menu</a>

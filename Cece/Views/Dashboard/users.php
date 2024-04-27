@@ -77,9 +77,34 @@
 
 					<div class="col col--100">
 
-						<h2 class="h4">No users found</h2>
+						<table class="user-list">
 
-						<p>There aren't any users to show you right now.</p>
+							<thead>
+
+								<tr>
+
+									<th>ID</th>
+									<th>Name</th>
+									<th>Email Address</th>
+									<th>Type</th>
+									<th>Last Active</th>
+									<th>Registered</th>
+
+								</tr>
+
+							</thead>
+
+							<tbody>
+
+								<tr>
+
+									<td>No users found</td>
+
+								</tr>
+
+							</tbody>
+
+						</table>
 
 					</div>
 
@@ -101,7 +126,7 @@
 									<th>Name</th>
 									<th>Email Address</th>
 									<th>Type</th>
-									<th>Last Log In</th>
+									<th>Last Active</th>
 									<th>Registered</th>
 
 								</tr>

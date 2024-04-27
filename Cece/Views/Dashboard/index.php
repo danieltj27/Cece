@@ -42,11 +42,11 @@
 
 					<?php if ( '' == $me->user_fullname ) : ?>
 
-						<p>Welcome mysterious person 👋.</p>
+						<p>Hello mysterious person 👋.</p>
 
 					<?php else : ?>
 
-						<p>Welcome back, <strong><?php echo $me->user_fullname; ?></strong> 👋.</p>
+						<p>Hello, <strong><?php echo $me->user_fullname; ?></strong> 👋.</p>
 
 					<?php endif; ?>
 
@@ -54,7 +54,7 @@
 
 					<?php if ( is_author() ) : ?>
 
-						<p>Are you ready to <a href="<?php echo dashboard_url( 'posts/new/' ); ?>">start writing a new post</a>?</p>
+						<p><a href="<?php echo dashboard_url( 'posts/new/' ); ?>" class="button button--primary">Create New Post</a></p>
 
 						<hr />
 

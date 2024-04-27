@@ -14,10 +14,10 @@ body {
 
 	background-color: $white;
 	min-height: 100vh;
-	color: $mono;
+	color: $black;
 	font-size: $font-size;
 	font-weight: $font-weight;
-	font-family: $font-family;
+	font-family: $font-light;
 	line-height: $line-height;
 
 }
@@ -69,10 +69,12 @@ ul {
 
 hr {
 
-	background-color: $grey;
+	background-color: $light-grey;
 	border: none;
+
 	width: 100%;
-	height: 1px;
+	height: 4px;
+	
 	margin: 20px 0;
 	display: block;
 
@@ -83,7 +85,9 @@ code {
 	background-color: $primary;
 	padding: 2px 6px;
 	border-radius: $radius;
+	
 	color: $white;
+	font-size: $text-xxs;
 	font-family: monospace;
 
 }
@@ -211,7 +215,7 @@ img {
 
 a {
 
-	color: $mono;
+	color: $black;
 	text-decoration: underline;
 	cursor: pointer;
 

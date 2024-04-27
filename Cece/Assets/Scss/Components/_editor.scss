@@ -90,7 +90,7 @@
 
 			ul {
 
-				background-color: $secondary;
+				background-color: $primary;
 				margin: 0 0 20px;
 				padding: 0;
 				display: flex;
@@ -181,7 +181,7 @@
 
 			&:focus {
 
-				background-color: $light-grey;
+				background-color: lighten( $light-grey, 3% );
 
 			}
 
@@ -193,7 +193,7 @@
 			margin: 0 0 20px;
 			padding: 10px;
 			color: $mono;
-			font-size: $text-hg;
+			font-size: $text-xl;
 
 		}
 

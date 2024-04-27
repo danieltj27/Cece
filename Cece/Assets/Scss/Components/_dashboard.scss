@@ -34,14 +34,9 @@
 
 		width: 100%;
 		margin: 0;
-		display: flex;
-		flex-wrap: wrap;
+		display: block;
 
-		@media screen and ( max-width: 768px ) {
-
-			padding: 40px 0 0;
-
-		}
+		position: relative;
 
 		&__card {
 
@@ -55,35 +50,19 @@
 
 		.header {
 
-			background-color: $light-grey;
-			width: 280px;
-			min-height: 100vh;
+			background-color: $black;
+			width: 100%;
+			min-height: 1px;
 			margin: 0;
 
-			@media screen and ( max-width: 768px ) {
+			padding: 0;
 
-				height: 100vh;
-				padding: 0 0 45px;
-				overflow: auto;
-				transition: ease-in-out left 0.5s;
-				position: absolute;
-				left: -280px;
-				z-index: 800;
+			display: flex;
+			align-items: center;
 
-				&.open {
-
-					left: 0;
-
-				}
-
-			}
-
-			@media screen and ( max-width: 320px ) {
-
-				width: 100%;
-				left: -100%;
-
-			}
+			position: sticky;
+			top: 0;
+			z-index: 99;
 
 			&-toggle {
 
@@ -123,86 +102,36 @@
 
 			}
 
-			&__gutter,
-			&__logo,
-			&__search,
-			&__menu {
-
-				width: 100%;
-				display: block;
-
-			}
-
-			&__gutter {
-
-				min-height: 100vh;
-				position: -webkit-sticky;
-				position: sticky;
-				top: 0;
-
-				@media screen and ( max-width: 768px ) {
-
-					top: 40px;
-
-				}
-
-			}
-
 			&__logo {
 
-				width: 100%;
-				padding: 20px;
-				display: flex;
-				flex-wrap: nowrap;
-				align-items: center;
-				transition: ease-in-out all 0.5s;
+				background-color: $white;
+				border: 2px solid $white;
+
+				width: auto;
+				margin: 10px;
+				padding: 6px 15px;
+				display: inline-block;
+
+				color: $black;
+				font-size: $text-lg;
+				text-align: center;
+				font-family: $font-bold;
+
 				text-decoration: none;
+				transition: ease-in-out all 0.5s;
+
+				text-wrap: nowrap;
 
 				&:hover {
 
-					background-color: rgba( 0, 0, 0, 0.05 );
+					background-color: $clear;
+					color: $white;
 
 				}
 
 				&:focus {
 
 					box-shadow: inset 0 0 0 3px lighten( $primary, 20% );
-
-				}
-
-				.blog {
-
-					&__logo {
-
-						background-color: $primary;
-						background-image: url('../Svg/cece.svg');
-						background-repeat: no-repeat;
-						background-position: center;
-						background-size: 32px 32px;
-						width: 32px;
-						height: 32px;
-						display: block;
-						border-radius: $radius;
-						font-size: 0;
-						flex-shrink: 0;
-
-					}
-
-					&__name {
-
-						border-left: 1px solid $grey;
-						width: 100%;
-						margin: 0 0 0 20px;
-						padding: 0 0 0 20px;
-						display: inline-block;
-						color: $mono;
-						font-size: $text-lg;
-						vertical-align: bottom;
-						white-space: nowrap;
-						text-overflow: ellipsis;
-						overflow: hidden;
-
-					}
 
 				}
 
@@ -220,7 +149,6 @@
 
 				input {
 
-					background-color: $white;
 					padding: 4px 38px 4px 10px;
 
 				}
@@ -239,7 +167,7 @@
 
 					&:hover {
 
-						background-color: rgba( 0, 0, 0, 0.08 );
+						background-color: $mono;
 
 					}
 
@@ -265,57 +193,108 @@
 
 			&__menu {
 
-				padding: 0 0 50px;
+				padding: 0;
 
 				ul {
 
-					width: 100%;
-					margin: 0;
-					padding: 0 14px 10px;
+					width: auto;
+					margin: 0 10px;
+					padding: 0;
+
+					display: flex;
+					align-items: center;
+					flex-wrap: nowrap;
 
 					li {
 
-						width: 100%;
-						margin: 0;
+						width: auto;
+						margin: 0 10px 0 0;
 						padding: 0;
-						display: block;
+						display: inline-block;
 						list-style: none;
 
-						&.spacer {
-
-							width: 100%;
-							height: 15px;
-							padding: 0;
-
-						}
+						position: relative;
 
 						a {
 
 							background-color: $clear;
+
 							width: 100%;
 							margin: 0;
-							padding: 5px 8px;
+							padding: 20px 10px;
 							display: block;
-							border-radius: $radius;
-							color: $mono;
-							font-size: $text-nl;
+
+							color: darken( $light-grey, 10% );
+							font-size: $text-sm;
 							text-decoration: none;
-							transition: ease-in-out all 0.5s;
 
-							i {
-
-								width: 24px;
-								font-size: $text-nl;
-								line-height: inherit;
-								vertical-align: bottom;
-								text-align: center;
-
-							}
+							transition: none;
 
 							&:hover {
 
-								background-color: $primary;
-								color: $white;
+								background-color: $white;
+
+								color: $black;
+
+							}
+
+						}
+
+						ul {
+
+							background-color: $black;
+							width: 100%;
+							min-width: 150px;
+
+							margin: 0;
+							padding: 0;
+
+							display: none;
+							box-shadow: 4px 4px 8px rgba( 0, 0, 0, 0.15 );
+
+							position: absolute;
+							top: 100%;
+							left: 0;
+
+							z-index: 10;
+
+							li {
+
+								width: 100%;
+								margin: 0;
+								padding: 0;
+
+								a {
+
+									padding: 10px 14px;
+
+									&:hover {
+
+										background-color: $white;
+
+										color: $black;
+
+									}
+
+								}
+
+							}
+
+						}
+
+						&:hover {
+
+							background-color: $white;
+
+							> a {
+
+								color: $black;
+
+							}
+
+							ul {
+
+								display: block;
 
 							}
 
@@ -327,32 +306,67 @@
 
 			}
 
-			&__callout {
+			&__profile {
 
-				width: 100%;
-				position: absolute;
-				left: 0;
-				bottom: 0;
+				background-color: $clear;
 
-				.button {
+				width: auto;
+				margin-left: auto;
+				margin-right: 10px;
+				padding: 6px 12px;
 
-					background-color: $clear;
-					border-top: 1px solid $grey;
-					width: 100%;
-					padding: 10px 4px;
-					display: block;
-					border-radius: 0;
-					box-shadow: none;
+				display: flex;
+				align-items: center;
 
-					&:hover {
+				color: $light-grey;
+				text-decoration: none;
 
-						background-color: rgba( 0, 0, 0, 0.05 );
+				transition: ease-in-out all 0.5s;
+
+				.profile {
+
+					&__avatar {
+
+						background-color: $white;
+
+						width: 32px;
+						height: 32px;
+						display: block;
+
+						border-radius: 100%;
+
+						color: $black;
+						font-size: $text-sm;
+						line-height: 32px;
+						font-family: $font-bold;
+						text-align: center;
 
 					}
 
-					&:focus {
+					&__name {
 
-						box-shadow: inset 0 0 0 3px lighten( $primary, 20% );
+						width: 120px;
+						margin-left: 10px;
+
+						text-wrap: wrap;
+
+						transition: ease-in-out all 0.5s;
+
+					}
+
+				}
+
+				&:hover {
+
+					background-color: $primary;
+
+					.profile {
+
+						&__name {
+
+							color: $white;
+
+						}
 
 					}
 
@@ -364,16 +378,10 @@
 
 		.content {
 
-			background-color: $white;
-			width: calc( 100% - 280px );
-			padding: 0;
-			box-shadow: 0 0 10px rgba( 0, 0, 0, 0.1 );
+			width: 100%;
 
-			@media screen and ( max-width: 768px ) {
-
-				width: 100%;
-
-			}
+			position: relative;
+			z-index: 11;
 
 			&__wrapper,
 			&__banner,
@@ -387,7 +395,13 @@
 
 			&__wrapper {
 
-				padding: 0;
+				width: 100%;
+				max-width: $container;
+
+				margin: 0 auto;
+				padding: 20px $gutter 0;
+
+				display: block;
 
 			}
 

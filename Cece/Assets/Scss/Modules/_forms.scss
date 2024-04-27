@@ -36,10 +36,24 @@ label {
 
 	margin: 0 0 4px;
 	color: $mono;
-	font-size: $text-nl;
+
+	font-size: $text-sm;
 	font-weight: 400;
 	font-family: $font-family;
+	
 	cursor: pointer;
+
+	&:has(input) {
+
+		margin: 0;
+
+	}
+
+	input {
+
+		margin-right: 5px;
+
+	}
 
 }
 
@@ -47,25 +61,29 @@ input,
 select,
 textarea {
 
-	background-color: lighten( $light-grey, 3% );
-	border: 1px solid $grey;
+	background-color: $white;
+	border: 1px solid $light-grey;
+
 	width: 100%;
 	max-width: $container;
-	height: 36px;
-	padding: 4px 10px;
+	height: 40px;
+	padding: 8px 14px;
 	display: inline-block;
 	border-radius: $radius;
-	color: $mono;
-	font-size: $text-nl;
+	
+	color: $black;
+	font-size: $text-sm;
 	font-weight: 400;
 	font-family: $font-family;
+	
 	outline: none;
 	box-sizing: border-box;
 
 	&:focus {
 
-		background-color: $white;
+		background-color: lighten( $light-grey, 5% );
 		border: 1px solid $primary;
+
 		box-shadow: 0 0 0 3px lighten( $primary, 20% );
 		outline: none;
 
@@ -186,7 +204,7 @@ input {
 		padding: 5px 0;
 		border-radius: 0;
 		color: $secondary;
-		font-size: $text-hg;
+		font-size: $text-xl;
 
 		&:focus {
 
@@ -202,7 +220,7 @@ input {
 select {
 
 	background-image: url('../svg/arrows.svg');
-	background-position: 6px center;
+	background-position: 10px center;
 	background-size: 16px 16px;
 
 }
@@ -225,7 +243,7 @@ p.input-desc {
 
 	margin: 3px 0 1px;
 	color: $mono;
-	font-size: $text-lt;
+	font-size: $text-xs;
 
 }
 

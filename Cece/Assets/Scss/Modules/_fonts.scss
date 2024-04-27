@@ -3,15 +3,36 @@
  */
 
 @font-face {
+	font-family: 'Work Sans Thin';
+	font-style: normal;
+	font-weight: 100;
+	src: url(../Font/WorkSans-VF.ttf) format('truetype');
+}
+
+@font-face {
+	font-family: 'Work Sans Light';
+	font-style: normal;
+	font-weight: 300;
+	src: url(../Font/WorkSans-VF.ttf) format('truetype');
+}
+
+@font-face {
 	font-family: 'Work Sans';
 	font-style: normal;
 	font-weight: 400;
-	src: url(../Font/WorkSans-Regular.ttf) format('truetype');
+	src: url(../Font/WorkSans-VF.ttf) format('truetype');
 }
 
 @font-face {
 	font-family: 'Work Sans Bold';
 	font-style: normal;
 	font-weight: 700;
-	src: url(../Font/WorkSans-Bold.ttf) format('truetype');
+	src: url(../Font/WorkSans-VF.ttf) format('truetype');
+}
+
+@font-face {
+	font-family: 'Work Sans Heavy';
+	font-style: normal;
+	font-weight: 900;
+	src: url(../Font/WorkSans-VF.ttf) format('truetype');
 }

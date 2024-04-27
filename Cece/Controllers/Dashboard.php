@@ -58,9 +58,9 @@ class Dashboard extends Controller {
 		// Define the controller routes.
 		$this->get( 'dashboard/', array( $this->class, 'index' ), is_logged_in() );
 		$this->get( 'dashboard/about/', array( $this->class, 'about' ), is_logged_in() );
-		$this->get( 'dashboard/system/', array( $this->class, 'system' ), is_admin() );
-		$this->post( 'dashboard/system/check-updates/', array( $this->class, 'check_updates' ), is_admin() );
-		$this->post( 'dashboard/system/update-core/', array( $this->class, 'core_update' ), is_admin() );
+		$this->get( 'dashboard/updates/', array( $this->class, 'updates' ), is_admin() );
+		$this->post( 'dashboard/updates/check/', array( $this->class, 'updates_check' ), is_admin() );
+		$this->post( 'dashboard/updates/update-core/', array( $this->class, 'updates_core_update' ), is_admin() );
 		$this->get( 'dashboard/search/', array( $this->class, 'search' ), is_author() );
 		$this->get( 'dashboard/menus/', array( $this->class, 'menus' ), is_admin() );
 		$this->get( 'dashboard/menus/new/', array( $this->class, 'menus_new' ), is_admin() );
@@ -104,96 +104,80 @@ class Dashboard extends Controller {
 	public function register_menu() {
 
 		// Create menu link collection.
-		$menu = array(
-			array(
+		$menu = [
+			[
 				'key' => 'dashboard',
 				'label' => 'Dashboard',
-				'icon' => 'tachometer-alt',
 				'url' => dashboard_url()
-			),
-			array(
-				'key' => 'spacer-1',
-				'spacer' => true,
-				'auth' => is_author()
-			),
-			array(
-				'key' => 'new-post',
-				'label' => 'New Post',
-				'icon' => 'plus',
-				'url' => dashboard_url( 'posts/new/' ),
-				'auth' => is_author()
-			),
-			array(
-				'key' => 'post',
-				'label' => 'Post',
-				'icon' => 'pencil-alt',
+			],
+			[
+				'key' => 'posts',
+				'label' => 'Posts',
 				'url' => dashboard_url( 'posts/' ),
-				'auth' => is_author()
-			),
-			array(
-				'key' => 'media',
-				'label' => 'Media',
-				'icon' => 'image',
-				'url' => dashboard_url( 'media/' ),
-				'auth' => is_author()
-			),
-			array(
-				'key' => 'profile',
-				'label' => 'Profile',
-				'icon' => 'smile',
-				'url' => dashboard_url( 'users/edit/' . my_id() . '/' )
-			),
-			array(
-				'key' => 'spacer-2',
-				'spacer' => true,
-				'auth' => is_admin()
-			),
-			array(
+				'auth' => is_author(),
+				'sub' => [
+					[
+						'key' => 'post-new',
+						'label' => 'New Post',
+						'icon' => 'circle',
+						'url' => dashboard_url( 'posts/new/' ),
+						'auth' => is_author(),
+					],
+					[
+						'key' => 'posts',
+						'label' => 'Posts',
+						'icon' => 'circle',
+						'url' => dashboard_url( 'posts/' ),
+						'auth' => is_author(),
+					],
+					[
+						'key' => 'media',
+						'label' => 'Media',
+						'icon' => 'circle',
+						'url' => dashboard_url( 'media/' ),
+						'auth' => is_author()
+					],
+				]
+			],
+			[
 				'key' => 'users',
 				'label' => 'Users',
-				'icon' => 'user-friends',
 				'url' => dashboard_url( 'users/' ),
 				'auth' => is_admin()
-			),
-			array(
+			],
+			[
 				'key' => 'menus',
 				'label' => 'Menus',
-				'icon' => 'table',
 				'url' => dashboard_url( 'menus/' ),
 				'auth' => is_admin()
-			),
-			array(
+			],
+			[
 				'key' => 'extensions',
 				'label' => 'Extensions',
-				'icon' => 'puzzle-piece',
 				'url' => dashboard_url( 'extensions/' ),
 				'auth' => is_admin()
-			),
-			array(
+			],
+			[
 				'key' => 'settings',
 				'label' => 'Settings',
-				'icon' => 'wrench',
 				'url' => dashboard_url( 'settings/' ),
-				'auth' => is_admin()
-			),
-			array(
-				'key' => 'system',
-				'label' => 'System',
-				'icon' => 'university',
-				'url' => dashboard_url( 'system/' ),
-				'auth' => is_admin()
-			),
-			array(
-				'key' => 'spacer-3',
-				'spacer' => true
-			),
-			array(
-				'key' => 'log-out',
-				'label' => 'Log Out',
-				'icon' => 'door-open',
-				'url' => auth_url( 'logout/' )
-			)
-		);
+				'auth' => is_admin(),
+				'sub' => [
+					[
+						'key' => 'updates',
+						'label' => 'Updates',
+						'url' => dashboard_url( 'updates/' ),
+						'auth' => is_admin(),
+					],
+					[
+						'key' => 'about',
+						'label' => 'About',
+						'url' => dashboard_url( 'about/' ),
+						'auth' => is_author(),
+					]
+				]
+			]
+		];
 
 		// Add each menu link.
 		foreach ( $menu as $link ) {
@@ -272,9 +256,9 @@ class Dashboard extends Controller {
 	 * 
 	 * @return mixed
 	 */
-	public static function system() {
+	public static function updates() {
 
-		return self::view( self::$path . 'system.php', array( 'title' => 'System &lsaquo; Dashboard' ), true );
+		return self::view( self::$path . 'updates.php', array( 'title' => 'System &lsaquo; Dashboard' ), true );
 
 	}
 
@@ -285,7 +269,7 @@ class Dashboard extends Controller {
 	 * 
 	 * @return void
 	 */
-	public static function check_updates() {
+	public static function updates_check() {
 
 		// Try and check for updates.
 		if ( App::check_system_update() ) {
@@ -316,7 +300,7 @@ class Dashboard extends Controller {
 
 		}
 
-		return self::redirect( 'dashboard/system/' );
+		return self::redirect( 'dashboard/updates/' );
 
 	}
 
@@ -327,7 +311,7 @@ class Dashboard extends Controller {
 	 * 
 	 * @return void
 	 */
-	public static function core_update() {
+	public static function updates_core_update() {
 
 		// Try and run the updater.
 		if ( App::run_system_update() ) {
@@ -342,7 +326,7 @@ class Dashboard extends Controller {
 
 		}
 
-		return self::redirect( 'dashboard/system/' );
+		return self::redirect( 'dashboard/updates/' );
 
 	}
 
@@ -1213,7 +1197,7 @@ class Dashboard extends Controller {
 
 		$media->fetch( $media_id );
 
-		if ( $media->file_found() ) {
+		if ( ! $media->file_found() ) {
 
 			register_notice( 'media_details', 'warning', 'The file cannot be found on the server.' );
 

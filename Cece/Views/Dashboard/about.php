@@ -71,27 +71,27 @@
 					<ul>
 
 						<li>
-							<a href="https://jquery.com/" target="_blank">The jQuery Framework (JavaScript)</a>
+							<a href="https://jquery.com/" target="_blank">jQuery Framework (JavaScript)</a>
 						</li>
 
 						<li>
-							<a href="https://sass-lang.com/" target="_blank">The Sass Language (CSS)</a>
+							<a href="https://sass-lang.com/" target="_blank">Sass Language (CSS)</a>
 						</li>
 
 						<li>
-							<a href="https://fontawesome.com/" target="_blank">Font Awesome (Iconography)</a>
+							<a href="https://fontawesome.com/" target="_blank">Font Awesome (icons)</a>
 						</li>
 
 						<li>
-							<a href="https://fonts.google.com/specimen/Work+Sans" target="_blank">Wei Huang (Typography)</a>
+							<a href="https://fonts.google.com/specimen/Work+Sans" target="_blank">Work Sans (font)</a>
 						</li>
 
 						<li>
-							<a href="https://github.com/PHPMailer/PHPMailer" target="_blank">The PHPMailer Team (PHP)</a>
+							<a href="https://github.com/PHPMailer/PHPMailer" target="_blank">PHPMailer (php)</a>
 						</li>
 
 						<li>
-							<a href="https://github.com/erusev/parsedown" target="_blank">Emanuil Rusev (PHP)</a>
+							<a href="https://github.com/erusev/parsedown" target="_blank">Parsedown (php)</a>
 						</li>
 
 					</ul>

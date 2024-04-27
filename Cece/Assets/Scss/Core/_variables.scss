@@ -2,39 +2,42 @@
  * Variables
  */
 
-$container:  1024px;
-$gutter:  20px;
+$container: 1024px;
+$gutter:    20px;
 
-$text-ms: 3rem;
-$text-hg: 1.5rem;
-$text-lg: 1.2rem;
-$text-nl: 1rem;
-$text-sm: 0.9rem;
-$text-lt: 0.8rem;
-$text-tn: 0.7rem;
+$text-xxl: 30px;
+$text-xl:  24px;
+$text-lg:  22px;
+$text-md:  18px;
+$text-sm:  16px;
+$text-xs:  14px;
+$text-xxs: 10px;
 
-$font-size:      $text-nl;
+$font-size:      $text-md;
 $font-weight:    400;
 $font-family:    "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+$font-thin:      "Work Sans Thin", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+$font-light:     "Work Sans Light", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 $font-bold:      "Work Sans Bold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-$line-height:    150%;
+$font-heavy:     "Work Sans Heavy", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+$line-height:    125%;
 $letter-spacing: 0;
 
-$radius:  4px;
+$radius:  5px;
 $lighter: 15%;
 $darker:  25%;
 
 $clear:       transparent;
 $white:       #ffffff;
 $black:       #000000;
-$mono:        #20272f;
-$blue:        #3b89c3;
-$dark-blue:   #244965;
+$mono:        #222222;
+$blue:        #004ddd;
+$dark-blue:   #002b7b;
 $primary:     $blue;
 $secondary:   $dark-blue;
 $blue:        #0083ef;
 $red:         #e40f0e;
 $green:       #2aa528;
-$dark-grey:   #2b2f33;
-$grey:        #c2c9d0;
-$light-grey:  #edf1f5;
+$dark-grey:   #333333;
+$grey:        #a7abb0;
+$light-grey:  #f1f1f1;
